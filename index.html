@@ -1,0 +1,1647 @@
+<!DOCTYPE html>
+<html lang="zh-Hant">
+<head>
+  <meta charset="UTF-8" />
+  <meta name="viewport" content="width=device-width, initial-scale=1.0" />
+  <title>西文深度閱讀與複習站（30 分鐘版 · A2）</title>
+  <style>
+    :root {
+      --primary: #d9480f;
+      --primary-light: #fff4e6;
+      --accent: #1971c2;
+      --accent-light: #e7f5ff;
+      --bg: #f8f9fa;
+      --card: #ffffff;
+      --text: #212529;
+      --muted: #5c6670;
+      --border: #dee2e6;
+      --success: #2b8a3e;
+      --success-bg: #ebfbee;
+      --danger: #c92a2a;
+      --danger-bg: #fff5f5;
+      --origin-bg: #f8f0fc;
+      --origin-border: #e5dbff;
+      --origin-text: #5f3dc4;
+      --grammar-bg: #fff9db;
+      --grammar-border: #ffe066;
+    }
+
+    * { box-sizing: border-box; }
+    body {
+      margin: 0;
+      font-family: -apple-system, BlinkMacSystemFont, "Segoe UI", Roboto, "Noto Sans TC", sans-serif;
+      background: var(--bg);
+      color: var(--text);
+      line-height: 1.75;
+    }
+
+    header {
+      background: var(--card);
+      border-bottom: 1px solid var(--border);
+      padding: 14px 20px;
+      position: sticky;
+      top: 0;
+      z-index: 20;
+      box-shadow: 0 1px 6px rgba(0,0,0,0.04);
+    }
+
+    .header-inner {
+      max-width: 1020px;
+      margin: 0 auto;
+      display: flex;
+      flex-wrap: wrap;
+      justify-content: space-between;
+      align-items: center;
+      gap: 12px;
+    }
+
+    .brand {
+      font-size: 1.12rem;
+      font-weight: 700;
+      color: var(--primary);
+      display: flex;
+      align-items: center;
+      gap: 8px;
+    }
+
+    .nav-controls {
+      display: flex;
+      flex-wrap: wrap;
+      align-items: center;
+      gap: 8px;
+    }
+
+    button {
+      cursor: pointer;
+      border: 1px solid var(--border);
+      background: var(--card);
+      color: var(--text);
+      padding: 8px 14px;
+      border-radius: 8px;
+      font-size: 0.92rem;
+      transition: all 0.15s ease;
+    }
+
+    button:hover:not(:disabled) { background: #f1f3f5; }
+    button.primary {
+      background: var(--primary);
+      color: #fff;
+      border-color: var(--primary);
+      font-weight: 600;
+    }
+    button.primary:hover:not(:disabled) { background: #c2410c; }
+
+    button.secondary-active {
+      background: var(--accent-light);
+      color: var(--accent);
+      border-color: #74c0fc;
+      font-weight: 600;
+    }
+
+    button:disabled { opacity: 0.45; cursor: not-allowed; }
+
+    main {
+      max-width: 1020px;
+      margin: 24px auto;
+      padding: 0 20px 96px;
+      display: grid;
+      gap: 22px;
+    }
+
+    .card {
+      background: var(--card);
+      border: 1px solid var(--border);
+      border-radius: 14px;
+      padding: 24px;
+      box-shadow: 0 2px 8px rgba(0,0,0,0.03);
+    }
+
+    /* 文章選單面板 */
+    .article-menu-panel {
+      background: var(--card);
+      border: 1px solid var(--border);
+      border-radius: 14px;
+      padding: 20px 22px;
+      box-shadow: 0 6px 20px rgba(0,0,0,0.06);
+      display: none;
+    }
+    .article-menu-panel.open {
+      display: block;
+    }
+
+    .menu-header {
+      display: flex;
+      justify-content: space-between;
+      align-items: center;
+      gap: 10px;
+      margin-bottom: 14px;
+    }
+
+    .menu-title {
+      font-size: 1.05rem;
+      font-weight: 700;
+      margin: 0;
+    }
+
+    .menu-grid {
+      display: grid;
+      grid-template-columns: repeat(auto-fit, minmax(270px, 1fr));
+      gap: 12px;
+    }
+
+    .menu-item-btn {
+      text-align: left;
+      display: flex;
+      flex-direction: column;
+      gap: 6px;
+      padding: 14px 16px;
+      border-radius: 12px;
+      border: 1px solid var(--border);
+      background: #fcfcfd;
+    }
+    .menu-item-btn:hover:not(:disabled) {
+      border-color: var(--primary);
+      background: var(--primary-light);
+    }
+    .menu-item-btn.active {
+      border-color: var(--primary);
+      background: var(--primary-light);
+      box-shadow: inset 0 0 0 1px var(--primary);
+    }
+
+    .menu-item-top {
+      display: flex;
+      justify-content: space-between;
+      align-items: center;
+      gap: 8px;
+      font-size: 0.8rem;
+      color: var(--muted);
+      font-weight: 600;
+    }
+
+    .menu-item-es {
+      font-weight: 700;
+      font-size: 0.98rem;
+      color: var(--text);
+    }
+
+    .menu-item-topic {
+      font-size: 0.84rem;
+      color: var(--accent);
+      font-weight: 600;
+    }
+
+    .io-bar {
+      display: flex;
+      flex-wrap: wrap;
+      justify-content: space-between;
+      align-items: center;
+      gap: 12px;
+      background: #fff;
+      border: 1px solid var(--border);
+      border-radius: 12px;
+      padding: 14px 18px;
+    }
+
+    .io-title {
+      font-weight: 700;
+      font-size: 0.96rem;
+      color: var(--text);
+    }
+
+    .io-desc {
+      font-size: 0.85rem;
+      color: var(--muted);
+    }
+
+    .io-actions {
+      display: flex;
+      flex-wrap: wrap;
+      gap: 8px;
+      align-items: center;
+    }
+
+    .io-status {
+      width: 100%;
+      font-size: 0.88rem;
+      padding: 8px 12px;
+      border-radius: 8px;
+      display: none;
+    }
+    .io-status.show { display: block; }
+    .io-status.ok {
+      background: var(--success-bg);
+      color: var(--success);
+      border: 1px solid #b2f2bb;
+    }
+    .io-status.bad {
+      background: var(--danger-bg);
+      color: var(--danger);
+      border: 1px solid #ffc9c9;
+    }
+
+    .meta {
+      display: flex;
+      flex-wrap: wrap;
+      gap: 8px;
+      align-items: center;
+      margin-bottom: 10px;
+      font-size: 0.88rem;
+      color: var(--muted);
+    }
+
+    .badge {
+      background: var(--primary-light);
+      color: var(--primary);
+      padding: 3px 10px;
+      border-radius: 999px;
+      font-weight: 600;
+    }
+
+    .topic-badge {
+      background: var(--accent-light);
+      color: var(--accent);
+      padding: 3px 10px;
+      border-radius: 999px;
+      font-weight: 600;
+    }
+
+    .time-badge {
+      background: #edf2ff;
+      color: #364fc7;
+      padding: 3px 10px;
+      border-radius: 999px;
+      font-weight: 600;
+    }
+
+    h1, h2, h3 { margin-top: 0; }
+    h1 { font-size: 1.55rem; margin-bottom: 10px; }
+    h2 {
+      font-size: 1.22rem;
+      margin-bottom: 16px;
+      border-left: 4px solid var(--primary);
+      padding-left: 10px;
+    }
+
+    .es-text {
+      font-size: 1.12rem;
+      background: #fcfcfd;
+      border: 1px solid #e9ecef;
+      border-radius: 10px;
+      padding: 18px 20px;
+      margin: 12px 0;
+    }
+
+    .es-text p { margin: 0 0 14px; }
+    .es-text p:last-child { margin-bottom: 0; }
+
+    .zh-text {
+      background: #f8f9fa;
+      border-left: 4px solid var(--primary);
+      padding: 14px 18px;
+      border-radius: 0 8px 8px 0;
+      color: #2b2f36;
+      margin-top: 12px;
+    }
+
+    .en-text {
+      background: #f4f9ff;
+      border-left: 4px solid var(--accent);
+      padding: 14px 18px;
+      border-radius: 0 8px 8px 0;
+      color: #1c355e;
+      margin-top: 12px;
+    }
+
+    .zh-text p, .en-text p { margin: 0 0 10px; }
+    .zh-text p:last-child, .en-text p:last-child { margin-bottom: 0; }
+
+    .trans-label {
+      font-size: 0.8rem;
+      font-weight: 700;
+      text-transform: uppercase;
+      letter-spacing: 0.04em;
+      margin-bottom: 6px;
+      display: block;
+      opacity: 0.85;
+    }
+
+    .toolbar {
+      display: flex;
+      flex-wrap: wrap;
+      gap: 10px;
+      margin-top: 14px;
+    }
+
+    .grid-2 {
+      display: grid;
+      grid-template-columns: repeat(auto-fit, minmax(300px, 1fr));
+      gap: 16px;
+    }
+
+    .item-box {
+      border: 1px solid var(--border);
+      border-radius: 12px;
+      padding: 16px;
+      background: #fff;
+      display: flex;
+      flex-direction: column;
+      gap: 8px;
+    }
+
+    .item-head {
+      display: flex;
+      justify-content: space-between;
+      align-items: baseline;
+      gap: 8px;
+      flex-wrap: wrap;
+    }
+
+    .es-word {
+      font-size: 1.1rem;
+      font-weight: 700;
+      color: var(--primary);
+    }
+
+    .pos {
+      font-size: 0.8rem;
+      color: var(--muted);
+      background: #f1f3f5;
+      padding: 2px 8px;
+      border-radius: 6px;
+    }
+
+    .meaning-line { font-size: 0.95rem; }
+
+    .example {
+      font-size: 0.9rem;
+      color: var(--muted);
+      background: #f8f9fa;
+      padding: 8px 10px;
+      border-radius: 8px;
+    }
+
+    .origin-box {
+      font-size: 0.86rem;
+      color: var(--origin-text);
+      background: var(--origin-bg);
+      border: 1px solid var(--origin-border);
+      padding: 8px 10px;
+      border-radius: 8px;
+    }
+
+    .grammar-box {
+      background: var(--grammar-bg);
+      border: 1px solid var(--grammar-border);
+      border-radius: 10px;
+      padding: 16px;
+      margin-bottom: 14px;
+    }
+    .grammar-box:last-child { margin-bottom: 0; }
+
+    .quiz-header {
+      display: flex;
+      flex-wrap: wrap;
+      justify-content: space-between;
+      align-items: center;
+      gap: 12px;
+      margin-bottom: 16px;
+      padding-bottom: 12px;
+      border-bottom: 1px solid var(--border);
+    }
+
+    .lang-switch { display: flex; gap: 8px; }
+
+    .quiz-q {
+      margin-bottom: 18px;
+      padding-bottom: 14px;
+      border-bottom: 1px dashed var(--border);
+    }
+    .quiz-q:last-of-type { border-bottom: none; }
+
+    .options {
+      display: grid;
+      grid-template-columns: repeat(auto-fit, minmax(240px, 1fr));
+      gap: 8px;
+      margin-top: 10px;
+    }
+
+    .option-label {
+      display: flex;
+      align-items: center;
+      gap: 8px;
+      padding: 10px 12px;
+      border: 1px solid var(--border);
+      border-radius: 8px;
+      cursor: pointer;
+      font-size: 0.94rem;
+    }
+    .option-label:hover { background: #f8f9fa; }
+
+    .feedback {
+      margin-top: 10px;
+      padding: 10px 12px;
+      border-radius: 8px;
+      font-size: 0.92rem;
+    }
+    .feedback.ok { background: var(--success-bg); color: var(--success); border: 1px solid #b2f2bb; }
+    .feedback.bad { background: var(--danger-bg); color: var(--danger); border: 1px solid #ffc9c9; }
+
+    .quiz-actions {
+      display: flex;
+      flex-wrap: wrap;
+      align-items: center;
+      gap: 12px;
+      margin-top: 10px;
+    }
+
+    .review-note {
+      font-size: 0.88rem;
+      color: var(--muted);
+    }
+
+    /* 常駐右下角純向上箭頭按鈕 */
+    .scroll-top-btn {
+      position: fixed;
+      right: 24px;
+      bottom: 24px;
+      z-index: 30;
+      width: 48px;
+      height: 48px;
+      padding: 0;
+      background: var(--primary);
+      color: #fff;
+      border: none;
+      border-radius: 50%;
+      font-size: 1.3rem;
+      font-weight: 700;
+      line-height: 1;
+      box-shadow: 0 6px 18px rgba(217, 72, 15, 0.28);
+      display: inline-flex;
+      align-items: center;
+      justify-content: center;
+    }
+    .scroll-top-btn:hover {
+      background: #c2410c;
+      transform: translateY(-2px);
+    }
+  </style>
+</head>
+<body>
+  <header>
+    <div class="header-inner">
+      <div class="brand">🇪🇸 西文深度閱讀站（30 分鐘版 · 手動切換）</div>
+      <div class="nav-controls">
+        <button type="button" id="toggleMenuBtn" class="secondary-active">📚 文章選單</button>
+        <button type="button" id="prevBtn">← 上一篇</button>
+        <span id="currentUnitLabel" style="font-weight: 600; font-size: 0.92rem;">第 1 篇</span>
+        <button type="button" id="nextBtn">下一篇 →</button>
+      </div>
+    </div>
+  </header>
+
+  <main id="app"></main>
+
+  <button type="button" id="scrollTopBtn" class="scroll-top-btn" aria-label="回到最上方" title="回到最上方">
+    ↑
+  </button>
+
+  <script>
+    const INITIAL_LESSONS = [
+      {
+        id: "ia-trabajo-educacion",
+        unitLabel: "第 1 篇",
+        topic: "科技、AI 與學習生活",
+        level: "A2 初級",
+        duration: "約 30 分鐘單元",
+        title: "El impacto de la inteligencia artificial en el trabajo y la educación",
+        esParagraphs: [
+          "En los últimos años, la inteligencia artificial ha cambiado la forma en que trabajamos y estudiamos. En muchas oficinas, los empleados usan programas inteligentes para resumir informes largos, organizar agendas y responder correos sencillos. Así, ganan tiempo para tareas que necesitan más creatividad y conversación con otras personas.",
+          "En las escuelas y universidades, el cambio también es visible. Muchos estudiantes piden ayuda a un asistente digital cuando no entienden un tema de historia, ciencias o idiomas. El sistema explica las ideas paso a paso y propone ejercicios nuevos para practicar en casa.",
+          "Sin embargo, los profesores y las empresas recuerdan que la tecnología no piensa por sí sola. A veces, una herramienta automática comete errores o da respuestas poco claras. Por eso, es necesario revisar la información con cuidado y comprobar los datos en fuentes confiables.",
+          "En la vida diaria de Valeria, profesora de secundaria, la inteligencia artificial es una aliada útil pero limitada. Ella prepara actividades variadas con ayuda digital, pero prefiere corregir los textos de sus alumnos de manera personal para conocer su estilo y animarlos de verdad.",
+          "Al final, el verdadero aprendizaje depende de la curiosidad, el esfuerzo constante y el diálogo humano. Las herramientas digitales abren puertas rápidas, pero las personas son quienes deciden cómo usarlas con responsabilidad y buen criterio."
+        ],
+        zhParagraphs: [
+          "近幾年來，人工智慧改變了我們工作與學習的方式。在許多辦公室裡，員工使用智慧程式來摘要長篇報告、安排行程與回覆簡單的郵件。如此一來，他們就能省下時間，去做需要更多創意與人際溝通的工作。",
+          "在學校與大學裡，這項轉變同樣清晰可見。當學生對歷史、科學或語言的某個主題不理解時，許多人會向數位助理求助。系統會一步步解釋概念，並提供新的練習題讓學生在家練習。",
+          "然而，老師與企業也提醒大家，科技並不會自己獨立思考。有時候，自動化工具會犯錯，或給出不夠清楚的答案。因此，仔細檢視資訊並在可信賴的來源核對資料是必要的。",
+          "在高中老師瓦萊麗亞的日常生活中，人工智慧是一個有用但有限度的幫手。她會藉助數位工具準備多樣的活動，但仍喜歡親自批改學生的作文，以便了解他們的風格並給予真正的鼓勵。",
+          "歸根究柢，真正的學習取決於好奇心、持續的努力以及人與人的對話。數位工具能快速開啟大門，但如何負責任且明智地使用它們，決定權仍在人身上。"
+        ],
+        enParagraphs: [
+          "In recent years, artificial intelligence has changed the way we work and study. In many offices, employees use smart programs to summarize long reports, organize schedules, and reply to simple emails. That way, they save time for tasks that require more creativity and conversation with other people.",
+          "In schools and universities, the change is also visible. Many students ask a digital assistant for help when they do not understand a topic in history, science, or languages. The system explains ideas step by step and suggests new exercises to practice at home.",
+          "However, teachers and companies remind us that technology does not think on its own. Sometimes an automatic tool makes mistakes or gives unclear answers. Because of that, it is necessary to review information carefully and check facts in reliable sources.",
+          "In the daily life of Valeria, a high school teacher, artificial intelligence is a useful yet limited ally. She prepares varied activities with digital help, but she prefers grading her students' texts personally to understand their style and truly encourage them.",
+          "In the end, real learning depends on curiosity, steady effort, and human dialogue. Digital tools open doors quickly, but people are the ones who decide how to use them responsibly and with good judgment."
+        ],
+        vocab: [
+          {
+            word: "resumir",
+            pos: "動詞",
+            meaning: "摘要、概述、總結（EN: summarize）",
+            example: "En esta reunión vamos a resumir los puntos principales.",
+            origin: "源自拉丁文 resumere（重新取回、再次拿起），引申為把長篇內容濃縮提煉出重點。"
+          },
+          {
+            word: "el informe",
+            pos: "名詞(陽)",
+            meaning: "報告、報告書（EN: report）",
+            example: "El equipo presentó un informe claro al final del mes.",
+            origin: "源自動詞 informar（告知、報告），源自拉丁文 informare（塑造、說明）。"
+          },
+          {
+            word: "la tarea",
+            pos: "名詞(陰)",
+            meaning: "工作任務、作業（EN: task / homework）",
+            example: "Termino mis tareas de la tarde antes de cenar.",
+            origin: "源自阿拉伯文 tariha（被交付的事、負擔），經由古西班牙文傳入，指分配到的工作或功課。"
+          },
+          {
+            word: "comprobar",
+            pos: "動詞",
+            meaning: "核對、查證、確認（EN: check / verify）",
+            example: "Siempre compruebo la hora del tren antes de salir.",
+            origin: "由前綴 com-（完全／一起）加上 probar（測試、證明）構成，指透過比對或測試來確認真偽。"
+          },
+          {
+            word: "la fuente",
+            pos: "名詞(陰)",
+            meaning: "來源、消息來源、噴泉（EN: source / fountain）",
+            example: "Busca siempre información en una fuente confiable.",
+            origin: "源自拉丁文 fons / fontis（泉水、水源），後來引申為知識、資料或事物的「源頭」。"
+          },
+          {
+            word: "confiable",
+            pos: "形容詞",
+            meaning: "可信賴的、可靠的（EN: reliable）",
+            example: "Necesitamos una fuente confiable para este trabajo.",
+            origin: "源自動詞 confiar（信任、託付），加上表示「能夠……的」字尾 -able 構成。"
+          },
+          {
+            word: "variado/a",
+            pos: "形容詞",
+            meaning: "多樣的、豐富的（EN: varied / diverse）",
+            example: "Preparamos ejercicios variados para toda la semana.",
+            origin: "源自拉丁文 varius（多樣的、斑駁的），指具有不同類型或變化。"
+          },
+          {
+            word: "la curiosidad",
+            pos: "名詞(陰)",
+            meaning: "好奇心（EN: curiosity）",
+            example: "La curiosidad ayuda a hacer buenas preguntas.",
+            origin: "源自拉丁文 curiositas，與 curiosus（留心的、渴望知道的）相關，原意帶有「用心探究」的積極色彩。"
+          },
+          {
+            word: "el esfuerzo",
+            pos: "名詞(陽)",
+            meaning: "努力、心力（EN: effort）",
+            example: "Su esfuerzo diario dio buenos resultados.",
+            origin: "由前綴 es-（向外／充分）與 fuerza（力量、體力）構成，指把力量投入某件事上。"
+          },
+          {
+            word: "el criterio",
+            pos: "名詞(陽)",
+            meaning: "判斷標準、見識（EN: criterion / judgment）",
+            example: "Necesitamos criterio para elegir buenas noticias.",
+            origin: "源自古希臘文 kriterion（判斷的標準、衡量工具），與 krinein（分辨、決定）同源。"
+          }
+        ],
+        phrases: [
+          {
+            phrase: "en los últimos años",
+            meaning: "在最近幾年裡（EN: in recent years）",
+            example: "En los últimos años cambió mucho nuestra forma de comprar.",
+            origin: "último 源自拉丁文 ultimus（最遠的、最後的），與 años（年）搭配表示「截至目前為止的最近幾年」。"
+          },
+          {
+            phrase: "paso a paso",
+            meaning: "一步一步地、循序漸進（EN: step by step）",
+            example: "Explicamos el problema paso a paso en clase.",
+            origin: "paso 源自拉丁文 passus（步伐），重複連接「一步接一步」，強調穩健不急躁的過程。"
+          },
+          {
+            phrase: "por sí solo / sola",
+            meaning: "靠自己、獨立地（EN: by itself / on its own）",
+            example: "El programa no decide por sí solo.",
+            origin: "由 por + 反身代名詞 sí + solo（獨自的）組成，用來強調某事物或某人不依賴外力。"
+          },
+          {
+            phrase: "por eso",
+            meaning: "因此、所以（EN: therefore / that is why）",
+            example: "Llueve mucho; por eso llevamos paraguas.",
+            origin: "由介系詞 por（由於、為了）加上指示代名詞 eso（那件事）構成，直接連接原因與結果。"
+          },
+          {
+            phrase: "de manera personal",
+            meaning: "親自地、以個人方式（EN: personally / in person）",
+            example: "Prefiero hablar con él de manera personal.",
+            origin: "manera 源自拉丁文 manus（手），引申為「做法、方式」，搭配 personal 強調親力親為。"
+          },
+          {
+            phrase: "depender de algo",
+            meaning: "取決於某事、依靠某事（EN: depend on something）",
+            example: "El éxito del proyecto depende de todo el equipo.",
+            origin: "源自拉丁文 dependere（懸掛於下、依賴於），在現代西文中表示結果或狀態由某條件決定。"
+          }
+        ],
+        grammar: [
+          {
+            title: "1. 連接詞「por eso」與「sin embargo」的邏輯功能",
+            explanation: "「por eso（因此）」用來帶出前一件事造成的結果；「sin embargo（然而、不過）」則用來帶出與前文相反或形成對比的狀況。兩者都是 A2 閱讀與寫作中非常實用的篇章連接詞。",
+            example: "A veces el sistema da respuestas poco claras; por eso, revisamos los datos.（系統有時給出不清楚的答案；因此，我們會核對資料。）"
+          },
+          {
+            title: "2. 關係子句「en que」與「quienes」補充說明",
+            explanation: "文中「la forma en que trabajamos（我們工作的方式）」用 en que 說明方式；「las personas son quienes deciden（人是那些做決定的人）」用 quienes 指代複數的人，讓長句更精準。",
+            example: "Los alumnos son quienes practican cada día.（學生才是每天練習的人。）"
+          }
+        ],
+        quiz: [
+          {
+            esQ: "1. ¿Qué usan muchos empleados en las oficinas según el primer párrafo?",
+            esOpts: ["Mapas de papel", "Programas inteligentes", "Cámaras de cine", "Bicicletas eléctricas"],
+            zhQ: "1. 根據第一段，許多員工在辦公室裡使用什麼？",
+            zhOpts: ["紙本地圖", "智慧程式", "電影攝影機", "電動自行車"],
+            answer: 1,
+            esExplain: "Usan programas inteligentes para resumir informes y organizar agendas.",
+            zhExplain: "第一段提到員工使用智慧程式來摘要報告、安排行程與回信。"
+          },
+          {
+            esQ: "2. ¿Qué significa el verbo 'resumir'?",
+            esOpts: ["Borrar un archivo", "Imprimir cien páginas", "Contar las ideas principales de forma breve", "Cambiar la contraseña"],
+            zhQ: "2. 動詞「resumir」的意思最接近哪一項？",
+            zhOpts: ["刪除檔案", "列印一百頁", "簡要整理出重點／摘要", "更改密碼"],
+            answer: 2,
+            esExplain: "'Resumir' significa presentar lo esencial de un texto de manera breve.",
+            zhExplain: "resumir 的意思是「摘要、簡要總結重點」。"
+          },
+          {
+            esQ: "3. ¿Qué hace un asistente digital cuando un estudiante no entiende un tema?",
+            esOpts: ["Borra todos los libros", "Cambia la fecha del examen", "Llama a los padres", "Explica paso a paso y propone ejercicios"],
+            zhQ: "3. 當學生不理解某個主題時，數位助理會做什麼？",
+            zhOpts: ["刪除所有書本", "更改考試日期", "打電話給家長", "一步步解釋並提供練習題"],
+            answer: 3,
+            esExplain: "Explica las ideas paso a paso y propone ejercicios nuevos.",
+            zhExplain: "系統會一步步解釋概念，並提供新的練習題。"
+          },
+          {
+            esQ: "4. ¿Cuál es un problema que mencionan profesores y empresas?",
+            esOpts: ["La IA a veces comete errores", "La IA nunca funciona de día", "La IA es más pesada que un coche", "La IA prohíbe leer"],
+            zhQ: "4. 老師與企業提到哪一個潛在問題？",
+            zhOpts: ["AI 有時會犯錯", "AI 白天完全不能用", "AI 比汽車還重", "AI 禁止閱讀"],
+            answer: 0,
+            esExplain: "A veces una herramienta automática comete errores o da respuestas poco claras.",
+            zhExplain: "第三段指出自動化工具偶爾會犯錯或給出不夠清楚的答案。"
+          },
+          {
+            esQ: "5. ¿Qué significa 'comprobar' en el tercer párrafo?",
+            esOpts: ["Olvidar por completo", "Verificar o confirmar datos", "Pintar de colores", "Comprar en oferta"],
+            zhQ: "5. 第三段中的動詞「comprobar」是什麼意思？",
+            zhOpts: ["完全忘記", "核對、查證資料", "塗上顏色", "特價購買"],
+            answer: 1,
+            esExplain: "'Comprobar' significa revisar para confirmar que algo es correcto.",
+            zhExplain: "comprobar 的意思是「核對、查證以確認正確性」。"
+          },
+          {
+            esQ: "6. ¿Quién es Valeria en el cuarto párrafo?",
+            esOpts: ["Piloto de avión", "Arquitecta de puentes", "Profesora de secundaria", "Periodista deportiva"],
+            zhQ: "6. 第四段提到的瓦萊麗亞是什麼身分？",
+            zhOpts: ["飛機駕駛", "橋樑建築師", "中學老師", "體育記者"],
+            answer: 2,
+            esExplain: "Valeria es profesora de secundaria.",
+            zhExplain: "瓦萊麗亞是一位中學老師（profesora de secundaria）。"
+          },
+          {
+            esQ: "7. ¿Por qué prefiere Valeria corregir los textos de manera personal?",
+            esOpts: ["Porque no tiene electricidad", "Porque no sabe escribir", "Para cobrar más dinero", "Para conocer su estilo y animarlos"],
+            zhQ: "7. 瓦萊麗亞為什麼喜歡親自批改學生的作文？",
+            zhOpts: ["因為家裡沒電", "因為她不會寫字", "為了多收費", "為了了解風格並給予鼓勵"],
+            answer: 3,
+            esExplain: "Para conocer su estilo y animarlos de verdad.",
+            zhExplain: "她希望了解學生的寫作風格並給予真正的鼓勵。"
+          },
+          {
+            esQ: "8. ¿Qué significa el adjetivo 'confiable'?",
+            esOpts: ["En quien o en qué se puede confiar", "Muy difícil de leer", "Demasiado caro", "Totalmente vacío"],
+            zhQ: "8. 形容詞「confiable」的意思是什麼？",
+            zhOpts: ["可信賴的、可靠的", "非常難讀的", "過於昂貴的", "完全空的"],
+            answer: 0,
+            esExplain: "'Confiable' describe algo seguro o digno de confianza.",
+            zhExplain: "confiable 指「可信賴的、可靠的」。"
+          },
+          {
+            esQ: "9. ¿Cuál de estos sustantivos lleva el artículo 'la'?",
+            esOpts: ["el informe", "la tarea", "el esfuerzo", "el criterio"],
+            zhQ: "9. 下列哪一個名詞搭配的冠詞是「la」？",
+            zhOpts: ["el informe", "la tarea", "el esfuerzo", "el criterio"],
+            answer: 1,
+            esExplain: "'La tarea' es un sustantivo femenino.",
+            zhExplain: "la tarea 是陰性名詞，冠詞為 la。"
+          },
+          {
+            esQ: "10. ¿Cuál de estos sustantivos lleva el artículo 'el'?",
+            esOpts: ["la fuente", "la curiosidad", "el criterio", "la tarea"],
+            zhQ: "10. 下列哪一個名詞搭配的冠詞是「el」？",
+            zhOpts: ["la fuente", "la curiosidad", "el criterio", "la tarea"],
+            answer: 2,
+            esExplain: "'El criterio' es un sustantivo masculino.",
+            zhExplain: "el criterio 是陽性名詞，冠詞為 el。"
+          },
+          {
+            esQ: "11. ¿Qué significa 'paso a paso'?",
+            esOpts: ["Muy rápido y sin mirar", "Hacia atrás", "En silencio absoluto", "De forma gradual, un paso tras otro"],
+            zhQ: "11. 「paso a paso」的意思是什麼？",
+            zhOpts: ["非常快且不看路", "往後退", "完全安靜地", "一步一步、循序漸進"],
+            answer: 3,
+            esExplain: "'Paso a paso' significa avanzar de manera gradual.",
+            zhExplain: "paso a paso 的意思是「一步一步地、循序漸進」。"
+          },
+          {
+            esQ: "12. Completa: 'A veces falla el sistema; ____ revisamos todo.'",
+            esOpts: ["por eso", "nunca", "todavía", "apenas"],
+            zhQ: "12. 填入表示結果的片語：A veces falla el sistema; ____ revisamos todo.",
+            zhOpts: ["por eso", "nunca", "todavía", "apenas"],
+            answer: 0,
+            esExplain: "'Por eso' introduce la consecuencia lógica.",
+            zhExplain: "por eso 用來引出前面的原因所導致的結果（因此）。"
+          },
+          {
+            esQ: "13. ¿Qué significa 'variado' en 'actividades variadas'?",
+            esOpts: ["Muy aburridas", "Diversas y de distintos tipos", "Solo para niños", "Demasiado largas"],
+            zhQ: "13. 在「actividades variadas」中，「variadas」的意思是什麼？",
+            zhOpts: ["非常無聊的", "多樣化的、不同類型的", "只給小孩的", "太長的"],
+            answer: 1,
+            esExplain: "'Variadas' significa que tienen variedad o diferencia.",
+            zhExplain: "variadas 指「多樣化的、豐富多變的」。"
+          },
+          {
+            esQ: "14. Completa: 'El éxito del curso ____ del interés de los estudiantes.'",
+            esOpts: ["dependen", "depender", "depende", "dependido"],
+            zhQ: "14. 填入正確動詞變位：El éxito del curso ____ del interés de los estudiantes.",
+            zhOpts: ["dependen", "depender", "depende", "dependido"],
+            answer: 2,
+            esExplain: "'El éxito' es singular, por eso corresponde 'depende'.",
+            zhExplain: "主詞 el éxito 為單數，搭配 depende de（取決於）。"
+          },
+          {
+            esQ: "15. ¿Qué significa 'por sí solo'?",
+            esOpts: ["Con mucha música", "Durante las vacaciones", "En voz alta", "Sin ayuda de otro elemento"],
+            zhQ: "15. 「por sí solo」的意思最接近哪一項？",
+            zhOpts: ["伴隨很多音樂", "在假期期間", "大聲地", "不靠其他因素、獨立地"],
+            answer: 3,
+            esExplain: "'Por sí solo' indica que algo actúa sin depender de otro.",
+            zhExplain: "por sí solo 表示「靠自身、不依賴其他事物」。"
+          },
+          {
+            esQ: "16. ¿Cuál de estos sustantivos es femenino ('la')?",
+            esOpts: ["la curiosidad", "el esfuerzo", "el informe", "el criterio"],
+            zhQ: "16. 下列哪一個是陰性名詞（la）？",
+            zhOpts: ["la curiosidad", "el esfuerzo", "el informe", "el criterio"],
+            answer: 0,
+            esExplain: "'La curiosidad' es femenino.",
+            zhExplain: "la curiosidad 是陰性名詞。"
+          },
+          {
+            esQ: "17. Completa: '____ últimos años cambió mucho la educación.'",
+            esOpts: ["A las", "En los", "Por un", "Sin la"],
+            zhQ: "17. 填入正確搭配：____ últimos años cambió mucho la educación.",
+            zhOpts: ["A las", "En los", "Por un", "Sin la"],
+            answer: 1,
+            esExplain: "La expresión completa es 'en los últimos años'.",
+            zhExplain: "固定時間片語為 en los últimos años（近幾年）。"
+          },
+          {
+            esQ: "18. ¿Qué actitud promueve el texto hacia las herramientas digitales?",
+            esOpts: ["Rechazo total sin probar", "Copiar todo sin leer", "Uso responsable y con criterio", "Dejar de estudiar"],
+            zhQ: "18. 文章對數位工具抱持什麼態度？",
+            zhOpts: ["完全拒絕不嘗試", "不看就全盤照抄", "負責任且有判斷力地使用", "停止學習"],
+            answer: 2,
+            esExplain: "El texto anima a usarlas con responsabilidad y buen criterio.",
+            zhExplain: "文章主張負責任且具備良好判斷力地使用工具。"
+          },
+          {
+            esQ: "19. Completa: 'Habla con los alumnos ____ personal.'",
+            esOpts: ["en barco", "por tren", "a pie", "de manera"],
+            zhQ: "19. 填入正確片語：Habla con los alumnos ____ personal.",
+            zhOpts: ["en barco", "por tren", "a pie", "de manera"],
+            answer: 3,
+            esExplain: "'De manera personal' significa de forma directa y cercana.",
+            zhExplain: "de manera personal 意思是「親自地、以個人方式」。"
+          },
+          {
+            esQ: "20. ¿Cuál es el tema central de la lectura?",
+            esOpts: ["La IA en el trabajo y la educación", "Cómo cultivar tomates", "Historia del fútbol", "Preparar una maleta"],
+            zhQ: "20. 這篇文章的核心主題是什麼？",
+            zhOpts: ["AI 在工作與教育的影響", "如何種植番茄", "足球歷史", "整理行李箱"],
+            answer: 0,
+            esExplain: "Todo el texto analiza cómo influye la IA en el trabajo, el estudio y la vida diaria.",
+            zhExplain: "全文圍繞人工智慧在工作、學習與日常生活中的影響與反思。"
+          }
+        ]
+      },
+      {
+        id: "energia-solar-transporte-limpio",
+        unitLabel: "第 2 篇",
+        topic: "永續能源與綠色城市",
+        level: "A2 初級",
+        duration: "約 30 分鐘單元",
+        title: "Ciudades que apuestan por la energía solar y el transporte limpio",
+        esParagraphs: [
+          "Muchas ciudades medianas y grandes están cambiando su modelo de energía y movilidad. En varios barrios, los vecinos instalan paneles solares en los tejados para producir electricidad limpia en casa. Esta energía ayuda a reducir el gasto mensual y a disminuir las emisiones que contaminan el aire.",
+          "El transporte público también vive una etapa de transformación. Cada vez más autobuses funcionan con electricidad o gas limpio y hacen menos ruido en las calles. Además, los municipios amplían las aceras y los carriles para bicicletas para que caminar o pedalear sea más seguro.",
+          "Sin embargo, la transición energética no ocurre de un día para otro. Instalar paneles requiere una inversión inicial y organizar bien los horarios de carga y mantenimiento. Algunos comerciantes también preguntan cómo afectarán las nuevas zonas peatonales a las entregas de mercancías.",
+          "En la ciudad de Adrián, conductor de autobús urbano, los cambios ya se notan cada mañana. Él conduce un vehículo eléctrico que es silencioso y cómodo para los pasajeros. Al terminar su turno, comenta que los vecinos saludan más y que la plaza central parece más viva.",
+          "Construir una ciudad más limpia exige acuerdos entre vecinos, empresas y autoridades. Cuando todos colaboran con paciencia, los espacios públicos mejoran y la calidad de vida crece para las generaciones presentes y futuras."
+        ],
+        zhParagraphs: [
+          "許多中大型城市正在改變它們的能源與交通模式。在不少社區裡，居民在屋頂安裝太陽能板，以便在家中製造潔淨電力。這種能源有助於降低每月電費支出，並減少汙染空氣的排放物。",
+          "大眾運輸也正經歷轉型的階段。越來越多的公車改用電力或潔淨天然氣行駛，在街上的噪音也更小。此外，市政府擴寬人行道與自行車道，讓走路或騎車更加安全。",
+          "然而，能源轉型並不是一夕之間就能完成的。安裝太陽能板需要初期投入成本，也需要妥善安排充電與維護的時程。部分商家也詢問，新的行人徒步區會如何影響貨物的配送。",
+          "在市區公車司機阿德里安所在的城市，這些改變每天早上都能明顯感受到。他駕駛的電動車安靜且讓乘客感到舒適。輪班結束後，他表示居民們更常打招呼，中央廣場也顯得更有活力。",
+          "打造更乾淨的城市，需要居民、企業與政府部門之間的共識。當大家有耐心地合作時，公共空間會變得更好，現今與未來世代的生活品質也會隨之提升。"
+        ],
+        enParagraphs: [
+          "Many medium-sized and large cities are changing their energy and mobility models. In several neighborhoods, residents install solar panels on roofs to produce clean electricity at home. This energy helps lower monthly expenses and reduce emissions that pollute the air.",
+          "Public transport is also going through a stage of transformation. More and more buses run on electricity or clean gas and make less noise in the streets. In addition, local councils widen sidewalks and bike lanes so walking or cycling is safer.",
+          "However, the energy transition does not happen overnight. Installing panels requires an initial investment and good planning for charging and maintenance schedules. Some shopkeepers also ask how new pedestrian zones will affect goods deliveries.",
+          "In the city of Adrián, a city bus driver, the changes are already noticeable every morning. He drives an electric vehicle that is quiet and comfortable for passengers. When his shift ends, he mentions that neighbors greet each other more and the main square feels livelier.",
+          "Building a cleaner city requires agreements among residents, businesses, and authorities. When everyone collaborates patiently, public spaces improve and quality of life grows for present and future generations."
+        ],
+        vocab: [
+          {
+            word: "contaminar",
+            pos: "動詞",
+            meaning: "汙染、使髒亂（EN: pollute / contaminate）",
+            example: "Los vehículos sin filtro pueden contaminar el aire.",
+            origin: "源自拉丁文 contaminare（弄髒、混合、玷污），與 contagio（接觸傳染）同源。"
+          },
+          {
+            word: "el gasto",
+            pos: "名詞(陽)",
+            meaning: "花費、支出（EN: expense / spending）",
+            example: "Anotamos cada gasto para cuidar el presupuesto.",
+            origin: "源自動詞 gastar（花費、消耗），源自拉丁文 vastare（使荒蕪、耗盡），後轉為日常財務支出。"
+          },
+          {
+            word: "ampliar",
+            pos: "動詞",
+            meaning: "擴大、擴寬、擴充（EN: widen / expand）",
+            example: "El ayuntamiento decidió ampliar la acera de la calle.",
+            origin: "源自拉丁文 ampliare（使變大、擴展），與 amplio（寬敞的）同源。"
+          },
+          {
+            word: "la acera",
+            pos: "名詞(陰)",
+            meaning: "人行道（EN: sidewalk / pavement）",
+            example: "Caminamos por la acera ancha hasta el parque.",
+            origin: "源自拉丁文 facies（面貌、側面），早期指街道兩側供行人行走的邊緣地帶。"
+          },
+          {
+            word: "la inversión",
+            pos: "名詞(陰)",
+            meaning: "投資、投入（EN: investment）",
+            example: "La energía limpia requiere una inversión a largo plazo.",
+            origin: "源自動詞 invertir（投入、投資），源自拉丁文 invertere（翻轉、投入使用）。"
+          },
+          {
+            word: "el horario",
+            pos: "名詞(陽)",
+            meaning: "時刻表、營業時間／作息（EN: schedule / timetable）",
+            example: "Consulta el horario del tren antes de salir.",
+            origin: "由 hora（小時、時間）加上字尾 -ario 構成，指安排時間的規則或表單。"
+          },
+          {
+            word: "silencioso/a",
+            pos: "形容詞",
+            meaning: "安靜的、無聲的（EN: quiet / silent）",
+            example: "Este autobús eléctrico es muy silencioso.",
+            origin: "源自 silencio（寂靜、安靜），由拉丁文 silentium 演變而來，指幾乎沒有聲音。"
+          },
+          {
+            word: "el turno",
+            pos: "名詞(陽)",
+            meaning: "輪班、班次、輪流順序（EN: shift / turn）",
+            example: "Hoy trabajo en el turno de la mañana.",
+            origin: "源自拉丁文 turnus（車床轉動、輪流），引申為排班制中的「班次」或輪到某人的順序。"
+          },
+          {
+            word: "la plaza",
+            pos: "名詞(陰)",
+            meaning: "廣場、市集廣場（EN: square / plaza）",
+            example: "Nos reunimos en la plaza del pueblo.",
+            origin: "源自希臘文 plateia（寬闊的街道），經由拉丁文 platea 傳入，指城市中寬敞的公共廣場。"
+          },
+          {
+            word: "exigir",
+            pos: "動詞",
+            meaning: "要求、需要（EN: require / demand）",
+            example: "Este cambio exige diálogo y cooperación.",
+            origin: "源自拉丁文 exigere（驅出、催討、嚴格要求），在現代語境中常指「需要、要求條件」。"
+          }
+        ],
+        phrases: [
+          {
+            phrase: "apostar por algo",
+            meaning: "押注於、致力支持某事物（EN: bet on / back something）",
+            example: "La ciudad apuesta por el transporte eléctrico.",
+            origin: "apostar 源自拉丁文 apponere（放置、下注），原本指賭注，現常比喻「投入資源支持某方向」。"
+          },
+          {
+            phrase: "vivir una etapa",
+            meaning: "經歷一個階段（EN: go through a stage）",
+            example: "El barrio vive una etapa de renovación.",
+            origin: "etapa 源自希臘文 stadion（賽跑距離／階段），在生活中指發展過程中的某個時期。"
+          },
+          {
+            phrase: "de un día para otro",
+            meaning: "一夕之間、突然間（EN: overnight / from one day to the next）",
+            example: "Las costumbres no cambian de un día para otro.",
+            origin: "對比「一天」與「隔天」，強調事物變化無法瞬間完成，需要時間醞釀。"
+          },
+          {
+            phrase: "a largo plazo",
+            meaning: "長期來看、長遠地（EN: in the long term）",
+            example: "Ahorrar energía es bueno a largo plazo.",
+            origin: "plazo 源自拉丁文 placitum（約定、期限），與 largo（長的）搭配表示較長的時間跨度。"
+          },
+          {
+            phrase: "en la ciudad de + 地名",
+            meaning: "在……這座城市（EN: in the city of...）",
+            example: "Vive en la ciudad de Valencia desde hace dos años.",
+            origin: "以定冠詞 la + ciudad + de 連接城市專有名稱，是介紹人物所在地的標準句型。"
+          },
+          {
+            phrase: "mejorar la calidad de vida",
+            meaning: "提升生活品質（EN: improve quality of life）",
+            example: "Más zonas verdes mejoran la calidad de vida.",
+            origin: "結合 mejorar（改善）與 calidad de vida（生活品質），常見於都市規劃與永續議題。"
+          }
+        ],
+        grammar: [
+          {
+            title: "1. 比較級「más + 形容詞/副詞 + que」與「menos + 形容詞/副詞」",
+            explanation: "短文中出現「más seguro（更安全）」、「menos ruido（更少噪音）」、「más viva（更有活力）」。使用 más 或 menos 搭配形容詞或副詞，能清楚比較改變前後的差異。",
+            example: "El autobús eléctrico hace menos ruido en la calle.（電動公車在街上產生的噪音更少。）"
+          },
+          {
+            title: "2. 動詞「requerir」與「exigir」表達需求與條件",
+            explanation: "文中「Instalar paneles requiere una inversión inicial」與「Construir una ciudad más limpia exige acuerdos」都用及物動詞帶出達成某事所需的條件，語氣比 necesitar 更精準。",
+            example: "Este proyecto requiere buena organización.（這個計畫需要良好的規劃。）"
+          }
+        ],
+        quiz: [
+          {
+            esQ: "1. ¿Dónde instalan paneles solares los vecinos en varios barrios?",
+            esOpts: ["Bajo el suelo", "Dentro del metro", "En los tejados", "En las montañas"],
+            zhQ: "1. 許多社區的居民把太陽能板裝在哪裡？",
+            zhOpts: ["在地下", "在地鐵裡", "在屋頂上", "在山上"],
+            answer: 2,
+            esExplain: "Instalan paneles solares en los tejados para producir electricidad limpia.",
+            zhExplain: "第一段提到居民在屋頂（los tejados）安裝太陽能板發電。"
+          },
+          {
+            esQ: "2. ¿Qué significa el verbo 'contaminar'?",
+            esOpts: ["Limpiar un jardín", "Reparar una bicicleta", "Plantar flores", "Hacer daño o ensuciar el aire o el agua"],
+            zhQ: "2. 動詞「contaminar」的意思是什麼？",
+            zhOpts: ["整理花園", "修理腳踏車", "種花", "汙染空氣或水源"],
+            answer: 3,
+            esExplain: "'Contaminar' significa alterar o ensuciar el medio ambiente.",
+            zhExplain: "contaminar 指「汙染（空氣、水或環境）」。"
+          },
+          {
+            esQ: "3. ¿Cómo funcionan cada vez más autobuses en el transporte público?",
+            esOpts: ["Con electricidad o gas limpio", "Con carbón pesado", "Sin ruedas", "Solo de noche"],
+            zhQ: "3. 大眾運輸中越來越多的公車使用什麼動力？",
+            zhOpts: ["電力或潔淨天然氣", "重型煤炭", "沒有輪子", "只在晚上行駛"],
+            answer: 0,
+            esExplain: "Funcionan con electricidad o gas limpio y hacen menos ruido.",
+            zhExplain: "第二段指出越來越多公車使用電力或潔淨天然氣行駛。"
+          },
+          {
+            esQ: "4. ¿Qué significa el verbo 'ampliar'?",
+            esOpts: ["Cerrar un edificio", "Hacer algo más grande o ancho", "Vender un coche", "Apagar la luz"],
+            zhQ: "4. 動詞「ampliar」的意思最接近哪一項？",
+            zhOpts: ["關閉建築物", "擴大、擴寬", "賣掉汽車", "關燈"],
+            answer: 1,
+            esExplain: "'Ampliar' significa extender o aumentar el tamaño o ancho de algo.",
+            zhExplain: "ampliar 的意思是「擴大、擴寬」。"
+          },
+          {
+            esQ: "5. ¿Qué significa 'de un día para otro' en el tercer párrafo?",
+            esOpts: ["Cada cien años", "Durante todo el invierno", "De repente o en muy poco tiempo", "En otro continente"],
+            zhQ: "5. 第三段中的「de un día para otro」是什麼意思？",
+            zhOpts: ["每百年一次", "整個冬天", "一夕之間、突然間", "在另一個大洲"],
+            answer: 2,
+            esExplain: "Significa que algo no ocurre de forma inmediata o instantánea.",
+            zhExplain: "意思是「一夕之間、立刻」，文中說明轉型無法瞬間完成。"
+          },
+          {
+            esQ: "6. ¿Qué requiere instalar paneles solares según el texto?",
+            esOpts: ["Solo cerrar las ventanas", "Dejar de usar luz", "Comprar un barco", "Inversión inicial y organizar carga y mantenimiento"],
+            zhQ: "6. 根據文章，安裝太陽能板需要什麼條件？",
+            zhOpts: ["只要關上窗戶", "停止使用燈光", "買一艘船", "初期投資與安排充電及維護"],
+            answer: 3,
+            esExplain: "Requiere una inversión inicial y organizar horarios de carga y mantenimiento.",
+            zhExplain: "需要初期投資（inversión inicial）以及安排充電與維護時程。"
+          },
+          {
+            esQ: "7. ¿Qué preguntan algunos comerciantes?",
+            esOpts: ["Cómo afectarán las zonas peatonales a las entregas", "Cuándo abre el museo", "Cuánto cuesta un billete de avión", "Dónde está la playa"],
+            zhQ: "7. 部分商家詢問了什麼問題？",
+            zhOpts: ["行人徒步區如何影響貨物配送", "博物館何時開門", "機票多少錢", "海灘在哪裡"],
+            answer: 0,
+            esExplain: "Preguntan cómo afectarán las nuevas zonas peatonales a las entregas de mercancías.",
+            zhExplain: "他們關心新設行人徒步區會如何影響貨物配送。"
+          },
+          {
+            esQ: "8. ¿Qué significa el adjetivo 'silencioso'?",
+            esOpts: ["Muy rápido y alto", "Que hace poco o ningún ruido", "De color amarillo", "Difícil de encontrar"],
+            zhQ: "8. 形容詞「silencioso」的意思是什麼？",
+            zhOpts: ["非常快且大聲的", "安靜的、幾乎沒有噪音的", "黃色的", "很難找到的"],
+            answer: 1,
+            esExplain: "'Silencioso' significa tranquilo y sin ruido.",
+            zhExplain: "silencioso 指「安靜的、無聲的」。"
+          },
+          {
+            esQ: "9. ¿Cuál de estos sustantivos lleva el artículo 'el'?",
+            esOpts: ["la acera", "la inversión", "el gasto", "la plaza"],
+            zhQ: "9. 下列哪一個名詞的冠詞是「el」？",
+            zhOpts: ["la acera", "la inversión", "el gasto", "la plaza"],
+            answer: 2,
+            esExplain: "'El gasto' es un sustantivo masculino.",
+            zhExplain: "el gasto 是陽性名詞，冠詞為 el。"
+          },
+          {
+            esQ: "10. ¿Cuál de estos sustantivos lleva el artículo 'la'?",
+            esOpts: ["el gasto", "el horario", "el turno", "la acera"],
+            zhQ: "10. 下列哪一個名詞的冠詞是「la」？",
+            zhOpts: ["el gasto", "el horario", "el turno", "la acera"],
+            answer: 3,
+            esExplain: "'La acera' es un sustantivo femenino.",
+            zhExplain: "la acera 是陰性名詞，冠詞為 la。"
+          },
+          {
+            esQ: "11. ¿Qué nota Adrián al terminar su turno?",
+            esOpts: ["Los vecinos saludan más y la plaza parece más viva", "Hay menos árboles", "Cierran todas las calles", "Llueve todo el día"],
+            zhQ: "11. 輪班結束後，阿德里安注意到什麼變化？",
+            zhOpts: ["居民更常打招呼且廣場更有活力", "樹木變少", "所有街道封閉", "整天下雨"],
+            answer: 0,
+            esExplain: "Los vecinos saludan más y la plaza central parece más viva.",
+            zhExplain: "他提到居民更常打招呼，中央廣場也顯得更有活力。"
+          },
+          {
+            esQ: "12. ¿Qué significa 'apostar por' en el contexto del título?",
+            esOpts: ["Olvidar por completo", "Apoyar y dedicar recursos a algo", "Prohibir una actividad", "Vender una casa"],
+            zhQ: "12. 「apostar por」在能源與城市語境中的意思是？",
+            zhOpts: ["完全忘記", "支持並投入資源發展某事", "禁止某項活動", "賣掉房子"],
+            answer: 1,
+            esExplain: "'Apostar por' significa apoyar o elegir decididamente una opción.",
+            zhExplain: "apostar por 在這裡指「支持、致力推動某項方向」。"
+          },
+          {
+            esQ: "13. Completa: 'Es una decisión buena a ____ plazo.'",
+            esOpts: ["corto", "alto", "largo", "bajo"],
+            zhQ: "13. 填入正確詞彙完成片語：Es una decisión buena a ____ plazo.",
+            zhOpts: ["corto", "alto", "largo", "bajo"],
+            answer: 2,
+            esExplain: "La expresión fija es 'a largo plazo'.",
+            zhExplain: "固定片語為 a largo plazo（長期來看）。"
+          },
+          {
+            esQ: "14. ¿Qué significa el verbo 'exigir'?",
+            esOpts: ["Dormir profundamente", "Viajar en barco", "Cocinar pan", "Pedir o requerir algo necesario"],
+            zhQ: "14. 動詞「exigir」的意思是什麼？",
+            zhOpts: ["熟睡", "搭船旅行", "烤麵包", "要求、需要"],
+            answer: 3,
+            esExplain: "'Exigir' significa requerir o demandar algo.",
+            zhExplain: "exigir 意思是「要求、需要」。"
+          },
+          {
+            esQ: "15. ¿Cuál de estos sustantivos lleva el artículo 'el'?",
+            esOpts: ["el horario", "la plaza", "la acera", "la inversión"],
+            zhQ: "15. 下列哪一個名詞搭配「el」？",
+            zhOpts: ["el horario", "la plaza", "la acera", "la inversión"],
+            answer: 0,
+            esExplain: "'El horario' es masculino.",
+            zhExplain: "el horario 是陽性名詞。"
+          },
+          {
+            esQ: "16. ¿Qué se necesita para construir una ciudad más limpia según el final?",
+            esOpts: ["Solo dinero en efectivo", "Acuerdos y colaboración con paciencia", "Cerrar todas las escuelas", "No hablar con vecinos"],
+            zhQ: "16. 根據結尾段落，打造更乾淨的城市需要什麼？",
+            zhOpts: ["只要現金", "共識與有耐心的合作", "關閉所有學校", "不與鄰居交談"],
+            answer: 1,
+            esExplain: "Exige acuerdos entre vecinos, empresas y autoridades y colaborar con paciencia.",
+            zhExplain: "最後一段指出需要各方共識以及有耐心地合作。"
+          },
+          {
+            esQ: "17. Completa: 'Los parques ayudan a mejorar la ____ de vida.'",
+            esOpts: ["cantidad", "velocidad", "calidad", "temperatura"],
+            zhQ: "17. 填入正確詞彙：Los parques ayudan a mejorar la ____ de vida.",
+            zhOpts: ["cantidad", "velocidad", "calidad", "temperatura"],
+            answer: 2,
+            esExplain: "La colocación habitual es 'calidad de vida'.",
+            zhExplain: "常見搭配為 mejorar la calidad de vida（提升生活品質）。"
+          },
+          {
+            esQ: "18. ¿Cuál de estos sustantivos es femenino ('la')?",
+            esOpts: ["el gasto", "el horario", "el turno", "la plaza"],
+            zhQ: "18. 下列哪一個是陰性名詞（la）？",
+            zhOpts: ["el gasto", "el horario", "el turno", "la plaza"],
+            answer: 3,
+            esExplain: "'La plaza' es un sustantivo femenino.",
+            zhExplain: "la plaza 是陰性名詞，冠詞為 la。"
+          },
+          {
+            esQ: "19. Completa: 'Vive ____ ciudad de Madrid.'",
+            esOpts: ["en la", "a los", "sin un", "por unas"],
+            zhQ: "19. 填入正確搭配：Vive ____ ciudad de Madrid.",
+            zhOpts: ["en la", "a los", "sin un", "por unas"],
+            answer: 0,
+            esExplain: "La estructura habitual es 'en la ciudad de + nombre'.",
+            zhExplain: "常用搭配為 en la ciudad de + 城市名稱。"
+          },
+          {
+            esQ: "20. ¿Qué mejora se menciona al final cuando todos colaboran?",
+            esOpts: ["El tráfico caótico", "Espacios públicos y calidad de vida", "La basura en las calles", "El ruido nocturno"],
+            zhQ: "20. 當眾人合作時，最後提到什麼會改善？",
+            zhOpts: ["混亂的交通", "公共空間與生活品質", "街頭垃圾", "夜間噪音"],
+            answer: 1,
+            esExplain: "Mejoran los espacios públicos y crece la calidad de vida.",
+            zhExplain: "公共空間會改善，生活品質也會提升。"
+          }
+        ]
+      }
+    ];
+
+    let lessons = structuredClone(INITIAL_LESSONS);
+    let currentIndex = 0;
+    let menuOpen = true;
+    let showZh = false;
+    let showEn = false;
+    let quizLang = "es"; // "es" or "zh"
+    let ioStatus = { type: "", message: "" };
+    let shuffledQuizCache = {}; // 依文章 index 暫存洗牌後的選項順序
+
+    const appEl = document.getElementById("app");
+    const toggleMenuBtn = document.getElementById("toggleMenuBtn");
+    const currentUnitLabelEl = document.getElementById("currentUnitLabel");
+    const prevBtn = document.getElementById("prevBtn");
+    const nextBtn = document.getElementById("nextBtn");
+    const scrollTopBtn = document.getElementById("scrollTopBtn");
+
+    function buildShuffledQuiz(quizList) {
+      return quizList.map((qItem) => {
+        const indices = qItem.esOpts.map((_, idx) => idx);
+        for (let i = indices.length - 1; i > 0; i--) {
+          const j = Math.floor(Math.random() * (i + 1));
+          [indices[i], indices[j]] = [indices[j], indices[i]];
+        }
+        return {
+          ...qItem,
+          esOpts: indices.map(i => qItem.esOpts[i]),
+          zhOpts: indices.map(i => qItem.zhOpts[i]),
+          answer: indices.indexOf(qItem.answer)
+        };
+      });
+    }
+
+    function getActiveQuiz(lessonIndex) {
+      if (!shuffledQuizCache[lessonIndex]) {
+        shuffledQuizCache[lessonIndex] = buildShuffledQuiz(lessons[lessonIndex].quiz);
+      }
+      return shuffledQuizCache[lessonIndex];
+    }
+
+    function speakSpanish(paragraphs) {
+      if (!("speechSynthesis" in window)) {
+        alert("你的瀏覽器不支援語音朗讀功能。");
+        return;
+      }
+      window.speechSynthesis.cancel();
+      const fullText = paragraphs.join(" ");
+      const utter = new SpeechSynthesisUtterance(fullText);
+      utter.lang = "es-ES";
+      utter.rate = 0.92;
+      window.speechSynthesis.speak(utter);
+    }
+
+    function exportLessonsJson() {
+      const payload = {
+        exportedAt: new Date().toISOString(),
+        level: "A2",
+        count: lessons.length,
+        lessons
+      };
+      const blob = new Blob([JSON.stringify(payload, null, 2)], { type: "application/json;charset=utf-8" });
+      const url = URL.createObjectURL(blob);
+      const a = document.createElement("a");
+      a.href = url;
+      a.download = `spanish-lessons-a2-${lessons.length}-units.json`;
+      document.body.appendChild(a);
+      a.click();
+      a.remove();
+      URL.revokeObjectURL(url);
+
+      ioStatus = {
+        type: "ok",
+        message: `✅ 已匯出 ${lessons.length} 篇西文學習單元為 JSON 檔案。`
+      };
+      render();
+    }
+
+    function validateAndNormalizeLesson(item, fallbackIndex) {
+      if (!item || typeof item !== "object" || !item.title) {
+        throw new Error(`第 ${fallbackIndex + 1} 筆資料缺少標題（title）。`);
+      }
+      const esParagraphs = Array.isArray(item.esParagraphs)
+        ? item.esParagraphs
+        : (typeof item.es === "string" ? [item.es] : []);
+      if (esParagraphs.length === 0) {
+        throw new Error(`「${item.title}」缺少西文段落內容（esParagraphs）。`);
+      }
+      return {
+        id: item.id || `custom-${Date.now()}-${fallbackIndex}`,
+        unitLabel: item.unitLabel || `第 ${fallbackIndex + 1} 篇`,
+        topic: item.topic || "自訂主題",
+        level: item.level || "A2 初級",
+        duration: item.duration || "約 30 分鐘單元",
+        title: item.title,
+        esParagraphs,
+        zhParagraphs: Array.isArray(item.zhParagraphs)
+          ? item.zhParagraphs
+          : (typeof item.zh === "string" ? [item.zh] : []),
+        enParagraphs: Array.isArray(item.enParagraphs)
+          ? item.enParagraphs
+          : (typeof item.en === "string" ? [item.en] : []),
+        vocab: Array.isArray(item.vocab) ? item.vocab : [],
+        phrases: Array.isArray(item.phrases) ? item.phrases : [],
+        grammar: Array.isArray(item.grammar) ? item.grammar : [],
+        quiz: Array.isArray(item.quiz) ? item.quiz : []
+      };
+    }
+
+    function handleImportFile(file) {
+      if (!file) return;
+      const reader = new FileReader();
+      reader.onload = (e) => {
+        try {
+          const parsed = JSON.parse(String(e.target.result));
+          const rawList = Array.isArray(parsed)
+            ? parsed
+            : (Array.isArray(parsed.lessons) ? parsed.lessons : [parsed]);
+
+          const normalizedList = rawList.map((item, idx) =>
+            validateAndNormalizeLesson(item, lessons.length + idx)
+          );
+
+          let addedCount = 0;
+          let updatedCount = 0;
+          let lastTouchedIndex = currentIndex;
+
+          normalizedList.forEach((newLesson) => {
+            const existingIdx = lessons.findIndex(l => l.id === newLesson.id);
+            if (existingIdx >= 0) {
+              newLesson.unitLabel = lessons[existingIdx].unitLabel;
+              lessons[existingIdx] = newLesson;
+              delete shuffledQuizCache[existingIdx];
+              updatedCount++;
+              lastTouchedIndex = existingIdx;
+            } else {
+              newLesson.unitLabel = `第 ${lessons.length + 1} 篇`;
+              lessons.push(newLesson);
+              addedCount++;
+              lastTouchedIndex = lessons.length - 1;
+            }
+          });
+
+          currentIndex = lastTouchedIndex;
+          showZh = false;
+          showEn = false;
+          ioStatus = {
+            type: "ok",
+            message: `✅ 匯入完成：新增 ${addedCount} 篇、更新 ${updatedCount} 篇（目前共 ${lessons.length} 篇）。`
+          };
+          render();
+        } catch (err) {
+          ioStatus = {
+            type: "bad",
+            message: `❌ 匯入失敗：${err.message || "請確認 JSON 格式是否正確。"}`
+          };
+          render();
+        }
+      };
+      reader.readAsText(file, "utf-8");
+    }
+
+    function resetBuiltInLessons() {
+      lessons = structuredClone(INITIAL_LESSONS);
+      shuffledQuizCache = {};
+      currentIndex = 0;
+      showZh = false;
+      showEn = false;
+      ioStatus = {
+        type: "ok",
+        message: "↩️ 已還原為內建初始文章清單。"
+      };
+      render();
+    }
+
+    function render() {
+      const lesson = lessons[currentIndex];
+      const activeQuiz = getActiveQuiz(currentIndex);
+      currentUnitLabelEl.textContent = `${lesson.unitLabel || `第 ${currentIndex + 1} 篇`} / 共 ${lessons.length} 篇`;
+      prevBtn.disabled = currentIndex === 0;
+      nextBtn.disabled = currentIndex === lessons.length - 1;
+      toggleMenuBtn.className = menuOpen ? "secondary-active" : "";
+
+      appEl.innerHTML = `
+        <section id="articleMenuPanel" class="article-menu-panel ${menuOpen ? "open" : ""}" aria-label="文章選單">
+          <div class="menu-header">
+            <h2 class="menu-title">📚 文章選單（直接點選想看的文章 · 手動切換）</h2>
+            <button type="button" id="closeMenuBtn">收合選單</button>
+          </div>
+          <div class="menu-grid">
+            ${lessons.map((item, idx) => `
+              <button
+                type="button"
+                class="menu-item-btn ${idx === currentIndex ? "active" : ""}"
+                data-select-index="${idx}"
+              >
+                <div class="menu-item-top">
+                  <span>${item.unitLabel || `第 ${idx + 1} 篇`} · ${item.level || "A2 初級"}</span>
+                  <span>${item.duration || "約 30 分鐘"}</span>
+                </div>
+                <div class="menu-item-topic">${item.topic || "綜合主題"}</div>
+                <div class="menu-item-es">${item.title}</div>
+              </button>
+            `).join("")}
+          </div>
+        </section>
+
+        <section class="io-bar">
+          <div>
+            <div class="io-title">💾 本機文章管理（匯入／匯出 JSON · 永不過期）</div>
+            <div class="io-desc">可匯出目前所有文章備份，或從本機選取 .json 文章檔匯入新增／更新。</div>
+          </div>
+          <div class="io-actions">
+            <button type="button" id="exportJsonBtn">⬇️ 匯出文章 (JSON)</button>
+            <button type="button" id="importJsonBtn">⬆️ 匯入文章 (JSON)</button>
+            <button type="button" id="resetDefaultBtn">↩️ 還原內建</button>
+            <input type="file" id="jsonFileInput" accept=".json,application/json" style="display:none;" />
+          </div>
+          <div id="ioStatusBox" class="io-status ${ioStatus.message ? `show ${ioStatus.type}` : ""}">
+            ${ioStatus.message}
+          </div>
+        </section>
+
+        <section class="card">
+          <div class="meta">
+            <span class="badge">${lesson.level}</span>
+            <span class="topic-badge">${lesson.topic}</span>
+            <span class="time-badge">${lesson.duration}</span>
+            <span>${lesson.unitLabel} · 手動切換（可重複閱讀與複習）</span>
+          </div>
+          <h1>${lesson.title}</h1>
+
+          <div class="es-text" id="esParagraphs">
+            ${lesson.esParagraphs.map(p => `<p>${p}</p>`).join("")}
+          </div>
+
+          <div class="toolbar">
+            <button type="button" class="primary" id="playBtn">🔊 朗讀全文（西文）</button>
+            <button type="button" id="toggleZhBtn" class="${showZh ? "secondary-active" : ""}">
+              ${showZh ? "🙈 隱藏中文翻譯" : "🇹🇼 顯示中文翻譯"}
+            </button>
+            <button type="button" id="toggleEnBtn" class="${showEn ? "secondary-active" : ""}">
+              ${showEn ? "🙈 隱藏英文翻譯" : "🇬🇧 顯示英文翻譯"}
+            </button>
+          </div>
+
+          ${showZh && lesson.zhParagraphs.length ? `
+            <div class="zh-text">
+              <span class="trans-label">中文翻譯（Traducción al chino）</span>
+              ${lesson.zhParagraphs.map(p => `<p>${p}</p>`).join("")}
+            </div>
+          ` : ""}
+
+          ${showEn && lesson.enParagraphs.length ? `
+            <div class="en-text">
+              <span class="trans-label">英文翻譯（English translation）</span>
+              ${lesson.enParagraphs.map(p => `<p>${p}</p>`).join("")}
+            </div>
+          ` : ""}
+        </section>
+
+        <section class="card">
+          <h2>重要單字與歷史淵源（${lesson.vocab.length} 詞 · 多詞性＋名詞 el/la 冠詞）</h2>
+          <div class="grid-2">
+            ${lesson.vocab.map(v => `
+              <div class="item-box">
+                <div class="item-head">
+                  <span class="es-word">${v.word}</span>
+                  <span class="pos">${v.pos}</span>
+                </div>
+                <div class="meaning-line"><strong>釋義：</strong>${v.meaning}</div>
+                <div class="example"><strong>例句：</strong>${v.example}</div>
+                ${v.origin ? `<div class="origin-box"><strong>歷史／詞源淵源：</strong>${v.origin}</div>` : ""}
+              </div>
+            `).join("")}
+          </div>
+        </section>
+
+        <section class="card">
+          <h2>實用片語與歷史淵源（${lesson.phrases.length} 組 · Expresiones）</h2>
+          <div class="grid-2">
+            ${lesson.phrases.map(p => `
+              <div class="item-box">
+                <div class="item-head">
+                  <span class="es-word">${p.phrase}</span>
+                </div>
+                <div class="meaning-line"><strong>釋義：</strong>${p.meaning}</div>
+                <div class="example"><strong>例句：</strong>${p.example}</div>
+                ${p.origin ? `<div class="origin-box"><strong>歷史／詞源淵源：</strong>${p.origin}</div>` : ""}
+              </div>
+            `).join("")}
+          </div>
+        </section>
+
+        <section class="card">
+          <h2>文法重點（${lesson.grammar.length} 點 · Gramática A2）</h2>
+          ${lesson.grammar.map(g => `
+            <div class="grammar-box">
+              <h3 style="margin-bottom: 6px;">${g.title}</h3>
+              <p style="margin: 0 0 8px;">${g.explanation}</p>
+              <div class="example"><strong>補充例句：</strong>${g.example}</div>
+            </div>
+          `).join("")}
+        </section>
+
+        <section class="card">
+          <div class="quiz-header">
+            <div>
+              <h2 style="margin-bottom: 4px;">雙語綜合測驗（${activeQuiz.length} 題 · 選項自動隨機排列）</h2>
+              <div class="review-note">
+                ${quizLang === "es" ? "目前模式：🇪🇸 西文版測驗（Cuestionario en español）" : "目前模式：🇹🇼 中文版測驗"}
+              </div>
+            </div>
+            <div class="lang-switch">
+              <button type="button" id="langEsBtn" class="${quizLang === "es" ? "secondary-active" : ""}">🇪🇸 西文版測驗</button>
+              <button type="button" id="langZhBtn" class="${quizLang === "zh" ? "secondary-active" : ""}">🇹🇼 中文版測驗</button>
+            </div>
+          </div>
+
+          <form id="quizForm">
+            ${activeQuiz.map((qItem, qIdx) => {
+              const promptText = quizLang === "es" ? qItem.esQ : qItem.zhQ;
+              const opts = quizLang === "es" ? qItem.esOpts : qItem.zhOpts;
+              return `
+                <div class="quiz-q">
+                  <div style="font-weight: 600;">${promptText}</div>
+                  <div class="options">
+                    ${opts.map((opt, oIdx) => `
+                      <label class="option-label">
+                        <input type="radio" name="q${qIdx}" value="${oIdx}" />
+                        <span>${opt}</span>
+                      </label>
+                    `).join("")}
+                  </div>
+                  <div id="feedback-${qIdx}"></div>
+                </div>
+              `;
+            }).join("")}
+
+            <div class="quiz-actions">
+              <button type="submit" class="primary">提交測驗</button>
+              <button type="button" id="resetQuizBtn">🔄 重新洗牌作答／複習</button>
+              <span id="scoreSummary" style="font-weight: 700;"></span>
+            </div>
+          </form>
+        </section>
+      `;
+
+      document.querySelectorAll("[data-select-index]").forEach(btn => {
+        btn.addEventListener("click", () => {
+          const targetIdx = Number(btn.getAttribute("data-select-index"));
+          switchLesson(targetIdx);
+        });
+      });
+
+      const closeMenuBtn = document.getElementById("closeMenuBtn");
+      if (closeMenuBtn) {
+        closeMenuBtn.addEventListener("click", () => {
+          menuOpen = false;
+          render();
+        });
+      }
+
+      document.getElementById("exportJsonBtn").addEventListener("click", exportLessonsJson);
+
+      const fileInput = document.getElementById("jsonFileInput");
+      document.getElementById("importJsonBtn").addEventListener("click", () => fileInput.click());
+      fileInput.addEventListener("change", (e) => {
+        if (e.target.files && e.target.files[0]) {
+          handleImportFile(e.target.files[0]);
+          e.target.value = "";
+        }
+      });
+
+      document.getElementById("resetDefaultBtn").addEventListener("click", resetBuiltInLessons);
+
+      document.getElementById("playBtn").addEventListener("click", () => speakSpanish(lesson.esParagraphs));
+
+      document.getElementById("toggleZhBtn").addEventListener("click", () => {
+        showZh = !showZh;
+        render();
+      });
+
+      document.getElementById("toggleEnBtn").addEventListener("click", () => {
+        showEn = !showEn;
+        render();
+      });
+
+      document.getElementById("langEsBtn").addEventListener("click", () => {
+        quizLang = "es";
+        render();
+      });
+
+      document.getElementById("langZhBtn").addEventListener("click", () => {
+        quizLang = "zh";
+        render();
+      });
+
+      document.getElementById("resetQuizBtn").addEventListener("click", () => {
+        delete shuffledQuizCache[currentIndex];
+        render();
+      });
+
+      document.getElementById("quizForm").addEventListener("submit", (e) => {
+        e.preventDefault();
+        let score = 0;
+        const isEs = quizLang === "es";
+
+        activeQuiz.forEach((qItem, qIdx) => {
+          const opts = isEs ? qItem.esOpts : qItem.zhOpts;
+          const explain = isEs ? qItem.esExplain : qItem.zhExplain;
+          const selected = document.querySelector(`input[name="q${qIdx}"]:checked`);
+          const fbEl = document.getElementById(`feedback-${qIdx}`);
+
+          if (!selected) {
+            fbEl.className = "feedback bad";
+            fbEl.textContent = isEs
+              ? `Sin responder. Respuesta correcta: "${opts[qItem.answer]}". ${explain}`
+              : `尚未作答。正確答案是：「${opts[qItem.answer]}」。${explain}`;
+            return;
+          }
+
+          const val = Number(selected.value);
+          if (val === qItem.answer) {
+            score++;
+            fbEl.className = "feedback ok";
+            fbEl.textContent = isEs
+              ? `¡Correcto! ${explain}`
+              : `✅ 答對了！${explain}`;
+          } else {
+            fbEl.className = "feedback bad";
+            fbEl.textContent = isEs
+              ? `Incorrecto. Respuesta correcta: "${opts[qItem.answer]}". ${explain}`
+              : `❌ 再接再厲！正確答案是：「${opts[qItem.answer]}」。${explain}`;
+          }
+        });
+
+        const summaryEl = document.getElementById("scoreSummary");
+        summaryEl.textContent = isEs
+          ? `Puntuación: ${score} / ${activeQuiz.length}`
+          : `得分：${score} / ${activeQuiz.length}`;
+      });
+    }
+
+    function switchLesson(newIndex) {
+      if (newIndex >= 0 && newIndex < lessons.length) {
+        currentIndex = newIndex;
+        showZh = false;
+        showEn = false;
+        ioStatus = { type: "", message: "" };
+        render();
+        window.scrollTo({ top: 0, behavior: "smooth" });
+      }
+    }
+
+    toggleMenuBtn.addEventListener("click", () => {
+      menuOpen = !menuOpen;
+      render();
+    });
+
+    prevBtn.addEventListener("click", () => switchLesson(currentIndex - 1));
+    nextBtn.addEventListener("click", () => switchLesson(currentIndex + 1));
+
+    scrollTopBtn.addEventListener("click", () => {
+      window.scrollTo({ top: 0, behavior: "smooth" });
+    });
+
+    render();
+  </script>
+</body>
+</html>
