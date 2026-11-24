@@ -3,327 +3,2617 @@
 <head>
   <meta charset="UTF-8" />
   <meta name="viewport" content="width=device-width, initial-scale=1.0" />
-  <title>四語學習工作坊｜ES · CA · EN · ZH</title>
+  <meta name="apple-mobile-web-app-capable" content="yes" />
+  <meta name="apple-mobile-web-app-title" content="西文深度閱讀站" />
+  <meta name="theme-color" content="#fffaf0" />
+  <title>西文深度閱讀站</title>
+  <link
+    rel="icon"
+    type="image/svg+xml"
+    href="data:image/svg+xml,%3Csvg xmlns='http://www.w3.org/2000/svg' viewBox='0 0 128 128'%3E%3Crect width='128' height='128' rx='26' fill='%23efe3cc'/%3E%3Crect x='10' y='10' width='108' height='108' rx='20' fill='none' stroke='%23c8b28e' stroke-width='3'/%3E%3Cg transform='translate(64,64)'%3E%3Cellipse cx='0' cy='-25' rx='12' ry='21' fill='%23d48c46' stroke='%238c5220' stroke-width='2.5'/%3E%3Cellipse cx='0' cy='25' rx='12' ry='21' fill='%23d48c46' stroke='%238c5220' stroke-width='2.5'/%3E%3Cellipse cx='-25' cy='0' rx='21' ry='12' fill='%23d48c46' stroke='%238c5220' stroke-width='2.5'/%3E%3Cellipse cx='25' cy='0' rx='21' ry='12' fill='%23d48c46' stroke='%238c5220' stroke-width='2.5'/%3E%3Ccircle cx='0' cy='0' r='11' fill='%23f5d08a' stroke='%238c5220' stroke-width='2.5'/%3E%3Ccircle cx='0' cy='0' r='4' fill='%238c5220'/%3E%3C/g%3E%3C/svg%3E"
+  />
+  <link
+    rel="apple-touch-icon"
+    href="data:image/svg+xml,%3Csvg xmlns='http://www.w3.org/2000/svg' viewBox='0 0 180 180'%3E%3Crect width='180' height='180' rx='38' fill='%23efe3cc'/%3E%3Crect x='14' y='14' width='152' height='152' rx='28' fill='none' stroke='%23c8b28e' stroke-width='4'/%3E%3Cg transform='translate(90,90)'%3E%3Cellipse cx='0' cy='-35' rx='17' ry='29' fill='%23d48c46' stroke='%238c5220' stroke-width='3.5'/%3E%3Cellipse cx='0' cy='35' rx='17' ry='29' fill='%23d48c46' stroke='%238c5220' stroke-width='3.5'/%3E%3Cellipse cx='-35' cy='0' rx='29' ry='17' fill='%23d48c46' stroke='%238c5220' stroke-width='3.5'/%3E%3Cellipse cx='35' cy='0' rx='29' ry='17' fill='%23d48c46' stroke='%238c5220' stroke-width='3.5'/%3E%3Ccircle cx='0' cy='0' r='15' fill='%23f5d08a' stroke='%238c5220' stroke-width='3.5'/%3E%3Ccircle cx='0' cy='0' r='5.5' fill='%238c5220'/%3E%3C/g%3E%3C/svg%3E"
+  />
   <style>
     :root {
-      --bg: #f6f7fb;
-      --card: #ffffff;
-      --text: #1f2937;
-      --muted: #6b7280;
-      --primary: #2563eb;
-      --primary-soft: #eff6ff;
-      --border: #e5e7eb;
-      --success: #059669;
-      --warning: #d97706;
+      --primary: #c85a17;
+      --primary-hover: #a8460c;
+      --warm-btn: #FFFCF6;
+      --warm-btn-hover: #f6eedc;
+      --warm-border: #d9be8c;
+      --warm-shadow: #d4b47c;
+      --primary-shadow: #8c3b0b;
+      --accent: #1d5d8c;
+      --accent-light: #e8f3fb;
+      --ca-color: #2c6e49;
+      --ca-light: #ecf7f0;
+      --bg: #fbf7ef;
+      --card: #fffdf9;
+      --text: #3E3A39;
+      --muted: #6b5e50;
+      --border: #e5d8c1;
+      --success: #2b7a3b;
+      --success-bg: #edf9ef;
+      --danger: #b52b27;
+      --danger-bg: #fdf0ef;
+      --origin-bg: #f6effa;
+      --origin-border: #dfd0eb;
+      --origin-text: #563278;
+      --grammar-bg: #FFFFFF;
+      --grammar-border: #e5d8c1;
+      --header-offset: 108px;
     }
+
     * { box-sizing: border-box; }
+
+    html {
+      scroll-behavior: smooth;
+    }
+
     body {
       margin: 0;
       font-family: -apple-system, BlinkMacSystemFont, "Segoe UI", Roboto, "Noto Sans TC", sans-serif;
       background: var(--bg);
       color: var(--text);
-      line-height: 1.65;
+      line-height: 1.75;
+      font-size: clamp(0.95rem, 0.4vw + 0.88rem, 1.05rem);
     }
+
+    section[id],
+    h2[id] {
+      scroll-margin-top: calc(var(--header-offset) + 14px);
+    }
+
+    /* 頂端固定導覽列：左品牌、中兩排置中對齊選單、右上下篇 */
     header {
-      background: var(--card);
+      background: #fffaf0;
       border-bottom: 1px solid var(--border);
-      padding: 14px 20px;
+      padding: 10px clamp(12px, 2.5vw, 24px);
       position: sticky;
       top: 0;
-      z-index: 20;
+      z-index: 30;
+      box-shadow: 0 4px 12px rgba(130, 96, 52, 0.08);
     }
-    .header-inner {
-      max-width: 1080px;
+
+    .header-bar {
+      max-width: 1140px;
       margin: 0 auto;
+      display: grid;
+      grid-template-columns: minmax(150px, 1fr) auto minmax(190px, 1fr);
+      align-items: center;
+      gap: 12px;
+      position: relative;
+    }
+
+    .header-brand {
+      justify-self: start;
+      font-size: clamp(1.02rem, 1.1vw + 0.78rem, 1.2rem);
+      font-weight: 800;
+      color: var(--primary);
+      line-height: 1.3;
+      white-space: nowrap;
+    }
+
+    .header-nav-stack {
+      justify-self: center;
+      display: flex;
+      flex-direction: column;
+      align-items: center;
+      gap: 6px;
+    }
+
+    .nav-row {
       display: flex;
       flex-wrap: wrap;
-      gap: 10px;
+      justify-content: center;
       align-items: center;
-      justify-content: space-between;
+      gap: 8px;
     }
-    .brand { font-weight: 700; font-size: 1.1rem; }
-    .toolbar {
+
+    .lesson-pager-group {
+      justify-self: end;
+      display: flex;
+      flex-wrap: wrap;
+      justify-content: flex-end;
+      align-items: center;
+      gap: 8px;
+    }
+
+    .unit-label {
+      font-weight: 700;
+      font-size: 0.85rem;
+      color: var(--muted);
+      white-space: nowrap;
+    }
+
+    /* 點擊「文章總覽」跳出的選單彈窗 */
+    .overview-menu-backdrop {
+      position: fixed;
+      inset: 0;
+      background: rgba(62, 58, 57, 0.28);
+      z-index: 38;
+      display: none;
+    }
+    .overview-menu-backdrop.open {
+      display: block;
+    }
+
+    .overview-menu-popover {
+      position: fixed;
+      top: calc(var(--header-offset) + 8px);
+      left: 50%;
+      transform: translateX(-50%);
+      width: min(680px, calc(100vw - 24px));
+      max-height: 72vh;
+      overflow-y: auto;
+      background: var(--card);
+      border: 1px solid var(--border);
+      border-radius: 14px;
+      padding: 16px 18px;
+      box-shadow: 0 12px 32px rgba(68, 46, 22, 0.18);
+      z-index: 40;
+      display: none;
+    }
+    .overview-menu-popover.open {
+      display: block;
+    }
+
+    .overview-menu-header {
+      display: flex;
+      justify-content: space-between;
+      align-items: center;
+      gap: 10px;
+      padding-bottom: 10px;
+      margin-bottom: 12px;
+      border-bottom: 1px solid var(--border);
+    }
+
+    .overview-menu-title {
+      margin: 0;
+      font-size: 1.05rem;
+      font-weight: 800;
+      color: var(--text);
+    }
+
+    .overview-title-list {
+      display: flex;
+      flex-direction: column;
+      gap: 8px;
+    }
+
+    .overview-title-item-btn {
+      width: 100%;
+      text-align: left;
+      padding: 11px 14px;
+      border-radius: 10px;
+      display: flex;
+      flex-direction: column;
+      gap: 4px;
+    }
+    .overview-title-item-btn.active {
+      background: #eed8aa;
+      border-color: var(--primary);
+    }
+
+    .overview-item-meta {
+      font-size: 0.8rem;
+      color: var(--muted);
       display: flex;
       flex-wrap: wrap;
       gap: 8px;
-      align-items: center;
     }
-    button, .btn {
-      border: 1px solid var(--border);
-      background: var(--card);
+
+    .overview-item-heading {
+      font-size: 0.98rem;
+      font-weight: 700;
       color: var(--text);
-      padding: 7px 12px;
-      border-radius: 8px;
-      cursor: pointer;
-      font-size: 0.9rem;
-      text-decoration: none;
     }
-    button:hover, .btn:hover { background: #f9fafb; }
+
+    /* #FFFCF6 按鈕 + 單一底色陰影 */
+    button {
+      cursor: pointer;
+      background: var(--warm-btn);
+      color: var(--text);
+      border: 1px solid var(--warm-border);
+      padding: 6px 12px;
+      border-radius: 9px;
+      font-size: clamp(0.84rem, 0.3vw + 0.78rem, 0.92rem);
+      font-weight: 600;
+      box-shadow: 0 3px 0 var(--warm-shadow);
+      transition: transform 0.12s ease, box-shadow 0.12s ease, background-color 0.15s ease;
+    }
+
+    button:hover:not(:disabled) {
+      background: var(--warm-btn-hover);
+      transform: translateY(-1px);
+      box-shadow: 0 4px 0 var(--warm-shadow);
+    }
+
+    button:active:not(:disabled) {
+      transform: translateY(2px);
+      box-shadow: 0 1px 0 var(--warm-shadow);
+    }
+
     button.primary {
       background: var(--primary);
-      color: #fff;
+      color: #fffdf9;
       border-color: var(--primary);
+      box-shadow: 0 3px 0 var(--primary-shadow);
     }
-    button.primary:hover { opacity: 0.92; }
-    .container {
+
+    button.primary:hover:not(:disabled) {
+      background: var(--primary-hover);
+      box-shadow: 0 4px 0 var(--primary-shadow);
+    }
+
+    button.primary:active:not(:disabled) {
+      transform: translateY(2px);
+      box-shadow: 0 1px 0 var(--primary-shadow);
+    }
+
+    button.active-pill {
+      background: #eed8aa;
+      border-color: var(--primary);
+      color: var(--primary-hover);
+      box-shadow: 0 3px 0 var(--warm-shadow);
+    }
+
+    button:disabled {
+      opacity: 0.45;
+      cursor: not-allowed;
+      box-shadow: none;
+    }
+
+    select {
+      padding: 6px 10px;
+      border-radius: 8px;
+      border: 1px solid var(--warm-border);
+      background: #fffdf8;
+      color: var(--text);
+      font-size: 0.86rem;
+      font-weight: 500;
+      max-width: min(230px, 100%);
+      box-shadow: 0 2px 0 var(--warm-shadow);
+    }
+
+    main {
       max-width: 1080px;
-      margin: 20px auto;
-      padding: 0 16px 60px;
+      margin: 18px auto 0;
+      padding: 0 clamp(12px, 2.5vw, 24px) 96px;
+      display: grid;
+      gap: 20px;
     }
-    .status-bar {
-      background: var(--primary-soft);
-      border: 1px solid #bfdbfe;
-      color: #1e40af;
-      padding: 10px 14px;
-      border-radius: 10px;
-      font-size: 0.9rem;
-      margin-bottom: 16px;
+
+    /* 巴塞隆納 SVG 插畫橫幅 */
+    .bcn-banner {
+      background: var(--card);
+      border: 1px solid var(--border);
+      border-radius: 16px;
+      padding: clamp(14px, 2vw, 20px);
+      box-shadow: 0 4px 14px rgba(140, 102, 54, 0.06);
+      position: relative;
+    }
+
+    .bcn-banner-top {
       display: flex;
       flex-wrap: wrap;
       justify-content: space-between;
-      gap: 8px;
+      align-items: center;
+      gap: 10px;
+      margin-bottom: 12px;
+      position: relative;
     }
-    .lesson-nav {
+
+    .bcn-caption-wrap {
       display: flex;
+      flex-wrap: wrap;
+      align-items: center;
       gap: 8px;
-      overflow-x: auto;
-      padding-bottom: 8px;
-      margin-bottom: 16px;
     }
-    .lesson-pill {
-      white-space: nowrap;
-      padding: 8px 14px;
-      border-radius: 999px;
-      border: 1px solid var(--border);
+
+    .bcn-title {
+      font-weight: 800;
+      font-size: clamp(0.98rem, 0.7vw + 0.85rem, 1.12rem);
+      color: var(--text);
+    }
+
+    .bcn-actions-right {
+      display: flex;
+      align-items: center;
+      gap: 8px;
+      flex-wrap: wrap;
+      position: relative;
+    }
+
+    .bcn-menu-wrap {
+      position: relative;
+    }
+
+    .bcn-controls-dropdown {
+      display: none;
+      position: absolute;
+      right: 0;
+      top: calc(100% + 8px);
+      width: max-content;
+      min-width: 136px;
       background: var(--card);
-      cursor: pointer;
-      font-size: 0.9rem;
+      border: 1px solid var(--border);
+      border-radius: 12px;
+      padding: 8px;
+      box-shadow: 0 10px 24px rgba(68, 46, 22, 0.16);
+      z-index: 20;
+      flex-direction: column;
+      align-items: stretch;
+      gap: 6px;
     }
-    .lesson-pill.active {
-      background: var(--primary);
-      color: #fff;
+    .bcn-controls-dropdown.open {
+      display: flex;
+    }
+
+    .bcn-controls-dropdown button {
+      width: auto;
+      padding: 5px 10px;
+      font-size: 0.83rem;
+      text-align: center;
+      white-space: nowrap;
+    }
+
+    .bcn-svg-frame {
+      width: 100%;
+      border-radius: 12px;
+      overflow: hidden;
+      border: 1px solid var(--border);
+      background: #f5efe2;
+    }
+
+    .bcn-svg-frame svg {
+      width: 100%;
+      height: auto;
+      max-height: 270px;
+      display: block;
+    }
+
+    .bcn-desc {
+      margin-top: 10px;
+      font-size: 0.92rem;
+      color: var(--text);
+    }
+
+    .bcn-gallery-panel {
+      margin-top: 14px;
+      padding-top: 14px;
+      border-top: 1px dashed var(--border);
+      display: none;
+    }
+    .bcn-gallery-panel.open { display: block; }
+
+    .bcn-gallery-grid {
+      display: grid;
+      grid-template-columns: repeat(auto-fill, minmax(175px, 1fr));
+      gap: 10px;
+    }
+
+    .bcn-thumb-btn {
+      padding: 8px;
+      border-radius: 10px;
+      text-align: left;
+      display: flex;
+      flex-direction: column;
+      gap: 6px;
+    }
+    .bcn-thumb-btn.active {
+      background: #eed8aa;
       border-color: var(--primary);
     }
+    .bcn-thumb-btn svg {
+      width: 100%;
+      height: 64px;
+      object-fit: cover;
+      border-radius: 6px;
+      background: #f5efe2;
+      display: block;
+    }
+    .bcn-thumb-label {
+      font-size: 0.8rem;
+      font-weight: 700;
+      line-height: 1.3;
+    }
+
+    /* 輕微動態效果 */
+    @keyframes gentleFloat {
+      0%, 100% { transform: translateY(0px); }
+      50% { transform: translateY(-3px); }
+    }
+
+    @keyframes gentleDrift {
+      0%, 100% { transform: translateX(0px); }
+      50% { transform: translateX(5px); }
+    }
+
+    @keyframes gentlePulse {
+      0%, 100% { opacity: 0.78; }
+      50% { opacity: 1; }
+    }
+
+    .anim-float {
+      animation: gentleFloat 4.2s ease-in-out infinite;
+      transform-box: fill-box;
+      transform-origin: center;
+    }
+
+    .anim-drift {
+      animation: gentleDrift 5.5s ease-in-out infinite;
+      transform-box: fill-box;
+      transform-origin: center;
+    }
+
+    .anim-pulse {
+      animation: gentlePulse 3.6s ease-in-out infinite;
+      transform-box: fill-box;
+      transform-origin: center;
+    }
+
+    body.reduced-motion .anim-float,
+    body.reduced-motion .anim-drift,
+    body.reduced-motion .anim-pulse {
+      animation: none !important;
+      transform: none !important;
+      opacity: 1 !important;
+    }
+
+    @media (prefers-reduced-motion: reduce) {
+      html { scroll-behavior: auto; }
+      .anim-float,
+      .anim-drift,
+      .anim-pulse {
+        animation: none !important;
+        transform: none !important;
+        opacity: 1 !important;
+      }
+    }
+
+    /* 本機 JSON 管理列 */
+    .io-bar {
+      display: flex;
+      flex-wrap: wrap;
+      justify-content: space-between;
+      align-items: center;
+      gap: 12px;
+      background: var(--card);
+      border: 1px solid var(--border);
+      border-radius: 12px;
+      padding: 14px 18px;
+      box-shadow: 0 3px 10px rgba(140, 102, 54, 0.04);
+    }
+
+    .io-title { font-weight: 700; font-size: 0.96rem; color: var(--text); }
+    .io-desc { font-size: 0.85rem; color: var(--muted); }
+    .io-actions { display: flex; flex-wrap: wrap; gap: 8px; align-items: center; }
+
+    .sync-drawer {
+      width: 100%;
+      display: none;
+      flex-direction: column;
+      gap: 8px;
+      padding-top: 10px;
+      border-top: 1px dashed var(--border);
+    }
+    .sync-drawer.open {
+      display: flex;
+    }
+    .sync-textarea {
+      width: 100%;
+      min-height: 76px;
+      padding: 8px 10px;
+      border-radius: 8px;
+      border: 1px solid var(--warm-border);
+      background: #fffdf8;
+      color: var(--text);
+      font-family: ui-monospace, SFMono-Regular, Menlo, Monaco, Consolas, monospace;
+      font-size: 0.82rem;
+      resize: vertical;
+    }
+    .sync-btns {
+      display: flex;
+      flex-wrap: wrap;
+      gap: 8px;
+      align-items: center;
+    }
+
+    .io-status {
+      width: 100%;
+      font-size: 0.88rem;
+      padding: 8px 12px;
+      border-radius: 8px;
+      display: none;
+    }
+    .io-status.show { display: block; }
+    .io-status.ok {
+      background: var(--success-bg);
+      color: var(--success);
+      border: 1px solid #b8e4c1;
+    }
+    .io-status.bad {
+      background: var(--danger-bg);
+      color: var(--danger);
+      border: 1px solid #f4c2be;
+    }
+
     .card {
       background: var(--card);
       border: 1px solid var(--border);
       border-radius: 14px;
-      padding: 20px;
-      margin-bottom: 18px;
+      padding: clamp(16px, 2.5vw, 24px);
+      box-shadow: 0 3px 12px rgba(140, 102, 54, 0.04);
     }
+
     .meta {
       display: flex;
       flex-wrap: wrap;
       gap: 8px;
-      font-size: 0.85rem;
+      align-items: center;
+      margin-bottom: 10px;
+      font-size: 0.86rem;
       color: var(--muted);
-      margin-bottom: 8px;
     }
+
     .badge {
-      background: #f3f4f6;
+      background: #faeed5;
+      color: var(--primary-hover);
+      padding: 3px 10px;
+      border-radius: 999px;
+      font-weight: 700;
+    }
+
+    .topic-badge {
+      background: var(--accent-light);
+      color: var(--accent);
+      padding: 3px 10px;
+      border-radius: 999px;
+      font-weight: 700;
+    }
+
+    .time-badge {
+      background: #f3ece0;
+      color: var(--text);
+      padding: 3px 10px;
+      border-radius: 999px;
+      font-weight: 600;
+    }
+
+    h1, h2, h3 { margin-top: 0; color: var(--text); }
+    h1 { font-size: clamp(1.25rem, 1.4vw + 0.95rem, 1.56rem); margin-bottom: 10px; }
+    h2 {
+      font-size: clamp(1.08rem, 0.8vw + 0.9rem, 1.24rem);
+      margin-bottom: 16px;
+      border-left: 4px solid var(--primary);
+      padding-left: 10px;
+    }
+
+    /* 文章內容底色改為白色 */
+    .es-text {
+      font-size: clamp(1rem, 0.45vw + 0.92rem, 1.12rem);
+      background: #FFFFFF;
+      color: var(--text);
+      border: 1px solid var(--border);
+      border-radius: 10px;
+      padding: clamp(14px, 2vw, 20px);
+      margin: 12px 0;
+    }
+    .es-text p { margin: 0 0 14px; }
+    .es-text p:last-child { margin-bottom: 0; }
+
+    .ca-text {
+      background: var(--ca-light);
+      border-left: 4px solid var(--ca-color);
+      padding: 14px 18px;
+      border-radius: 0 8px 8px 0;
+      color: #1c442d;
+      margin-top: 12px;
+    }
+
+    .zh-text {
+      background: #fdf8ee;
+      border-left: 4px solid var(--primary);
+      padding: 14px 18px;
+      border-radius: 0 8px 8px 0;
+      color: var(--text);
+      margin-top: 12px;
+    }
+
+    .en-text {
+      background: #f3f8fc;
+      border-left: 4px solid var(--accent);
+      padding: 14px 18px;
+      border-radius: 0 8px 8px 0;
+      color: #1c355e;
+      margin-top: 12px;
+    }
+
+    .ca-text p, .zh-text p, .en-text p { margin: 0 0 10px; }
+    .ca-text p:last-child, .zh-text p:last-child, .en-text p:last-child { margin-bottom: 0; }
+
+    .trans-label {
+      font-size: 0.78rem;
+      font-weight: 700;
+      text-transform: uppercase;
+      letter-spacing: 0.04em;
+      margin-bottom: 6px;
+      display: block;
+      opacity: 0.9;
+    }
+
+    .audio-panel {
+      display: flex;
+      flex-direction: column;
+      gap: 10px;
+      margin-top: 14px;
+      padding: 14px;
+      background: #FFFFFF;
+      border: 1px solid var(--border);
+      border-radius: 12px;
+    }
+
+    .audio-controls-row,
+    .voice-select-row {
+      display: flex;
+      flex-wrap: wrap;
+      align-items: center;
+      gap: 8px;
+    }
+
+    .voice-field {
+      display: flex;
+      flex-wrap: wrap;
+      align-items: center;
+      gap: 6px;
+      font-size: 0.86rem;
+      color: var(--muted);
+      font-weight: 600;
+    }
+
+    .speech-status {
+      font-size: 0.85rem;
+      color: var(--primary-hover);
+      font-weight: 700;
+    }
+
+    .grid-2 {
+      display: grid;
+      grid-template-columns: repeat(auto-fit, minmax(275px, 1fr));
+      gap: 16px;
+    }
+
+    .item-box {
+      border: 1px solid var(--border);
+      border-radius: 12px;
+      padding: 16px;
+      background: #fffdf9;
+      color: var(--text);
+      display: flex;
+      flex-direction: column;
+      gap: 8px;
+    }
+
+    .item-head {
+      display: flex;
+      justify-content: space-between;
+      align-items: baseline;
+      gap: 8px;
+      flex-wrap: wrap;
+    }
+
+    .es-word {
+      font-size: 1.08rem;
+      font-weight: 700;
+      color: var(--primary);
+    }
+
+    .pos {
+      font-size: 0.8rem;
+      color: var(--muted);
+      background: #f5ebd6;
       padding: 2px 8px;
       border-radius: 6px;
+      font-weight: 600;
     }
-    .lang-tabs {
+
+    .ca-box {
+      font-size: 0.88rem;
+      color: #1c442d;
+      background: var(--ca-light);
+      border: 1px solid #bfe2cb;
+      padding: 8px 10px;
+      border-radius: 8px;
+    }
+
+    .meaning-line { font-size: 0.94rem; color: var(--text); }
+
+    .example {
+      font-size: 0.89rem;
+      color: var(--text);
+      background: #faf4e8;
+      padding: 8px 10px;
+      border-radius: 8px;
+    }
+
+    .origin-box {
+      font-size: 0.86rem;
+      color: var(--origin-text);
+      background: var(--origin-bg);
+      border: 1px solid var(--origin-border);
+      padding: 8px 10px;
+      border-radius: 8px;
+    }
+
+    .grammar-box {
+      background: var(--grammar-bg);
+      color: var(--text);
+      border: 1px solid var(--grammar-border);
+      border-radius: 10px;
+      padding: 16px;
+      margin-bottom: 14px;
+    }
+    .grammar-box:last-child { margin-bottom: 0; }
+
+    .quiz-header {
+      display: flex;
+      flex-wrap: wrap;
+      justify-content: space-between;
+      align-items: center;
+      gap: 12px;
+      margin-bottom: 16px;
+      padding-bottom: 12px;
+      border-bottom: 1px solid var(--border);
+    }
+
+    .lang-switch {
       display: flex;
       flex-wrap: wrap;
       gap: 8px;
-      margin: 12px 0 16px;
     }
-    .lang-tab.active {
-      background: #111827;
-      color: #fff;
-      border-color: #111827;
+
+    .quiz-q {
+      margin-bottom: 18px;
+      padding-bottom: 14px;
+      border-bottom: 1px dashed var(--border);
     }
-    .para-box {
-      padding: 12px 14px;
-      border-left: 3px solid var(--primary);
-      background: #fafafa;
-      border-radius: 6px;
-      margin-bottom: 10px;
+    .quiz-q:last-of-type { border-bottom: none; }
+
+    .options {
+      display: grid;
+      grid-template-columns: repeat(auto-fit, minmax(210px, 1fr));
+      gap: 8px;
+      margin-top: 10px;
     }
-    .sub-lang {
+
+    .option-label {
+      display: flex;
+      align-items: center;
+      gap: 8px;
+      padding: 10px 12px;
+      border: 1px solid var(--border);
+      border-radius: 8px;
+      cursor: pointer;
+      font-size: 0.93rem;
+      background: #fffdf9;
+      color: var(--text);
+    }
+    .option-label:hover { background: #faeed5; }
+
+    .feedback {
+      margin-top: 10px;
+      padding: 10px 12px;
+      border-radius: 8px;
+      font-size: 0.92rem;
+    }
+    .feedback.ok {
+      background: var(--success-bg);
+      color: var(--success);
+      border: 1px solid #b8e4c1;
+    }
+    .feedback.bad {
+      background: var(--danger-bg);
+      color: var(--danger);
+      border: 1px solid #f4c2be;
+    }
+
+    .quiz-actions {
+      display: flex;
+      flex-wrap: wrap;
+      align-items: center;
+      gap: 12px;
+      margin-top: 10px;
+    }
+
+    .review-note {
       font-size: 0.88rem;
       color: var(--muted);
-      margin-top: 4px;
     }
-    .grid-2 {
-      display: grid;
-      grid-template-columns: repeat(auto-fit, minmax(280px, 1fr));
-      gap: 12px;
+
+    /* 常駐右下角純向上箭頭按鈕 */
+    .scroll-top-btn {
+      position: fixed;
+      right: clamp(14px, 2.5vw, 24px);
+      bottom: clamp(14px, 2.5vw, 24px);
+      z-index: 35;
+      width: 46px;
+      height: 46px;
+      padding: 0;
+      border-radius: 50%;
+      font-size: 1.25rem;
+      font-weight: 800;
+      line-height: 1;
+      display: inline-flex;
+      align-items: center;
+      justify-content: center;
+      background: var(--primary);
+      color: #fffdf9;
+      border: 1px solid var(--primary);
+      box-shadow: 0 4px 0 var(--primary-shadow);
     }
-    .item-card {
-      border: 1px solid var(--border);
-      border-radius: 10px;
-      padding: 12px;
-      background: #fcfcfd;
+    .scroll-top-btn:hover {
+      background: var(--primary-hover);
+      transform: translateY(-2px);
+      box-shadow: 0 5px 0 var(--primary-shadow);
     }
-    .sync-box {
-      display: none;
-      margin-bottom: 18px;
+
+    @media (max-width: 900px) {
+      .header-bar {
+        grid-template-columns: 1fr;
+        justify-items: center;
+        gap: 8px;
+      }
+      .header-brand,
+      .header-nav-stack,
+      .lesson-pager-group {
+        justify-self: center;
+        justify-content: center;
+      }
     }
-    .sync-box.open { display: block; }
-    textarea {
-      width: 100%;
-      min-height: 90px;
-      border: 1px solid var(--border);
-      border-radius: 8px;
-      padding: 10px;
-      font-family: monospace;
-      font-size: 0.85rem;
-    }
-    .quiz-opt {
-      display: block;
-      width: 100%;
-      text-align: left;
-      margin: 6px 0;
-      padding: 9px 12px;
-    }
-    .quiz-opt.correct {
-      background: #ecfdf5;
-      border-color: var(--success);
-      color: #065f46;
-    }
-    .quiz-opt.wrong {
-      background: #fef2f2;
-      border-color: #dc2626;
-      color: #991b1b;
-    }
-    .explain {
-      margin-top: 8px;
-      padding: 10px;
-      background: #f9fafb;
-      border-radius: 8px;
-      font-size: 0.9rem;
+
+    @media (max-width: 600px) {
+      button {
+        padding: 6px 10px;
+        font-size: 0.84rem;
+      }
+      .bcn-gallery-grid {
+        grid-template-columns: repeat(2, 1fr);
+      }
     }
   </style>
 </head>
 <body>
-  <header>
-    <div class="header-inner">
-      <div class="brand">四語學習工作坊（ES · CA · EN · ZH）</div>
-      <div class="toolbar">
-        <label class="btn primary">
-          匯入文章 (JSON)
-          <input id="importFile" type="file" accept=".json,application/json" multiple hidden />
-        </label>
-        <button id="exportBtn" type="button">匯出全部 JSON</button>
-        <button id="toggleSyncBtn" type="button">跨裝置同步（電腦→手機）</button>
-        <button id="resetBtn" type="button">還原預設</button>
+  <header id="topHeader">
+    <div class="header-bar">
+      <div class="header-brand">西文深度閱讀站</div>
+
+      <div class="header-nav-stack">
+        <div class="nav-row" aria-label="選單第一排">
+          <button type="button" data-jump="top">首頁</button>
+          <button type="button" data-jump="article">文章</button>
+          <button type="button" data-jump="vocab">單字</button>
+          <button type="button" data-jump="phrases">片語</button>
+        </div>
+        <div class="nav-row" aria-label="選單第二排">
+          <button type="button" data-jump="grammar">文法</button>
+          <button type="button" data-jump="quiz">測驗</button>
+          <button type="button" id="openOverviewMenuBtn">文章總覽</button>
+        </div>
+      </div>
+
+      <div class="lesson-pager-group">
+        <button type="button" id="prevBtn">上一篇</button>
+        <span id="currentUnitLabel" class="unit-label">第 1 篇 / 共 2 篇</span>
+        <button type="button" id="nextBtn">下一篇</button>
       </div>
     </div>
   </header>
 
-  <main class="container">
-    <div id="syncPanel" class="card sync-box">
-      <h3 style="margin-top:0">電腦 → 手機 跨裝置同步</h3>
-      <p style="margin:0 0 10px;color:var(--muted);font-size:0.92rem;">
-        瀏覽器本機儲存（<code>localStorage</code>）不會跨裝置自動傳送。你可以在<b>電腦</b>按「產生同步碼」複製到手機貼上匯入，或複製「同步網址」在手機開啟。
-      </p>
-      <div style="display:flex;flex-wrap:wrap;gap:8px;margin-bottom:10px;">
-        <button id="genCodeBtn" type="button" class="primary">1. 產生同步碼（電腦端）</button>
-        <button id="genLinkBtn" type="button">產生同步連結</button>
-        <button id="applyCodeBtn" type="button" class="primary">2. 套用同步碼／連結（手機端）</button>
-      </div>
-      <textarea id="syncText" placeholder="點「產生同步碼」取得代碼，或在手機貼上同步碼／同步連結後按「套用同步碼／連結」..."></textarea>
+  <div id="overviewBackdrop" class="overview-menu-backdrop"></div>
+  <div id="overviewMenuPopover" class="overview-menu-popover" role="dialog" aria-label="文章總覽選單">
+    <div class="overview-menu-header">
+      <h2 class="overview-menu-title">文章總覽選單（點選文章標題切換）</h2>
+      <button type="button" id="closeOverviewMenuBtn">關閉</button>
     </div>
+    <div id="overviewTitleList" class="overview-title-list"></div>
+  </div>
 
-    <div class="status-bar">
-      <div id="storageStatus">已載入文章，自動儲存於本機瀏覽器。</div>
-      <div id="lessonCount"></div>
-    </div>
+  <main id="app"></main>
 
-    <div id="lessonNav" class="lesson-nav"></div>
-    <div id="lessonContent"></div>
-  </main>
+  <button type="button" id="scrollTopBtn" class="scroll-top-btn" aria-label="回到最上方" title="回到最上方">
+    ↑
+  </button>
 
   <script>
-    const STORAGE_KEY = "quad_lang_lessons_v1";
-
-    const DEFAULT_LESSONS = [
+    /* =========================================================================
+       巴塞隆納（Barcelona）20 張具體插畫
+       ========================================================================= */
+    const BCN_ILLUSTRATIONS = [
       {
-        id: "demo-01-hola-mundo",
+        id: "sagrada-familia",
+        name: "1. 聖家堂誕生立面與尖塔",
+        category: "地標建築",
+        seasons: ["spring", "summer", "autumn", "winter"],
+        desc: "描繪聖家堂哥德與新藝術交融的尖塔、玫瑰窗、拱門與立面雕刻細節。",
+        svg: `
+          <svg viewBox="0 0 800 220" role="img" aria-label="聖家堂尖塔插畫">
+            <rect width="800" height="220" fill="#faeed5" />
+            <circle cx="670" cy="48" r="24" fill="#f5b942" class="anim-pulse" />
+            <path d="M100 58 Q125 40 150 58 Q175 44 200 58 Z" fill="#fffdf8" class="anim-drift" />
+            <rect x="0" y="184" width="800" height="36" fill="#e4d0ae" />
+            <path d="M312 184 L330 72 L338 38 L346 72 L364 184 Z" fill="#d97a3a" />
+            <circle cx="338" cy="34" r="6" fill="#c85a17" />
+            <path d="M366 184 L388 48 L400 18 L412 48 L434 184 Z" fill="#c85a17" class="anim-float" />
+            <circle cx="400" cy="14" r="7" fill="#1d5d8c" />
+            <path d="M436 184 L454 76 L462 44 L470 76 L488 184 Z" fill="#d97a3a" />
+            <circle cx="462" cy="40" r="6" fill="#c85a17" />
+            <rect x="292" y="128" width="216" height="56" rx="4" fill="#eab06d" stroke="#b86b28" stroke-width="2" />
+            <circle cx="400" cy="146" r="13" fill="#fffdf8" stroke="#1d5d8c" stroke-width="2" />
+            <circle cx="400" cy="146" r="5" fill="#c85a17" />
+            <path d="M322 184 L322 158 Q336 146 350 158 L350 184 Z" fill="#8c4a20" />
+            <path d="M382 184 L382 164 Q400 154 418 164 L418 184 Z" fill="#6e3614" />
+            <path d="M450 184 L450 158 Q464 146 478 158 L478 184 Z" fill="#8c4a20" />
+            <path d="M250 184 Q236 154 250 124 Q264 154 250 184 Z" fill="#4c7a4b" />
+            <path d="M550 184 Q536 154 550 124 Q564 154 550 184 Z" fill="#4c7a4b" />
+          </svg>
+        `
+      },
+      {
+        id: "park-guell-dragon",
+        name: "2. 奎爾公園馬賽克蜥蜴與廊柱",
+        category: "藝術公園",
+        seasons: ["spring", "summer", "autumn"],
+        desc: "呈現奎爾公園階梯、多立克式廊柱與平滑曲線拼貼的馬賽克蜥蜴。",
+        svg: `
+          <svg viewBox="0 0 800 220" role="img" aria-label="奎爾公園蜥蜴與廊柱插畫">
+            <rect width="800" height="220" fill="#eef5e8" />
+            <rect x="0" y="176" width="800" height="44" fill="#dfd0b2" />
+            <rect x="230" y="95" width="340" height="14" fill="#cbb898" />
+            <rect x="255" y="109" width="14" height="67" fill="#e6d7bc" />
+            <rect x="305" y="109" width="14" height="67" fill="#e6d7bc" />
+            <rect x="481" y="109" width="14" height="67" fill="#e6d7bc" />
+            <rect x="531" y="109" width="14" height="67" fill="#e6d7bc" />
+            <path d="M220 84 Q310 66 400 84 T580 84 L580 95 Q490 77 400 95 T220 95 Z" fill="#e07a3f" />
+            <g transform="translate(423, 154)">
+              <g class="anim-float">
+                <path d="M-81 -2 Q-71 -12 -49 -11 Q-17 -10 13 -5 Q45 -9 81 -22 Q65 0 29 6 Q15 8 3 6 L-1 20 Q-5 22 -9 19 L-7 6 L-47 6 L-52 20 Q-56 22 -60 19 L-56 5 Q-77 4 -81 -2 Z" fill="#2e8b75" stroke="#1d5d8c" stroke-width="1.6" stroke-linejoin="round" />
+                <path d="M-45 -3 Q-37 -7 -29 -3 Q-37 2 -45 -3 Z" fill="#f5b942" />
+                <path d="M-21 -3 Q-12 -7 -3 -3 Q-12 2 -21 -3 Z" fill="#c85a17" />
+                <path d="M4 -2 Q12 -6 20 -1 Q12 3 4 -2 Z" fill="#f5b942" />
+                <circle cx="-67" cy="-5" r="2.6" fill="#3E3A39" />
+              </g>
+            </g>
+          </svg>
+        `
+      },
+      {
+        id: "casa-batllo-redrawn",
+        name: "3. 巴特略之家立面與面具陽台",
+        category: "現代主義建築",
+        seasons: ["spring", "summer", "autumn", "winter"],
+        desc: "藍綠與金黃釉面立面、圓拱窗戶、骨骼狀柱飾與面具造型陽台。",
+        svg: `
+          <svg viewBox="0 0 800 220" role="img" aria-label="巴特略之家立面插畫">
+            <rect width="800" height="220" fill="#e9f2f7" />
+            <rect x="0" y="186" width="800" height="34" fill="#dfd0b5" />
+            <path d="M295 62 Q400 26 505 62 Z" fill="#d97a3a" />
+            <rect x="458" y="28" width="16" height="24" rx="4" fill="#c85a17" />
+            <rect x="305" y="62" width="190" height="124" rx="6" fill="#78b7d0" stroke="#3a7c96" stroke-width="2" />
+            <rect x="326" y="76" width="24" height="30" rx="12" fill="#fffdf8" stroke="#2b4c7e" stroke-width="2" />
+            <rect x="388" y="76" width="24" height="30" rx="12" fill="#fffdf8" stroke="#2b4c7e" stroke-width="2" />
+            <rect x="450" y="76" width="24" height="30" rx="12" fill="#fffdf8" stroke="#2b4c7e" stroke-width="2" />
+            <path d="M320 108 Q338 118 356 108 L356 122 L320 122 Z" fill="#f7d699" stroke="#8c5832" stroke-width="1.5" />
+            <path d="M382 108 Q400 118 418 108 L418 122 L382 122 Z" fill="#f7d699" stroke="#8c5832" stroke-width="1.5" />
+            <path d="M444 108 Q462 118 480 108 L480 122 L444 122 Z" fill="#f7d699" stroke="#8c5832" stroke-width="1.5" />
+            <rect x="328" y="132" width="38" height="32" rx="14" fill="#fffdf8" stroke="#2b4c7e" stroke-width="2" />
+            <rect x="381" y="132" width="38" height="32" rx="14" fill="#fffdf8" stroke="#2b4c7e" stroke-width="2" />
+            <rect x="434" y="132" width="38" height="32" rx="14" fill="#fffdf8" stroke="#2b4c7e" stroke-width="2" />
+            <rect x="376" y="168" width="48" height="18" rx="4" fill="#5c4028" />
+          </svg>
+        `
+      },
+      {
+        id: "rambla-stroll",
+        name: "4. 蘭布拉大道林蔭與路燈",
+        category: "城市街道",
+        seasons: ["spring", "summer", "autumn"],
+        desc: "展現蘭布拉大道中央步道、古典街燈、雙排懸鈴木與散步行人。",
+        svg: `
+          <svg viewBox="0 0 800 220" role="img" aria-label="蘭布拉大道插畫">
+            <rect width="800" height="220" fill="#fcf5e6" />
+            <polygon points="330,220 470,220 426,110 374,110" fill="#e5d2b5" />
+            <polygon points="374,220 426,220 410,110 390,110" fill="#f5ead6" />
+            <line x1="368" y1="165" x2="374" y2="115" stroke="#4a3b2c" stroke-width="3" />
+            <circle cx="374" cy="112" r="5" fill="#f5b942" class="anim-pulse" />
+            <line x1="432" y1="165" x2="426" y2="115" stroke="#4a3b2c" stroke-width="3" />
+            <circle cx="426" cy="112" r="5" fill="#f5b942" class="anim-pulse" />
+            <circle cx="315" cy="120" r="22" fill="#5a8f5b" />
+            <circle cx="290" cy="152" r="26" fill="#477a48" />
+            <circle cx="485" cy="120" r="22" fill="#5a8f5b" />
+            <circle cx="510" cy="152" r="26" fill="#477a48" />
+            <g transform="translate(395, 181)">
+              <g class="anim-float">
+                <circle cx="0" cy="-15" r="4" fill="#c85a17" />
+                <line x1="0" y1="-11" x2="0" y2="3" stroke="#c85a17" stroke-width="3" />
+                <line x1="0" y1="3" x2="-5" y2="15" stroke="#c85a17" stroke-width="2.5" />
+                <line x1="0" y1="3" x2="5" y2="15" stroke="#c85a17" stroke-width="2.5" />
+              </g>
+            </g>
+          </svg>
+        `
+      },
+      {
+        id: "mediterranean-port",
+        name: "5. 舊港帆船與碼頭",
+        category: "海港風光",
+        seasons: ["spring", "summer", "autumn"],
+        desc: "描繪巴塞隆納港口碼頭、海浪與迎風航行的帆船（不含燈塔）。",
+        svg: `
+          <svg viewBox="0 0 800 220" role="img" aria-label="地中海港灣帆船插畫">
+            <rect width="800" height="132" fill="#e5f2fa" />
+            <circle cx="640" cy="46" r="22" fill="#f5b942" class="anim-pulse" />
+            <rect x="0" y="132" width="800" height="88" fill="#4b93b8" />
+            <rect x="170" y="128" width="105" height="10" rx="2" fill="#d9c3a3" />
+            <path d="M280 156 Q360 150 440 156 T600 156" stroke="#b3def5" stroke-width="2.5" fill="none" class="anim-drift" />
+            <g transform="translate(406, 113)">
+              <g class="anim-float">
+                <path d="M-46 27 L44 27 L30 41 L-32 41 Z" fill="#c85a17" />
+                <line x1="-1" y1="27" x2="-1" y2="-41" stroke="#574837" stroke-width="3.5" />
+                <polygon points="1,-37 46,19 1,19" fill="#fffdf8" />
+                <polygon points="-3,-27 -36,19 -3,19" fill="#f7ebd2" />
+              </g>
+            </g>
+          </svg>
+        `
+      },
+      {
+        id: "sant-jordi-rose-book",
+        name: "6. 聖喬治節：紅玫瑰與書本",
+        category: "春季節慶",
+        seasons: ["spring"],
+        desc: "描繪 4 月 23 日聖喬治節的書本與紅玫瑰意象。",
+        svg: `
+          <svg viewBox="0 0 800 220" role="img" aria-label="聖喬治節玫瑰與書本插畫">
+            <rect width="800" height="220" fill="#fdf2ea" />
+            <rect x="0" y="182" width="800" height="38" fill="#e7d6ba" />
+            <g transform="translate(390, 161)">
+              <g class="anim-float">
+                <path d="M-155 -13 Q-78 -29 0 -11 L0 23 Q-78 5 -155 23 Z" fill="#fffdf8" stroke="#c85a17" stroke-width="2" />
+                <path d="M0 -11 Q78 -29 155 -13 L155 23 Q78 5 0 23 Z" fill="#fffdf8" stroke="#c85a17" stroke-width="2" />
+                <line x1="-128" y1="-3" x2="-25" y2="1" stroke="#b8a892" stroke-width="2" />
+                <line x1="25" y1="1" x2="128" y2="-3" stroke="#b8a892" stroke-width="2" />
+              </g>
+            </g>
+            <g transform="translate(515, 92)">
+              <g class="anim-pulse">
+                <line x1="0" y1="16" x2="-10" y2="62" stroke="#3f7d44" stroke-width="5" stroke-linecap="round" />
+                <ellipse cx="-14" cy="40" rx="11" ry="5.5" fill="#4e9454" transform="rotate(-25 -14 40)" />
+                <circle cx="0" cy="0" r="20" fill="#d63c2f" />
+                <path d="M-10 -2 Q0 -14 10 -2 Q6 10 -6 8 Z" fill="#eb6456" />
+              </g>
+            </g>
+          </svg>
+        `
+      },
+      {
+        id: "castellers-tower",
+        name: "7. 疊人塔高塔隊形",
+        category: "節慶傳統",
+        seasons: ["spring", "summer", "autumn"],
+        desc: "描繪疊人塔底座圍圈、層層疊高的隊形與揮手的頂端小孩。",
+        svg: `
+          <svg viewBox="0 0 800 220" role="img" aria-label="疊人塔高塔插畫">
+            <rect width="800" height="220" fill="#faeed5" />
+            <rect x="0" y="184" width="800" height="36" fill="#e3cfb0" />
+            <rect x="325" y="162" width="150" height="22" rx="8" fill="#c85a17" />
+            <circle cx="342" cy="154" r="8" fill="#f7d699" />
+            <circle cx="371" cy="154" r="8" fill="#f7d699" />
+            <circle cx="400" cy="154" r="8" fill="#f7d699" />
+            <circle cx="429" cy="154" r="8" fill="#f7d699" />
+            <circle cx="458" cy="154" r="8" fill="#f7d699" />
+            <g transform="translate(400, 92)">
+              <g class="anim-float">
+                <rect x="-28" y="36" width="56" height="20" rx="4" fill="#1d5d8c" />
+                <circle cx="-14" cy="28" r="7" fill="#f7d699" />
+                <circle cx="0" cy="28" r="7" fill="#f7d699" />
+                <circle cx="14" cy="28" r="7" fill="#f7d699" />
+                <rect x="-18" y="4" width="36" height="18" rx="4" fill="#d97a3a" />
+                <circle cx="-8" cy="-4" r="6.5" fill="#f7d699" />
+                <circle cx="8" cy="-4" r="6.5" fill="#f7d699" />
+                <rect x="-10" y="-24" width="20" height="15" rx="3" fill="#c85a17" />
+                <circle cx="0" cy="-32" r="6" fill="#f7d699" />
+                <circle cx="0" cy="-50" r="5.5" fill="#f5b942" />
+                <line x1="0" y1="-44" x2="0" y2="-30" stroke="#c85a17" stroke-width="3" />
+              </g>
+            </g>
+          </svg>
+        `
+      },
+      {
+        id: "tapas-paella",
+        name: "8. 海鮮飯與番茄麵包",
+        category: "飲食文化",
+        seasons: ["spring", "summer", "autumn", "winter"],
+        desc: "描繪金黃海鮮飯與番茄麵包。",
+        svg: `
+          <svg viewBox="0 0 800 220" role="img" aria-label="海鮮飯與番茄麵包插畫">
+            <rect width="800" height="220" fill="#fcf4e4" />
+            <rect x="0" y="174" width="800" height="46" fill="#e8d6b7" />
+            <line x1="212" y1="144" x2="232" y2="144" stroke="#8c5832" stroke-width="5" stroke-linecap="round" />
+            <line x1="378" y1="144" x2="398" y2="144" stroke="#8c5832" stroke-width="5" stroke-linecap="round" />
+            <ellipse cx="305" cy="148" rx="80" ry="21" fill="#b86b28" />
+            <ellipse cx="305" cy="144" rx="70" ry="16" fill="#f5c342" class="anim-pulse" />
+            <circle cx="276" cy="142" r="5" fill="#d63c2f" />
+            <circle cx="305" cy="146" r="5" fill="#4c7a4b" />
+            <circle cx="334" cy="141" r="5" fill="#d63c2f" />
+            <ellipse cx="475" cy="158" rx="30" ry="9" fill="#fffdf8" stroke="#cbb898" stroke-width="1.5" />
+            <rect x="457" y="146" width="35" height="10" rx="4" fill="#d99b52" />
+            <g transform="translate(474, 146)">
+              <circle cx="0" cy="0" r="5" fill="#d63c2f" class="anim-float" />
+            </g>
+          </svg>
+        `
+      },
+      {
+        id: "gothic-quarter",
+        name: "9. 哥德區主教座堂拱橋與石板巷",
+        category: "歷史街區",
+        seasons: ["spring", "autumn", "winter"],
+        desc: "描繪哥德區尖拱廊橋、中世紀石牆窗格、壁燈與石板路面。",
+        svg: `
+          <svg viewBox="0 0 800 220" role="img" aria-label="哥德區拱橋插畫">
+            <rect width="800" height="220" fill="#f3ece0" />
+            <rect x="215" y="24" width="95" height="196" fill="#cbb799" stroke="#a69072" stroke-width="1.5" />
+            <rect x="490" y="24" width="95" height="196" fill="#cbb799" stroke="#a69072" stroke-width="1.5" />
+            <path d="M245 78 L245 54 Q262 42 279 54 L279 78 Z" fill="#5e4b38" />
+            <path d="M521 78 L521 54 Q538 42 555 54 L555 78 Z" fill="#5e4b38" />
+            <rect x="310" y="96" width="180" height="20" fill="#b8a182" />
+            <path d="M352 116 L400 76 L448 116" fill="none" stroke="#9e8566" stroke-width="7" />
+            <circle cx="400" cy="132" r="6" fill="#f5b942" class="anim-pulse" />
+            <polygon points="295,220 505,220 442,146 358,146" fill="#dfd0b5" />
+          </svg>
+        `
+      },
+      {
+        id: "summer-barceloneta",
+        name: "10. 巴塞隆納海灘遮陽傘與棕櫚樹",
+        category: "海灘夏日",
+        seasons: ["summer"],
+        desc: "描繪海灘遮陽傘、棕櫚樹與地中海海岸風光。",
+        svg: `
+          <svg viewBox="0 0 800 220" role="img" aria-label="巴塞隆納海灘遮陽傘與棕櫚樹插畫">
+            <rect width="800" height="128" fill="#dff2fc" />
+            <circle cx="670" cy="44" r="24" fill="#f7b731" class="anim-pulse" />
+            <rect x="0" y="128" width="800" height="32" fill="#4da1c4" />
+            <path d="M0 158 Q400 148 800 158 L800 220 L0 220 Z" fill="#f3dfb6" />
+            <line x1="285" y1="160" x2="285" y2="112" stroke="#7c5329" stroke-width="4" />
+            <g transform="translate(285, 94)">
+              <g class="anim-float">
+                <path d="M-47 18 Q0 -18 47 18 Z" fill="#c85a17" />
+                <path d="M-17 18 Q0 -18 17 18 Z" fill="#f7ebd2" />
+              </g>
+            </g>
+            <path d="M515 166 Q522 126 508 90" stroke="#7c5329" stroke-width="6" fill="none" />
+            <g transform="translate(508, 76)">
+              <g class="anim-drift">
+                <path d="M0 14 Q-33 0 -53 20" stroke="#4d8f4c" stroke-width="5" stroke-linecap="round" fill="none" />
+                <path d="M0 14 Q32 0 52 20" stroke="#4d8f4c" stroke-width="5" stroke-linecap="round" fill="none" />
+                <path d="M0 14 Q-12 -14 10 -20" stroke="#4d8f4c" stroke-width="5" stroke-linecap="round" fill="none" />
+              </g>
+            </g>
+          </svg>
+        `
+      },
+      {
+        id: "barcelona-cathedral",
+        name: "11. 巴塞隆納主教座堂與復活節遊行",
+        category: "歷史建築",
+        seasons: ["spring", "summer", "autumn", "winter"],
+        desc: "描繪哥德區主教座堂尖頂、玫瑰窗，以及前方舉旗持燭的復活節遊行隊伍。",
+        svg: `
+          <svg viewBox="0 0 800 220" role="img" aria-label="巴塞隆納主教座堂與復活節遊行插畫">
+            <rect width="800" height="220" fill="#f6efe2" />
+            <rect x="0" y="186" width="800" height="34" fill="#e2d1b3" />
+            <rect x="315" y="92" width="170" height="94" fill="#d4bf9e" stroke="#9e8868" stroke-width="2" />
+            <polygon points="315,92 340,40 365,92" fill="#c4ae8d" />
+            <g transform="translate(400, 58)">
+              <polygon points="-30,34 0,-34 30,34" fill="#d9c4a3" class="anim-float" />
+            </g>
+            <polygon points="435,92 460,40 485,92" fill="#c4ae8d" />
+            <circle cx="400" cy="118" r="13" fill="#fffdf8" stroke="#7c6649" stroke-width="2" />
+            <path d="M380 186 L380 152 Q400 136 420 152 L420 186 Z" fill="#6e583c" />
+            <g transform="translate(266, 156)">
+              <g class="anim-drift">
+                <line x1="-11" y1="30" x2="-11" y2="-30" stroke="#574837" stroke-width="2.5" />
+                <polygon points="-10,-28 16,-20 -10,-12" fill="#6d3b8e" />
+                <polygon points="-30,30 -22,-2 -14,30" fill="#4e2a66" />
+                <circle cx="-22" cy="-8" r="5.5" fill="#f7d699" />
+                <polygon points="2,30 10,-2 18,30" fill="#4e2a66" />
+                <circle cx="10" cy="-8" r="5.5" fill="#f7d699" />
+                <line x1="30" y1="28" x2="30" y2="0" stroke="#8c5832" stroke-width="2" />
+                <circle cx="30" cy="-4" r="4" fill="#f5b942" class="anim-pulse" />
+              </g>
+            </g>
+          </svg>
+        `
+      },
+      {
+        id: "winter-lights-market",
+        name: "12. 冬季節慶燈飾與聖誕市集",
+        category: "冬季節慶",
+        seasons: ["winter"],
+        desc: "描繪冬夜街道燈串、小木屋市集攤位、聖誕樹與暖黃窗光。",
+        svg: `
+          <svg viewBox="0 0 800 220" role="img" aria-label="冬季節慶燈飾插畫">
+            <rect width="800" height="220" fill="#29384d" />
+            <rect x="0" y="178" width="800" height="42" fill="#3c4c63" />
+            <path d="M150 52 Q400 104 650 52" stroke="#f7ebd2" stroke-width="2" fill="none" />
+            <circle cx="230" cy="66" r="6" fill="#f5b942" class="anim-pulse" />
+            <g transform="translate(315, 80)">
+              <circle cx="0" cy="0" r="6" fill="#e85a4a" class="anim-float" />
+            </g>
+            <circle cx="400" cy="86" r="6" fill="#f7ebd2" class="anim-pulse" />
+            <g transform="translate(485, 80)">
+              <circle cx="0" cy="0" r="6" fill="#f5b942" class="anim-float" />
+            </g>
+            <circle cx="570" cy="66" r="6" fill="#e85a4a" class="anim-pulse" />
+            <rect x="335" y="126" width="130" height="52" rx="4" fill="#8c5832" />
+            <polygon points="325,126 400,88 475,126" fill="#c85a17" />
+            <rect x="378" y="142" width="44" height="22" rx="3" fill="#ffe082" class="anim-pulse" />
+            <polygon points="535,178 555,134 575,178" fill="#3b7a57" />
+            <g transform="translate(555, 137)">
+              <polygon points="-15,19 0,-19 15,19" fill="#4b946b" class="anim-float" />
+            </g>
+          </svg>
+        `
+      },
+      {
+        id: "montjuic-cablecar",
+        name: "13. 蒙特惠克山丘與空中纜車",
+        category: "山丘景觀",
+        seasons: ["spring", "summer", "autumn", "winter"],
+        desc: "描繪蒙特惠克山丘輪廓、山坡綠樹與沿纜車線行駛的紅色車廂。",
+        svg: `
+          <svg viewBox="0 0 800 220" role="img" aria-label="蒙特惠克山丘纜車插畫">
+            <rect width="800" height="220" fill="#f7e8d0" />
+            <path d="M0 192 Q250 116 510 162 T800 136 L800 220 L0 220 Z" fill="#89a86d" />
+            <line x1="160" y1="62" x2="640" y2="96" stroke="#574837" stroke-width="2" />
+            <g transform="translate(400, 99.5)">
+              <g class="anim-drift">
+                <line x1="0" y1="-20.5" x2="0" y2="-3.5" stroke="#574837" stroke-width="2" />
+                <rect x="-22" y="-3.5" width="44" height="24" rx="6" fill="#c85a17" stroke="#fffdf8" stroke-width="1.5" />
+                <rect x="-15" y="2.5" width="12" height="10" rx="2" fill="#fffdf8" />
+                <rect x="3" y="2.5" width="12" height="10" rx="2" fill="#fffdf8" />
+              </g>
+            </g>
+            <circle cx="655" cy="52" r="22" fill="#f29d38" class="anim-pulse" />
+          </svg>
+        `
+      },
+      {
+        id: "magic-fountain-montjuic",
+        name: "14. 魔幻噴泉（Font Màgica）水柱與光影",
+        category: "水舞地標",
+        seasons: ["spring", "summer", "autumn", "winter"],
+        desc: "描繪蒙特惠克魔幻噴泉多層水池、向上噴湧的水柱與繽紛燈光。",
+        svg: `
+          <svg viewBox="0 0 800 220" role="img" aria-label="魔幻噴泉插畫">
+            <rect width="800" height="220" fill="#23304a" />
+            <rect x="0" y="182" width="800" height="38" fill="#324161" />
+            <ellipse cx="400" cy="176" rx="190" ry="22" fill="#2c7da0" stroke="#89c2d9" stroke-width="2" />
+            <ellipse cx="400" cy="156" rx="135" ry="15" fill="#468faf" stroke="#a9d6e5" stroke-width="1.5" />
+            <ellipse cx="400" cy="138" rx="75" ry="10" fill="#61a5c2" />
+            <g transform="translate(400, 98)">
+              <g class="anim-float">
+                <path d="M0 38 Q-8 -14 0 -58 Q8 -14 0 38 Z" fill="#caf0f8" opacity="0.9" />
+                <path d="M-35 46 Q-70 -2 -95 -24 Q-55 6 -26 46 Z" fill="#90e0ef" opacity="0.85" />
+                <path d="M35 46 Q70 -2 95 -24 Q55 6 26 46 Z" fill="#90e0ef" opacity="0.85" />
+                <path d="M-65 58 Q-115 26 -148 16 Q-102 36 -55 58 Z" fill="#f5b942" opacity="0.78" />
+                <path d="M65 58 Q115 26 148 16 Q102 36 55 58 Z" fill="#e85a4a" opacity="0.78" />
+              </g>
+            </g>
+            <circle cx="400" cy="40" r="6" fill="#ffe082" class="anim-pulse" />
+          </svg>
+        `
+      },
+      {
+        id: "la-merce-festival",
+        name: "15. 梅爾塞節（La Mercè）煙火與巨型人偶",
+        category: "秋季節慶",
+        seasons: ["autumn", "spring", "summer", "winter"],
+        desc: "描繪梅爾塞節夜空煙火與身穿華麗禮服的加泰隆尼亞巨型人偶（Gegants）。",
+        svg: `
+          <svg viewBox="0 0 800 220" role="img" aria-label="梅爾塞節煙火與巨型人偶插畫">
+            <rect width="800" height="220" fill="#2c3552" />
+            <rect x="0" y="178" width="800" height="42" fill="#3d4766" />
+            <g transform="translate(250, 88)">
+              <g class="anim-pulse">
+                <circle cx="0" cy="0" r="5" fill="#ffe082" />
+                <line x1="0" y1="-6" x2="0" y2="-22" stroke="#f5b942" stroke-width="2.5" />
+                <line x1="0" y1="6" x2="0" y2="22" stroke="#f5b942" stroke-width="2.5" />
+                <line x1="-6" y1="0" x2="-22" y2="0" stroke="#e85a4a" stroke-width="2.5" />
+                <line x1="6" y1="0" x2="22" y2="0" stroke="#e85a4a" stroke-width="2.5" />
+                <line x1="-5" y1="-5" x2="-16" y2="-16" stroke="#90e0ef" stroke-width="2" />
+                <line x1="5" y1="-5" x2="16" y2="-16" stroke="#90e0ef" stroke-width="2" />
+              </g>
+            </g>
+            <g transform="translate(540, 74)">
+              <g class="anim-pulse">
+                <circle cx="0" cy="0" r="4.5" fill="#ffe082" />
+                <line x1="0" y1="-5" x2="0" y2="-18" stroke="#e85a4a" stroke-width="2.2" />
+                <line x1="0" y1="5" x2="0" y2="18" stroke="#e85a4a" stroke-width="2.2" />
+                <line x1="-5" y1="0" x2="-18" y2="0" stroke="#f5b942" stroke-width="2.2" />
+                <line x1="5" y1="0" x2="18" y2="0" stroke="#f5b942" stroke-width="2.2" />
+              </g>
+            </g>
+            <g transform="translate(388, 123)">
+              <g class="anim-float">
+                <polygon points="-33,55 -14,-9 14,-9 33,55" fill="#c85a17" stroke="#f7ebd2" stroke-width="1.5" />
+                <circle cx="0" cy="-25" r="14" fill="#f7d699" />
+                <polygon points="-14,-37 -7,-55 0,-43 7,-55 14,-37" fill="#f5b942" />
+              </g>
+            </g>
+            <g transform="translate(453, 129)">
+              <g class="anim-float">
+                <polygon points="-25,49 -11,-7 12,-7 26,49" fill="#1d5d8c" stroke="#f7ebd2" stroke-width="1.5" />
+                <circle cx="0" cy="-23" r="13" fill="#f7d699" />
+                <path d="M-13 -35 Q0 -51 13 -35 Z" fill="#f5b942" />
+              </g>
+            </g>
+          </svg>
+        `
+      },
+      {
+        id: "grid-eixample-blocks",
+        name: "16. 擴建區（Eixample）切角街廓與中庭",
+        category: "城市規劃",
+        seasons: ["spring", "summer", "autumn", "winter"],
+        desc: "描繪塞爾達規劃的八角街廓、街角切角路口與街廓中央綠意中庭。",
+        svg: `
+          <svg viewBox="0 0 800 220" role="img" aria-label="Eixample 街廓插畫">
+            <rect width="800" height="220" fill="#f7f1e5" />
+            <polygon points="250,46 356,46 372,62 372,158 356,174 250,174 234,158 234,62" fill="#e8c396" stroke="#c85a17" stroke-width="2" />
+            <rect x="274" y="78" width="58" height="64" rx="8" fill="#7da66b" class="anim-pulse" />
+            <polygon points="444,46 550,46 566,62 566,158 550,174 444,174 428,158 428,62" fill="#e8c396" stroke="#1d5d8c" stroke-width="2" />
+            <rect x="468" y="78" width="58" height="64" rx="8" fill="#89b5d6" class="anim-pulse" />
+          </svg>
+        `
+      },
+      {
+        id: "boqueria-market",
+        name: "17. 波蓋利亞市場條紋遮陽棚與水果攤",
+        category: "市集生活",
+        seasons: ["spring", "summer", "autumn"],
+        desc: "描繪市場紅色遮陽棚、木質攤位、柳橙、草莓與新鮮果汁。",
+        svg: `
+          <svg viewBox="0 0 800 220" role="img" aria-label="波蓋利亞市場插畫">
+            <rect width="800" height="220" fill="#fdf5e6" />
+            <rect x="215" y="132" width="370" height="56" rx="6" fill="#d9a76a" />
+            <rect x="205" y="74" width="390" height="24" rx="6" fill="#c85a17" />
+            <rect x="245" y="74" width="46" height="24" fill="#f7ebd2" />
+            <rect x="340" y="74" width="46" height="24" fill="#f7ebd2" />
+            <rect x="435" y="74" width="46" height="24" fill="#f7ebd2" />
+            <rect x="530" y="74" width="40" height="24" fill="#f7ebd2" />
+            <g transform="translate(399, 124)">
+              <g class="anim-float">
+                <circle cx="-119" cy="0" r="12" fill="#f59f00" />
+                <circle cx="-91" cy="0" r="12" fill="#e8590c" />
+                <circle cx="91" cy="0" r="12" fill="#37b24d" />
+                <circle cx="119" cy="0" r="12" fill="#e03131" />
+              </g>
+            </g>
+          </svg>
+        `
+      },
+      {
+        id: "three-kings-parade",
+        name: "18. 三王節（Reyes Magos）花車與王冠",
+        category: "冬日節慶",
+        seasons: ["winter", "autumn"],
+        desc: "描繪 1 月 5 日三王節遊行花車、三頂金色王冠與節慶燈光。",
+        svg: `
+          <svg viewBox="0 0 800 220" role="img" aria-label="三王節 Reyes Magos 插畫">
+            <rect width="800" height="220" fill="#233044" />
+            <rect x="0" y="178" width="800" height="42" fill="#38475e" />
+            <g transform="translate(400, 139)">
+              <g class="anim-drift">
+                <rect x="-125" y="-11" width="250" height="36" rx="8" fill="#1d5d8c" stroke="#f5b942" stroke-width="2" />
+                <circle cx="-80" cy="29" r="10" fill="#574837" />
+                <circle cx="80" cy="29" r="10" fill="#574837" />
+                <polygon points="-85,-15 -80,-35 -70,-23 -60,-35 -55,-15" fill="#f5b942" />
+                <polygon points="-15,-15 -10,-39 0,-25 10,-39 15,-15" fill="#ffe082" />
+                <polygon points="55,-15 60,-35 70,-23 80,-35 85,-15" fill="#f5b942" />
+              </g>
+            </g>
+            <circle cx="620" cy="52" r="6" fill="#ffe082" class="anim-pulse" />
+            <g transform="translate(190, 64)">
+              <circle cx="0" cy="0" r="5" fill="#f5b942" class="anim-float" />
+            </g>
+          </svg>
+        `
+      },
+      {
+        id: "ciutadella-arc-triomf",
+        name: "19. 城堡公園與巴塞隆納凱旋門",
+        category: "凱旋門與公園",
+        seasons: ["spring", "summer", "autumn"],
+        desc: "紅磚巴塞隆納凱旋門拱門與上方雕刻，搭配城堡公園綠蔭與湖畔。",
+        svg: `
+          <svg viewBox="0 0 800 220" role="img" aria-label="城堡公園與凱旋門插畫">
+            <rect width="800" height="220" fill="#eef6ea" />
+            <rect x="0" y="164" width="800" height="56" fill="#9bc27c" />
+            <ellipse cx="535" cy="184" rx="105" ry="18" fill="#7bb2c9" class="anim-pulse" />
+            <g transform="translate(230, 48)">
+              <rect x="0" y="16" width="126" height="100" fill="#c86432" stroke="#8f421c" stroke-width="2" />
+              <rect x="-6" y="6" width="138" height="12" rx="2" fill="#d97a46" />
+              <path d="M40 116 L40 62 Q63 42 86 62 L86 116 Z" fill="#eef6ea" stroke="#8f421c" stroke-width="2" />
+              <rect x="18" y="28" width="90" height="12" rx="2" fill="#f7d699" />
+            </g>
+            <g transform="translate(420, 132)">
+              <circle cx="0" cy="0" r="24" fill="#5b9154" class="anim-drift" />
+            </g>
+            <g transform="translate(655, 134)">
+              <circle cx="0" cy="0" r="22" fill="#4c7a4b" class="anim-drift" />
+            </g>
+          </svg>
+        `
+      },
+      {
+        id: "twelve-grapes-new-year",
+        name: "20. 跨年吃葡萄、煙火與無人機排字 Barcelona",
+        category: "跨年傳統",
+        seasons: ["winter", "autumn"],
+        desc: "描繪顯示 23:59 的時鐘、緊鄰時鐘旁的 12 顆幸運葡萄、高腳杯、煙火與無人機排字 Barcelona。",
+        svg: `
+          <svg viewBox="0 0 800 220" role="img" aria-label="跨年吃葡萄、23:59 時鐘、煙火與無人機排字 Barcelona 插畫">
+            <rect width="800" height="220" fill="#252e47" />
+            <rect x="0" y="178" width="800" height="42" fill="#3a4563" />
+            <g transform="translate(145, 58)">
+              <g class="anim-pulse">
+                <circle cx="0" cy="0" r="4.5" fill="#ffe082" />
+                <line x1="0" y1="-5" x2="0" y2="-18" stroke="#e85a4a" stroke-width="2.2" />
+                <line x1="0" y1="5" x2="0" y2="18" stroke="#e85a4a" stroke-width="2.2" />
+                <line x1="-5" y1="0" x2="-18" y2="0" stroke="#f5b942" stroke-width="2.2" />
+                <line x1="5" y1="0" x2="18" y2="0" stroke="#f5b942" stroke-width="2.2" />
+              </g>
+            </g>
+            <g class="anim-pulse">
+              <text x="565" y="64" fill="#ffe082" font-size="22" font-weight="800" letter-spacing="2" text-anchor="middle">Barcelona</text>
+              <circle cx="487" cy="56" r="2.5" fill="#90e0ef" />
+              <circle cx="513" cy="43" r="2.5" fill="#f5b942" />
+              <circle cx="543" cy="41" r="2.5" fill="#90e0ef" />
+              <circle cx="575" cy="41" r="2.5" fill="#f5b942" />
+              <circle cx="607" cy="41" r="2.5" fill="#90e0ef" />
+              <circle cx="637" cy="43" r="2.5" fill="#f5b942" />
+              <circle cx="659" cy="56" r="2.5" fill="#90e0ef" />
+            </g>
+            <g class="anim-pulse">
+              <circle cx="240" cy="106" r="32" fill="#fffdf8" stroke="#f5b942" stroke-width="3" />
+              <line x1="240" y1="106" x2="237" y2="85" stroke="#3E3A39" stroke-width="2.6" stroke-linecap="round" />
+              <line x1="240" y1="106" x2="241" y2="81" stroke="#c85a17" stroke-width="2.2" stroke-linecap="round" />
+              <text x="240" y="130" fill="#3E3A39" font-size="11" font-weight="800" text-anchor="middle">23:59</text>
+            </g>
+            <g transform="translate(284, 92)">
+              <g class="anim-float">
+                <line x1="22" y1="-10" x2="22" y2="0" stroke="#7c5329" stroke-width="3" stroke-linecap="round" />
+                <circle cx="6" cy="6" r="7" fill="#7ab84e" />
+                <circle cx="21" cy="6" r="7" fill="#8cc95d" />
+                <circle cx="36" cy="6" r="7" fill="#7ab84e" />
+                <circle cx="13" cy="18" r="7" fill="#8cc95d" />
+                <circle cx="28" cy="18" r="7" fill="#7ab84e" />
+                <circle cx="21" cy="30" r="7" fill="#8cc95d" />
+              </g>
+            </g>
+            <path d="M475 124 L505 124 L494 148 L486 148 Z" fill="#e8f3fb" stroke="#89b5d6" stroke-width="1.5" />
+            <line x1="490" y1="148" x2="490" y2="174" stroke="#89b5d6" stroke-width="2.5" />
+            <line x1="478" y1="174" x2="502" y2="174" stroke="#89b5d6" stroke-width="2.5" />
+          </svg>
+        `
+      }
+    ];
+
+    function getCurrentSeason() {
+      const month = new Date().getMonth() + 1;
+      if (month >= 3 && month <= 5) return "spring";
+      if (month >= 6 && month <= 8) return "summer";
+      if (month >= 9 && month <= 11) return "autumn";
+      return "winter";
+    }
+
+    function pickSeasonalIllustration(excludeId = null) {
+      const season = getCurrentSeason();
+      const pool = BCN_ILLUSTRATIONS.filter(item => item.seasons.includes(season));
+      const candidates = pool.length > 1 && excludeId
+        ? pool.filter(item => item.id !== excludeId)
+        : (pool.length > 0 ? pool : BCN_ILLUSTRATIONS);
+      const idx = Math.floor(Math.random() * candidates.length);
+      return candidates[idx];
+    }
+
+    /* =========================================================================
+       學習單元資料（各 12 個單字、6 個片語、3 個文法重點、20 題四語測驗）
+       ========================================================================= */
+    const INITIAL_LESSONS = [
+      {
+        id: "ia-trabajo-educacion",
         unitLabel: "第 1 篇",
-        topic: "日常問候與自我介紹",
-        level: "A1 入門",
-        duration: "約 15 分鐘單元",
-        title: "Saludar y presentarse en el día a día",
-        caTitle: "Saludar i presentar-se en el dia a dia",
+        topic: "科技、AI 與學習生活",
+        level: "A2 初級",
+        duration: "約 30 分鐘單元",
+        title: "El impacto de la inteligencia artificial en el trabajo y la educación",
+        caTitle: "L'impacte de la intel·ligència artificial en la feina i l'educació",
         esParagraphs: [
-          "Hola, me llamo Sofía y vivo en Barcelona. Cada mañana salgo a pasear cerca del parque y saludo a los vecinos.",
-          "Me gusta aprender idiomas con calma y escuchar conversaciones reales."
+          "En los últimos años, la inteligencia artificial ha cambiado la forma en que trabajamos y estudiamos. En muchas oficinas, los empleados usan programas inteligentes para resumir informes largos, organizar agendas y responder correos sencillos. Así, ganan tiempo para tareas que necesitan más creatividad y conversación con otras personas.",
+          "En las escuelas y universidades, el cambio también es visible. Muchos estudiantes piden ayuda a un asistente digital cuando no entienden un tema de historia, ciencias o idiomas. El sistema explica las ideas paso a paso y propone ejercicios nuevos para practicar en casa.",
+          "Sin embargo, los profesores y las empresas recuerdan que la tecnología no piensa por sí sola. A veces, una herramienta automática comete errores o da respuestas poco claras. Por eso, es necesario revisar la información con cuidado y comprobar los datos en fuentes confiables.",
+          "En la vida diaria de Valeria, profesora de secundaria, la inteligencia artificial es una aliada útil pero limitada. Ella prepara actividades variadas con ayuda digital, pero prefiere corregir los textos de sus alumnos de manera personal para conocer su estilo y animarlos de verdad.",
+          "Al final, el verdadero aprendizaje depende de la curiosidad, el esfuerzo constante y el diálogo humano. Las herramientas digitales abren puertas rápidas, pero las personas son quienes deciden cómo usarlas con responsabilidad y buen criterio."
         ],
         caParagraphs: [
-          "Hola, em dic Sofia i visc a Barcelona. Cada matí surto a passejar a prop del parc i saludo els veïns.",
-          "M'agrada aprendre idiomes amb calma i escoltar converses reals."
+          "En els últims anys, la intel·ligència artificial ha canviat la manera com treballem i estudiem. En moltes oficines, els treballadors fan servir programes intel·ligents per resumir informes llargs, organitzar agendes i respondre correus senzills. Així, guanyen temps per a tasques que necessiten més creativitat i conversa amb altres persones.",
+          "A les escoles i universitats, el canvi també és visible. Molts estudiants demanen ajuda a un assistent digital quan no entenen un tema d'història, ciències o idiomes. El sistema explica les idees pas a pas i proposa exercicis nous per practicar a casa.",
+          "Tanmateix, els professors i les empreses recorden que la tecnologia no pensa per si sola. De vegades, una eina automàtica comet errors o dóna respostes poc clares. Per això, cal revisar la informació amb cura i comprovar les dades en fonts fiables.",
+          "En la vida diària de la Valèria, professora de secundària, la intel·ligència artificial és una aliada útil però limitada. Ella prepara activitats variades amb ajuda digital, però prefereix corregir els textos dels seus alumnes de manera personal per conèixer el seu estil i animar-los de debò.",
+          "Al final, l'aprenentatge veritable depèn de la curiositat, l'esforç constant i el diàleg humà. Les eines digitals obren portes ràpides, però les persones són qui decideixen com fer-les servir amb responsabilitat i bon criteri."
         ],
         zhParagraphs: [
-          "嗨，我叫索菲亞，住在巴塞隆納。每天早上我都會到公園附近散步，並向鄰居問好。",
-          "我喜歡平靜地學習語言，也喜歡聽真實的對話。"
+          "近幾年來，人工智慧改變了我們工作與學習的方式。在許多辦公室裡，員工使用智慧程式來摘要長篇報告、安排行程與回覆簡單的郵件。如此一來，他們就能省下時間，去做需要更多創意與人際溝通的工作。",
+          "在學校與大學裡，這項轉變同樣清晰可見。當學生對歷史、科學或語言的某個主題不理解時，許多人會向數位助理求助。系統會一步步解釋概念，並提供新的練習題讓學生在家練習。",
+          "然而，老師與企業也提醒大家，科技並不會自己獨立思考。有時候，自動化工具會犯錯，或給出不夠清楚的答案。因此，仔細檢視資訊並在可信賴的來源核對資料是必要的。",
+          "在高中老師瓦萊麗亞的日常生活中，人工智慧是一個有用但有限度的幫手。她會藉助數位工具準備多樣的活動，但仍喜歡親自批改學生的作文，以便了解他們的風格並給予真正的鼓勵。",
+          "歸根究柢，真正的學習取決於好奇心、持續的努力以及人與人的對話。數位工具能快速開啟大門，但如何負責任且明智地使用它們，決定權仍在人身上。"
         ],
         enParagraphs: [
-          "Hi, my name is Sofía and I live in Barcelona. Every morning I go for a walk near the park and greet the neighbors.",
-          "I like learning languages calmly and listening to real conversations."
+          "In recent years, artificial intelligence has changed the way we work and study. In many offices, employees use smart programs to summarize long reports, organize schedules, and reply to simple emails. That way, they save time for tasks that require more creativity and conversation with other people.",
+          "In schools and universities, the change is also visible. Many students ask a digital assistant for help when they do not understand a topic in history, science, or languages. The system explains ideas step by step and suggests new exercises to practice at home.",
+          "However, teachers and companies remind us that technology does not think on its own. Sometimes an automatic tool makes mistakes or gives unclear answers. Because of that, it is necessary to review information carefully and check facts in reliable sources.",
+          "In the daily life of Valeria, a high school teacher, artificial intelligence is a useful yet limited ally. She prepares varied activities with digital help, but she prefers grading her students' texts personally to understand their style and truly encourage them.",
+          "In the end, real learning depends on curiosity, steady effort, and human dialogue. Digital tools open doors quickly, but people are the ones who decide how to use them responsibly and with good judgment."
         ],
         vocab: [
           {
-            word: "saludar",
-            caWord: "saludar",
+            word: "resumir",
+            caWord: "resumir",
             pos: "動詞",
-            meaning: "問候、打招呼（EN: greet）",
-            example: "Saludo a mis compañeros al llegar.",
-            caExample: "Saludo els meus companys en arribar.",
-            origin: "源自拉丁文 salutare（祝安康、致意）。"
+            meaning: "摘要、概述、總結（EN: summarize）",
+            example: "En esta reunión vamos a resumir los puntos principales.",
+            caExample: "En aquesta reunió resumirem els punts principals.",
+            origin: "源自拉丁文 resumere（重新取回、再次拿起），引申為把長篇內容濃縮提煉出重點。"
+          },
+          {
+            word: "el informe",
+            caWord: "l'informe (m.)",
+            pos: "名詞(陽)",
+            meaning: "報告、報告書（EN: report）",
+            example: "El equipo presentó un informe claro al final del mes.",
+            caExample: "L'equip va presentar un informe clar a final de mes.",
+            origin: "源自動詞 informar（告知、報告），源自拉丁文 informare（塑造、說明）。"
+          },
+          {
+            word: "la tarea",
+            caWord: "la tasca (f.)",
+            pos: "名詞(陰)",
+            meaning: "工作任務、作業（EN: task / homework）",
+            example: "Termino mis tareas de la tarde antes de cenar.",
+            caExample: "Acabo les tasques de la tarda abans de sopar.",
+            origin: "源自阿拉伯文 tariha（被交付的事、負擔），經由古西班牙文傳入，指分配到的工作或功課。"
+          },
+          {
+            word: "comprobar",
+            caWord: "comprovar",
+            pos: "動詞",
+            meaning: "核對、查證、確認（EN: check / verify）",
+            example: "Siempre compruebo la hora del tren antes de salir.",
+            caExample: "Sempre comprovo l'hora del tren abans de sortir.",
+            origin: "由前綴 com-（完全／一起）加上 probar（測試、證明）構成，指透過比對或測試來確認真偽。"
+          },
+          {
+            word: "la fuente",
+            caWord: "la font (f.)",
+            pos: "名詞(陰)",
+            meaning: "來源、消息來源、噴泉（EN: source / fountain）",
+            example: "Busca siempre información en una fuente confiable.",
+            caExample: "Busca sempre informació en una font fiable.",
+            origin: "源自拉丁文 fons / fontis（泉水、水源），後來引申為知識、資料或事物的「源頭」。"
+          },
+          {
+            word: "confiable",
+            caWord: "fiable",
+            pos: "形容詞",
+            meaning: "可信賴的、可靠的（EN: reliable）",
+            example: "Necesitamos una fuente confiable para este trabajo.",
+            caExample: "Necessitem una font fiable per a aquest treball.",
+            origin: "源自動詞 confiar（信任、託付），加上表示「能夠……的」字尾 -able 構成。"
+          },
+          {
+            word: "variado/a",
+            caWord: "variat / variada",
+            pos: "形容詞",
+            meaning: "多樣的、豐富的（EN: varied / diverse）",
+            example: "Preparamos ejercicios variados para toda la semana.",
+            caExample: "Preparem exercicis variats per a tota la setmana.",
+            origin: "源自拉丁文 varius（多樣的、斑駁的），指具有不同類型或變化。"
+          },
+          {
+            word: "la curiosidad",
+            caWord: "la curiositat (f.)",
+            pos: "名詞(陰)",
+            meaning: "好奇心（EN: curiosity）",
+            example: "La curiosidad ayuda a hacer buenas preguntas.",
+            caExample: "La curiositat ajuda a fer bones preguntes.",
+            origin: "源自拉丁文 curiositas，與 curiosus（留心的、渴望知道的）相關，原意帶有「用心探究」的積極色彩。"
+          },
+          {
+            word: "el esfuerzo",
+            caWord: "l'esforç (m.)",
+            pos: "名詞(陽)",
+            meaning: "努力、心力（EN: effort）",
+            example: "Su esfuerzo diario dio buenos resultados.",
+            caExample: "El seu esforç diari va donar bons resultats.",
+            origin: "由前綴 es-（向外／充分）與 fuerza（力量、體力）構成，指把力量投入某件事上。"
+          },
+          {
+            word: "el criterio",
+            caWord: "el criteri (m.)",
+            pos: "名詞(陽)",
+            meaning: "判斷標準、見識（EN: criterion / judgment）",
+            example: "Necesitamos criterio para elegir buenas noticias.",
+            caExample: "Necessitem criteri per triar bones notícies.",
+            origin: "源自古希臘文 kriterion（判斷的標準、衡量工具），與 krinein（分辨、決定）同源。"
+          },
+          {
+            word: "la herramienta",
+            caWord: "l'eina (f.)",
+            pos: "名詞(陰)",
+            meaning: "工具、器具（EN: tool）",
+            example: "Una buena herramienta facilita el estudio diario.",
+            caExample: "Una bona eina facilita l'estudi diari.",
+            origin: "源自拉丁文 ferramenta（鐵製工具的複數），與 hierro（鐵）同源。"
+          },
+          {
+            word: "el diálogo",
+            caWord: "el diàleg (m.)",
+            pos: "名詞(陽)",
+            meaning: "對話、交流（EN: dialogue）",
+            example: "El diálogo abierto ayuda a resolver dudas.",
+            caExample: "El diàleg obert ajuda a resoldre dubtes.",
+            origin: "源自希臘文 dialogos，由 dia-（穿過、彼此）與 legein（言說、交談）組成。"
           }
         ],
         phrases: [
           {
-            phrase: "en el día a día",
-            caPhrase: "en el dia a dia",
-            meaning: "在日常生活中（EN: in everyday life）",
-            example: "Practicamos saludos en el día a día.",
-            caExample: "Practiquem salutacions en el dia a dia.",
-            origin: "強調每天實際發生的生活場景。"
+            phrase: "en los últimos años",
+            caPhrase: "en els últims anys",
+            meaning: "在最近幾年裡（EN: in recent years）",
+            example: "En los últimos años cambió mucho nuestra forma de comprar.",
+            caExample: "En els últims anys ha canviat molt la nostra manera de comprar.",
+            origin: "último 源自拉丁文 ultimus（最遠的、最後的），與 años（年）搭配表示「截至目前為止的最近幾年」。"
+          },
+          {
+            phrase: "paso a paso",
+            caPhrase: "pas a pas",
+            meaning: "一步一步地、循序漸進（EN: step by step）",
+            example: "Explicamos el problema paso a paso en clase.",
+            caExample: "Expliquem el problema pas a pas a classe.",
+            origin: "paso 源自拉丁文 passus（步伐），重複連接「一步接一步」，強調穩健不急躁的過程。"
+          },
+          {
+            phrase: "por sí solo / sola",
+            caPhrase: "per si sol / sola",
+            meaning: "靠自己、獨立地（EN: by itself / on its own）",
+            example: "El programa no decide por sí solo.",
+            caExample: "El programa no decideix per si sol.",
+            origin: "由 por + 反身代名詞 sí + solo（獨自的）組成，用來強調某事物或某人不依賴外力。"
+          },
+          {
+            phrase: "por eso",
+            caPhrase: "per això",
+            meaning: "因此、所以（EN: therefore / that is why）",
+            example: "Llueve mucho; por eso llevamos paraguas.",
+            caExample: "Plou molt; per això portem paraigua.",
+            origin: "由介系詞 por（由於、為了）加上指示代名詞 eso（那件事）構成，直接連接原因與結果。"
+          },
+          {
+            phrase: "de manera personal",
+            caPhrase: "de manera personal",
+            meaning: "親自地、以個人方式（EN: personally / in person）",
+            example: "Prefiero hablar con él de manera personal.",
+            caExample: "Prefereixo parlar amb ell de manera personal.",
+            origin: "manera 源自拉丁文 manus（手），引申為「做法、方式」，搭配 personal 強調親力親為。"
+          },
+          {
+            phrase: "depender de algo",
+            caPhrase: "dependre d'alguna cosa",
+            meaning: "取決於某事、依靠某事（EN: depend on something）",
+            example: "El éxito del proyecto depende de todo el equipo.",
+            caExample: "L'èxit del projecte depèn de tot l'equip.",
+            origin: "源自拉丁文 dependere（懸掛於下、依賴於），在現代西文中表示結果或狀態由某條件決定。"
           }
         ],
         grammar: [
           {
-            title: "1. 「llamarse」自我介紹",
-            explanation: "西班牙文用「me llamo + 名字」表示「我叫……」。",
-            example: "ES: Me llamo Mateo.",
-            caExample: "CA: Em dic Mateu."
+            title: "1. 連接詞「por eso」與「sin embargo」的邏輯功能",
+            explanation: "「por eso（因此）」用來帶出前一件事造成的結果；「sin embargo（然而、不過）」則用來帶出與前文相反或形成對比的狀況。",
+            example: "ES: A veces el sistema da respuestas poco claras; por eso, revisamos los datos.",
+            caExample: "CA: De vegades el sistema dóna respostes poc clares; per això, revisem les dades. / Tanmateix, cal comprovar-ho."
+          },
+          {
+            title: "2. 關係子句「en que」與「quienes」補充說明",
+            explanation: "文中「la forma en que trabajamos（我們工作的方式）」用 en que 說明方式；「las personas son quienes deciden（人是那些做決定的人）」用 quienes 指代複數的人。",
+            example: "ES: Los alumnos son quienes practican cada día.",
+            caExample: "CA: Els alumnes són qui practica cada dia. / La manera com treballem canvia."
+          },
+          {
+            title: "3. 目的不定式結構「para + 原形動詞」",
+            explanation: "使用「para + 動詞原形」表示做某件事的目的，例如「para resumir informes（為了摘要報告）」、「para practicar en casa（為了在家練習）」。",
+            example: "ES: Leemos textos cortos para ampliar el vocabulario.",
+            caExample: "CA: Llegim textos curts per ampliar el vocabulari."
           }
         ],
         quiz: [
           {
-            esQ: "1. ¿Dónde vive Sofía?",
-            caQ: "1. On viu la Sofia?",
-            enQ: "1. Where does Sofía live?",
-            zhQ: "1. 索菲亞住在哪裡？",
-            esOpts: ["En Barcelona", "En Tokio", "En Lima", "En Oslo"],
-            caOpts: ["A Barcelona", "A Tòquio", "A Lima", "A Oslo"],
-            enOpts: ["In Barcelona", "In Tokyo", "In Lima", "In Oslo"],
-            zhOpts: ["巴塞隆納", "東京", "利馬", "奧斯陸"],
+            esQ: "1. ¿Qué usan muchos empleados en las oficinas según el primer párrafo?",
+            caQ: "1. Què fan servir molts treballadors a les oficines segons el primer paràgraf?",
+            enQ: "1. What do many employees use in offices according to the first paragraph?",
+            zhQ: "1. 根據第一段，許多員工在辦公室裡使用什麼？",
+            esOpts: ["Mapas de papel", "Programas inteligentes", "Cámaras de cine", "Bicicletas eléctricas"],
+            caOpts: ["Mapes de paper", "Programes intel·ligents", "Càmeres de cinema", "Bicicletes elèctriques"],
+            enOpts: ["Paper maps", "Smart programs", "Film cameras", "Electric bicycles"],
+            zhOpts: ["紙本地圖", "智慧程式", "電影攝影機", "電動自行車"],
+            answer: 1,
+            esExplain: "Usan programas inteligentes para resumir informes y organizar agendas.",
+            caExplain: "Fan servir programes intel·ligents per resumir informes i organitzar agendes.",
+            enExplain: "They use smart programs to summarize reports, organize schedules, and reply to simple emails.",
+            zhExplain: "第一段提到員工使用智慧程式來摘要報告、安排行程與回信。"
+          },
+          {
+            esQ: "2. ¿Qué significa el verbo 'resumir'?",
+            caQ: "2. Què significa el verb 'resumir'?",
+            enQ: "2. What does the Spanish verb 'resumir' mean?",
+            zhQ: "2. 動詞「resumir」的意思最接近哪一項？",
+            esOpts: ["Borrar un archivo", "Imprimir cien páginas", "Contar las ideas principales de forma breve", "Cambiar la contraseña"],
+            caOpts: ["Esborrar un arxiu", "Imprimir cent pàgines", "Explicar les idees principals de manera breu", "Canviar la contrasenya"],
+            enOpts: ["Delete a file", "Print a hundred pages", "Present the main ideas briefly", "Change the password"],
+            zhOpts: ["刪除檔案", "列印一百頁", "簡要整理出重點／摘要", "更改密碼"],
+            answer: 2,
+            esExplain: "'Resumir' significa presentar lo esencial de un texto de manera breve.",
+            caExplain: "'Resumir' vol dir presentar les idees principals de manera breu.",
+            enExplain: "'Resumir' means to summarize or give the main points in a short form.",
+            zhExplain: "resumir 的意思是「摘要、簡要總結重點」。"
+          },
+          {
+            esQ: "3. ¿Qué hace un asistente digital cuando un estudiante no entiende un tema?",
+            caQ: "3. Què fa un assistent digital quan un estudiant no entén un tema?",
+            enQ: "3. What does a digital assistant do when a student does not understand a topic?",
+            zhQ: "3. 當學生不理解某個主題時，數位助理會做什麼？",
+            esOpts: ["Borra todos los libros", "Cambia la fecha del examen", "Llama a los padres", "Explica paso a paso y propone ejercicios"],
+            caOpts: ["Esborra tots els llibres", "Canvia la data de l'examen", "Truca als pares", "Explica pas a pas i proposa exercicis"],
+            enOpts: ["Deletes all books", "Changes the exam date", "Calls the parents", "Explains step by step and suggests exercises"],
+            zhOpts: ["刪除所有書本", "更改考試日期", "打電話給家長", "一步步解釋並提供練習題"],
+            answer: 3,
+            esExplain: "Explica las ideas paso a paso y propone ejercicios nuevos.",
+            caExplain: "Explica les idees pas a pas i proposa exercicis nous.",
+            enExplain: "The system explains ideas step by step and suggests new exercises to practice at home.",
+            zhExplain: "系統會一步步解釋概念，並提供新的練習題。"
+          },
+          {
+            esQ: "4. ¿Cuál es un problema que mencionan profesores y empresas?",
+            caQ: "4. Quin problema mencionen els professors i les empreses?",
+            enQ: "4. What problem do teachers and companies point out?",
+            zhQ: "4. 老師與企業提到哪一個潛在問題？",
+            esOpts: ["La IA a veces comete errores", "La IA nunca funciona de día", "La IA es más pesada que un coche", "La IA prohíbe leer"],
+            caOpts: ["La IA de vegades comet errors", "La IA no funciona mai de dia", "La IA és més pesant que un cotxe", "La IA prohibeix llegir"],
+            enOpts: ["AI sometimes makes mistakes", "AI never works during the day", "AI is heavier than a car", "AI bans reading"],
+            zhOpts: ["AI 有時會犯錯", "AI 白天完全不能用", "AI 比汽車還重", "AI 禁止閱讀"],
             answer: 0,
-            esExplain: "Sofía dice: 'vivo en Barcelona'.",
-            caExplain: "La Sofia diu: 'visc a Barcelona'.",
-            enExplain: "Sofía says she lives in Barcelona.",
-            zhExplain: "第一段提到她住在巴塞隆納。"
+            esExplain: "A veces una herramienta automática comete errores o da respuestas poco claras.",
+            caExplain: "De vegades una eina automàtica comet errors o dóna respostes poc clares.",
+            enExplain: "Sometimes an automatic tool makes mistakes or gives unclear answers.",
+            zhExplain: "第三段指出自動化工具偶爾會犯錯或給出不夠清楚的答案。"
+          },
+          {
+            esQ: "5. ¿Qué significa 'comprobar' en el tercer párrafo?",
+            caQ: "5. Què significa 'comprovar' en el tercer paràgraf?",
+            enQ: "5. What does 'comprobar' mean in the third paragraph?",
+            zhQ: "5. 第三段中的動詞「comprobar」是什麼意思？",
+            esOpts: ["Olvidar por completo", "Verificar o confirmar datos", "Pintar de colores", "Comprar en oferta"],
+            caOpts: ["Oblidar del tot", "Verificar o confirmar dades", "Pintar de colors", "Comprar en oferta"],
+            enOpts: ["Forget completely", "Check or verify data", "Paint in colors", "Buy on sale"],
+            zhOpts: ["完全忘記", "核對、查證資料", "塗上顏色", "特價購買"],
+            answer: 1,
+            esExplain: "'Comprobar' significa revisar para confirmar que algo es correcto.",
+            caExplain: "'Comprovar' vol dir revisar per confirmar que una dada és correcta.",
+            enExplain: "'Comprobar' means to check or verify facts in reliable sources.",
+            zhExplain: "comprobar 的意思是「核對、查證以確認正確性」。"
+          },
+          {
+            esQ: "6. ¿Quién es Valeria en el cuarto párrafo?",
+            caQ: "6. Qui és la Valèria en el quart paràgraf?",
+            enQ: "6. Who is Valeria in the fourth paragraph?",
+            zhQ: "6. 第四段提到的瓦萊麗亞是什麼身分？",
+            esOpts: ["Piloto de avión", "Arquitecta de puentes", "Profesora de secundaria", "Periodista deportiva"],
+            caOpts: ["Pilot d'avió", "Arquitecta de ponts", "Professora de secundària", "Periodista esportiva"],
+            enOpts: ["Airplane pilot", "Bridge architect", "High school teacher", "Sports journalist"],
+            zhOpts: ["飛機駕駛", "橋樑建築師", "中學老師", "體育記者"],
+            answer: 2,
+            esExplain: "Valeria es profesora de secundaria.",
+            caExplain: "La Valèria és professora de secundària.",
+            enExplain: "Valeria is a high school teacher ('profesora de secundaria').",
+            zhExplain: "瓦萊麗亞是一位中學老師（profesora de secundaria）。"
+          },
+          {
+            esQ: "7. ¿Por qué prefiere Valeria corregir los textos de manera personal?",
+            caQ: "7. Per què prefereix la Valèria corregir els textos de manera personal?",
+            enQ: "7. Why does Valeria prefer grading students' texts personally?",
+            zhQ: "7. 瓦萊麗亞為什麼喜歡親自批改學生的作文？",
+            esOpts: ["Porque no tiene electricidad", "Porque no sabe escribir", "Para cobrar más dinero", "Para conocer su estilo y animarlos"],
+            caOpts: ["Perquè no té electricitat", "Perquè no sap escriure", "Per cobrar més diners", "Per conèixer el seu estil i animar-los"],
+            enOpts: ["Because she has no electricity", "Because she cannot write", "To charge more money", "To understand their style and encourage them"],
+            zhOpts: ["因為家裡沒電", "因為她不會寫字", "為了多收費", "為了了解風格並給予鼓勵"],
+            answer: 3,
+            esExplain: "Para conocer su estilo y animarlos de verdad.",
+            caExplain: "Per conèixer el seu estil i animar-los de debò.",
+            enExplain: "She grades texts personally to understand each student's style and truly encourage them.",
+            zhExplain: "她希望了解學生的寫作風格並給予真正的鼓勵。"
+          },
+          {
+            esQ: "8. ¿Qué significa el adjetivo 'confiable'?",
+            caQ: "8. Què significa l'adjectiu 'fiable'?",
+            enQ: "8. What does the Spanish adjective 'confiable' mean?",
+            zhQ: "8. 形容詞「confiable」的意思是什麼？",
+            esOpts: ["En quien o en qué se puede confiar", "Muy difícil de leer", "Demasiado caro", "Totalmente vacío"],
+            caOpts: ["En qui o què es pot confiar", "Molt difícil de llegir", "Massa car", "Totalment buit"],
+            enOpts: ["Reliable / trustworthy", "Very hard to read", "Too expensive", "Completely empty"],
+            zhOpts: ["可信賴的、可靠的", "非常難讀的", "過於昂貴的", "完全空的"],
+            answer: 0,
+            esExplain: "'Confiable' describe algo seguro o digno de confianza.",
+            caExplain: "'Fiable' descriu quelcom segur o digne de confiança.",
+            enExplain: "'Confiable' means reliable or trustworthy.",
+            zhExplain: "confiable 指「可信賴的、可靠的」。"
+          },
+          {
+            esQ: "9. ¿Cuál de estos sustantivos lleva el artículo 'la'?",
+            caQ: "9. Quin d'aquests substantius porta l'article 'la' en castellà?",
+            enQ: "9. Which of these Spanish nouns takes the feminine article 'la'?",
+            zhQ: "9. 下列哪一個名詞搭配的冠詞是「la」？",
+            esOpts: ["informe", "tarea", "esfuerzo", "criterio"],
+            caOpts: ["informe", "tarea", "esfuerzo", "criterio"],
+            enOpts: ["informe", "tarea", "esfuerzo", "criterio"],
+            zhOpts: ["informe", "tarea", "esfuerzo", "criterio"],
+            answer: 1,
+            esExplain: "'La tarea' es un sustantivo femenino.",
+            caExplain: "'La tarea' és un substantiu femení.",
+            enExplain: "'La tarea' (task/homework) is a feminine noun.",
+            zhExplain: "tarea（la tarea）是陰性名詞，搭配 la。"
+          },
+          {
+            esQ: "10. ¿Cuál de estos sustantivos lleva el artículo 'el'?",
+            caQ: "10. Quin d'aquests substantius porta l'article 'el' en castellà?",
+            enQ: "10. Which of these Spanish nouns takes the masculine article 'el'?",
+            zhQ: "10. 下列哪一個名詞搭配的冠詞是「el」？",
+            esOpts: ["fuente", "curiosidad", "criterio", "tarea"],
+            caOpts: ["fuente", "curiosidad", "criterio", "tarea"],
+            enOpts: ["fuente", "curiosidad", "criterio", "tarea"],
+            zhOpts: ["fuente", "curiosidad", "criterio", "tarea"],
+            answer: 2,
+            esExplain: "'El criterio' es un sustantivo masculino.",
+            caExplain: "'El criterio' és un substantiu masculí.",
+            enExplain: "'El criterio' (criterion/judgment) is a masculine noun.",
+            zhExplain: "criterio（el criterio）是陽性名詞，搭配 el。"
+          },
+          {
+            esQ: "11. ¿Qué significa 'paso a paso'?",
+            caQ: "11. Què significa 'pas a pas'?",
+            enQ: "11. What does 'paso a paso' mean?",
+            zhQ: "11. 「paso a paso」的意思是什麼？",
+            esOpts: ["Muy rápido y sin mirar", "Hacia atrás", "En silencio absoluto", "De forma gradual, un paso tras otro"],
+            caOpts: ["Molt ràpid i sense mirar", "Cap enrere", "En silenci absolut", "De manera gradual, un pas darrere l'altre"],
+            enOpts: ["Very fast without looking", "Backward", "In complete silence", "Step by step / gradually"],
+            zhOpts: ["非常快且不看路", "往後退", "完全安靜地", "一步一步、循序漸進"],
+            answer: 3,
+            esExplain: "'Paso a paso' significa avanzar de manera gradual.",
+            caExplain: "'Pas a pas' vol dir avançar de manera gradual.",
+            enExplain: "'Paso a paso' means step by step or gradually.",
+            zhExplain: "paso a paso 的意思是「一步一步地、循序漸進」。"
+          },
+          {
+            esQ: "12. Completa: 'A veces falla el sistema; ____ revisamos todo.'",
+            caQ: "12. Completa: 'De vegades falla el sistema; ____ ho revisem tot.'",
+            enQ: "12. Complete: 'Sometimes the system fails; ____ we check everything.'",
+            zhQ: "12. 填入表示結果的片語：A veces falla el sistema; ____ revisamos todo.",
+            esOpts: ["por eso", "nunca", "todavía", "apenas"],
+            caOpts: ["per això", "mai", "encara", "a penes"],
+            enOpts: ["por eso (therefore)", "nunca (never)", "todavía (still)", "apenas (barely)"],
+            zhOpts: ["por eso", "nunca", "todavía", "apenas"],
+            answer: 0,
+            esExplain: "'Por eso' introduce la consecuencia lógica.",
+            caExplain: "'Per això' introdueix la conseqüència lógica.",
+            enExplain: "'Por eso' means 'therefore' or 'that is why', introducing a result.",
+            zhExplain: "por eso 用來引出前面的原因所導致的結果（因此）。"
+          },
+          {
+            esQ: "13. ¿Qué significa 'variado' en 'actividades variadas'?",
+            caQ: "13. Què significa 'variades' en 'activitats variades'?",
+            enQ: "13. What does 'variadas' mean in 'actividades variadas'?",
+            zhQ: "13. 在「actividades variadas」中，「variadas」的意思是什麼？",
+            esOpts: ["Muy aburridas", "Diversas y de distintos tipos", "Solo para niños", "Demasiado largas"],
+            caOpts: ["Molt avorrides", "Diverses i de diferents tipus", "Només per a nens", "Massa llargues"],
+            enOpts: ["Very boring", "Varied / of different types", "Only for children", "Too long"],
+            zhOpts: ["非常無聊的", "多樣化的、不同類型的", "只給小孩的", "太長的"],
+            answer: 1,
+            esExplain: "'Variadas' significa que tienen variedad o diferencia.",
+            caExplain: "'Variades' significa que són diverses o de diferents tipus.",
+            enExplain: "'Variadas' means varied or diverse.",
+            zhExplain: "variadas 指「多樣化的、豐富多變的」。"
+          },
+          {
+            esQ: "14. Completa: 'El éxito del curso ____ del interés de los estudiantes.'",
+            caQ: "14. Completa: 'L'èxit del curs ____ de l'interès dels estudiants.'",
+            enQ: "14. Complete with the right verb form: 'El éxito del curso ____ del interés de los estudiantes.'",
+            zhQ: "14. 填入正確動詞變位：El éxito del curso ____ del interés de los estudiantes.",
+            esOpts: ["dependen", "depender", "depende", "dependido"],
+            caOpts: ["depenen", "dependre", "depèn", "dependut"],
+            enOpts: ["dependen", "depender", "depende", "dependido"],
+            zhOpts: ["dependen", "depender", "depende", "dependido"],
+            answer: 2,
+            esExplain: "'El éxito' es singular, por eso corresponde 'depende'.",
+            caExplain: "'L'èxit' és singular, per això correspon 'depèn'.",
+            enExplain: "'El éxito' is singular, so the third-person singular form is 'depende'.",
+            zhExplain: "主詞 el éxito 為單數，搭配 depende de（取決於）。"
+          },
+          {
+            esQ: "15. ¿Qué significa 'por sí solo'?",
+            caQ: "15. Què significa 'per si sol'?",
+            enQ: "15. What does 'por sí solo' mean?",
+            zhQ: "15. 「por sí solo」的意思最接近哪一項？",
+            esOpts: ["Con mucha música", "Durante las vacaciones", "En voz alta", "Sin ayuda de otro elemento"],
+            caOpts: ["Amb molta música", "Durant les vacances", "En veu alta", "Sense ajuda d'un altre element"],
+            enOpts: ["With lots of music", "During holidays", "Out loud", "By itself / on its own"],
+            zhOpts: ["伴隨很多音樂", "在假期期間", "大聲地", "不靠其他因素、獨立地"],
+            answer: 3,
+            esExplain: "'Por sí solo' indica que algo actúa sin depender de otro.",
+            caExplain: "'Per si sol' indica que quelcom actua sense dependre d'un altre element.",
+            enExplain: "'Por sí solo' means 'by itself' or 'on its own'.",
+            zhExplain: "por sí solo 表示「靠自身、不依賴其他事物」。"
+          },
+          {
+            esQ: "16. ¿Cuál de estos sustantivos lleva el artículo 'la'?",
+            caQ: "16. Quin d'aquests substantius porta l'article 'la' en castellà?",
+            enQ: "16. Which of these Spanish nouns takes 'la'?",
+            zhQ: "16. 下列哪一個名詞搭配的冠詞是「la」？",
+            esOpts: ["curiosidad", "esfuerzo", "informe", "criterio"],
+            caOpts: ["curiosidad", "esfuerzo", "informe", "criterio"],
+            enOpts: ["curiosidad", "esfuerzo", "informe", "criterio"],
+            zhOpts: ["curiosidad", "esfuerzo", "informe", "criterio"],
+            answer: 0,
+            esExplain: "'La curiosidad' es un sustantivo femenino.",
+            caExplain: "'La curiosidad' és un substantiu femení.",
+            enExplain: "'La curiosidad' (curiosity) is feminine.",
+            zhExplain: "curiosidad（la curiosidad）是陰性名詞，搭配 la。"
+          },
+          {
+            esQ: "17. Completa: '____ últimos años cambió mucho la educación.'",
+            caQ: "17. Completa: '____ últims anys ha canviat molt l'educació.'",
+            enQ: "17. Complete the time phrase: '____ últimos años cambió mucho la educación.'",
+            zhQ: "17. 填入正確搭配：____ últimos años cambió mucho la educación.",
+            esOpts: ["A las", "En los", "Por un", "Sin la"],
+            caOpts: ["A les", "En els", "Per un", "Sense la"],
+            enOpts: ["A las", "En los", "Por un", "Sin la"],
+            zhOpts: ["A las", "En los", "Por un", "Sin la"],
+            answer: 1,
+            esExplain: "La expresión completa es 'en los últimos años'.",
+            caExplain: "L'expressió completa és 'en els últims anys'.",
+            enExplain: "The standard expression is 'en los últimos años' (in recent years).",
+            zhExplain: "固定時間片語為 en los últimos años（近幾年）。"
+          },
+          {
+            esQ: "18. ¿Qué actitud promueve el texto hacia las herramientas digitales?",
+            caQ: "18. Quina actitud promou el text cap a les eines digitals?",
+            enQ: "18. What attitude toward digital tools does the text encourage?",
+            zhQ: "18. 文章對數位工具抱持什麼態度？",
+            esOpts: ["Rechazo total sin probar", "Copiar todo sin leer", "Uso responsable y con criterio", "Dejar de estudiar"],
+            caOpts: ["Rebuig total sense provar", "Copiar-ho tot sense llegir", "Ús responsable i amb criteri", "Deixar d'estudiar"],
+            enOpts: ["Total rejection without trying", "Copying everything unread", "Responsible use with good judgment", "Stopping study"],
+            zhOpts: ["完全拒絕不嘗試", "不看就全盤照抄", "負責任且有判斷力地使用", "停止學習"],
+            answer: 2,
+            esExplain: "El texto anima a usarlas con responsabilidad y buen criterio.",
+            caExplain: "El text anima a fer-les servir amb responsabilitat i bon criteri.",
+            enExplain: "The text encourages using digital tools responsibly and with good judgment.",
+            zhExplain: "文章主張負責任且具備良好判斷力地使用工具。"
+          },
+          {
+            esQ: "19. Completa: 'Habla con los alumnos ____ personal.'",
+            caQ: "19. Completa: 'Parla amb els alumnes ____ personal.'",
+            enQ: "19. Complete the phrase: 'Habla con los alumnos ____ personal.'",
+            zhQ: "19. 填入正確片語：Habla con los alumnos ____ personal.",
+            esOpts: ["en barco", "por tren", "a pie", "de manera"],
+            caOpts: ["en vaixell", "amb tren", "a peu", "de manera"],
+            enOpts: ["en barco", "por tren", "a pie", "de manera"],
+            zhOpts: ["en barco", "por tren", "a pie", "de manera"],
+            answer: 3,
+            esExplain: "'De manera personal' significa de forma directa y cercana.",
+            caExplain: "'De manera personal' vol dir de forma directa i propera.",
+            enExplain: "'De manera personal' means personally or in person.",
+            zhExplain: "de manera personal 意思是「親自地、以個人方式」。"
+          },
+          {
+            esQ: "20. ¿Cuál es el tema central de la lectura?",
+            caQ: "20. Quin és el tema central de la lectura?",
+            enQ: "20. What is the main topic of the reading?",
+            zhQ: "20. 這篇文章的核心主題是什麼？",
+            esOpts: ["La IA en el trabajo y la educación", "Cómo cultivar tomates", "Historia del fútbol", "Preparar una maleta"],
+            caOpts: ["La IA en la feina i l'educació", "Com conrear tomàquets", "Història del futbol", "Fer una maleta"],
+            enOpts: ["AI in work and education", "How to grow tomatoes", "History of football", "Packing a suitcase"],
+            zhOpts: ["AI 在工作與教育的影響", "如何種植番茄", "足球歷史", "整理行李箱"],
+            answer: 0,
+            esExplain: "Todo el texto analiza cómo influye la IA en el trabajo, el estudio y la vida diaria.",
+            caExplain: "Tot el text analitza com influeix la IA en la feina, l'estudi i la vida diària.",
+            enExplain: "The passage explores how AI affects work, studying, and daily life.",
+            zhExplain: "全文圍繞人工智慧在工作、學習與日常生活中的影響與反思。"
+          }
+        ]
+      },
+      {
+        id: "energia-solar-transporte-limpio",
+        unitLabel: "第 2 篇",
+        topic: "永續能源與綠色城市",
+        level: "A2 初級",
+        duration: "約 30 分鐘單元",
+        title: "Ciudades que apuestan por la energía solar y el transporte limpio",
+        caTitle: "Ciutats que aposten per l'energia solar i el transport net",
+        esParagraphs: [
+          "Muchas ciudades medianas y grandes están cambiando su modelo de energía y movilidad. En varios barrios, los vecinos instalan paneles solares en los tejados para producir electricidad limpia en casa. Esta energía ayuda a reducir el gasto mensual y a disminuir las emisiones que contaminan el aire.",
+          "El transporte público también vive una etapa de transformación. Cada vez más autobuses funcionan con electricidad o gas limpio y hacen menos ruido en las calles. Además, los municipios amplían las aceras y los carriles para bicicletas para que caminar o pedalear sea más seguro.",
+          "Sin embargo, la transición energética no ocurre de un día para otro. Instalar paneles requiere una inversión inicial y organizar bien los horarios de carga y mantenimiento. Algunos comerciantes también preguntan cómo afectarán las nuevas zonas peatonales a las entregas de mercancías.",
+          "En la ciudad de Adrián, conductor de autobús urbano, los cambios ya se notan cada mañana. Él conduce un vehículo eléctrico que es silencioso y cómodo para los pasajeros. Al terminar su turno, comenta que los vecinos saludan más y que la plaza central parece más viva.",
+          "Construir una ciudad más limpia exige acuerdos entre vecinos, empresas y autoridades. Cuando todos colaboran con paciencia, los espacios públicos mejoran y la calidad de vida crece para las generaciones presentes y futuras."
+        ],
+        caParagraphs: [
+          "Moltes ciutats mitjanes i grans estan canviant el seu model d'energia i mobilitat. En diversos barris, els veïns instal·len plaques solars a les teulades per produir electricitat neta a casa. Aquesta energia ajuda a reduir la despesa mensual i a disminuir les emissions que contaminen l'aire.",
+          "El transport públic també viu una etapa de transformació. Cada vegada més autobusos funcionen amb electricitat o gas net i fan menys soroll als carrers. A més, els ajuntaments amplien les voreres i els carrils bici perquè caminar o pedalar sigui més segur.",
+          "Tanmateix, la transició energètica no passa d'un dia per a l'altre. Instal·lar plaques requereix una inversió inicial i organitzar bé els horaris de càrrega i manteniment. Alguns comerciants també pregunten com afectaran les noves zones de vianants al lliurament de mercaderies.",
+          "A la ciutat de l'Adrià, conductor d'autobús urbà, els canvis ja es noten cada matí. Ell condueix un vehicle elèctric que és silenciós i còmode per als passatgers. En acabar el seu torn, comenta que els veïns saluden més i que la plaça central sembla més viva.",
+          "Construir una ciutat més neta exigeix acords entre veïns, empreses i autoritats. Quan tothom col·labora amb paciència, els espais públics milloren i la qualitat de vida creix per a les generacions presents i futures."
+        ],
+        zhParagraphs: [
+          "許多中大型城市正在改變它們的能源與交通模式。在不少社區裡，居民在屋頂安裝太陽能板，以便在家中製造潔淨電力。這種能源有助於降低每月電費支出，並減少汙染空氣的排放物。",
+          "大眾運輸也正經歷轉型的階段。越來越多的公車改用電力或潔淨天然氣行駛，在街上的噪音也更小。此外，市政府擴寬人行道與自行車道，讓走路或騎車更加安全。",
+          "然而，能源轉型並不是一夕之間就能完成的。安裝太陽能板需要初期投入成本，也需要妥善安排充電與維護的時程。部分商家也詢問，新的行人徒步區會如何影響貨物的配送。",
+          "在市區公車司機阿德里安所在的城市，這些改變每天早上都能明顯感受到。他駕駛的電動車安靜且讓乘客感到舒適。輪班結束後，他表示居民們更常打招呼，中央廣場也顯得更有活力。",
+          "打造更乾淨的城市，需要居民、企業與政府部門之間的共識。當大家有耐心地合作時，公共空間會變得更好，現今與未來世代的生活品質也會隨之提升。"
+        ],
+        enParagraphs: [
+          "Many medium-sized and large cities are changing their energy and mobility models. In several neighborhoods, residents install solar panels on roofs to produce clean electricity at home. This energy helps lower monthly expenses and reduce emissions that pollute the air.",
+          "Public transport is also going through a stage of transformation. More and more buses run on electricity or clean gas and make less noise in the streets. In addition, local councils widen sidewalks and bike lanes so walking or cycling is safer.",
+          "However, the energy transition does not happen overnight. Installing panels requires an initial investment and good planning for charging and maintenance schedules. Some shopkeepers also ask how new pedestrian zones will affect goods deliveries.",
+          "In the city of Adrián, a city bus driver, the changes are already noticeable every morning. He drives an electric vehicle that is quiet and comfortable for passengers. When his shift ends, he mentions that neighbors greet each other more and the main square feels livelier.",
+          "Building a cleaner city requires agreements among residents, businesses, and authorities. When everyone collaborates patiently, public spaces improve and quality of life grows for present and future generations."
+        ],
+        vocab: [
+          {
+            word: "contaminar",
+            caWord: "contaminar",
+            pos: "動詞",
+            meaning: "汙染、使髒亂（EN: pollute / contaminate）",
+            example: "Los vehículos sin filtro pueden contaminar el aire.",
+            caExample: "Els vehicles sense filtre poden contaminar l'aire.",
+            origin: "源自拉丁文 contaminare（弄髒、混合、玷污），與 contagio（接觸傳染）同源。"
+          },
+          {
+            word: "el gasto",
+            caWord: "la despesa (f.)",
+            pos: "名詞(陽)",
+            meaning: "花費、支出（EN: expense / spending）",
+            example: "Anotamos cada gasto para cuidar el presupuesto.",
+            caExample: "Anotem cada despesa per cuidar el pressupost.",
+            origin: "源自動詞 gastar（花費、消耗），源自拉丁文 vastare（使荒蕪、耗盡），後轉為日常財務支出。"
+          },
+          {
+            word: "ampliar",
+            caWord: "ampliar",
+            pos: "動詞",
+            meaning: "擴大、擴寬、擴充（EN: widen / expand）",
+            example: "El ayuntamiento decidió ampliar la acera de la calle.",
+            caExample: "L'ajuntament va decidir ampliar la vorera del carrer.",
+            origin: "源自拉丁文 ampliare（使變大、擴展），與 amplio（寬敞的）同源。"
+          },
+          {
+            word: "la acera",
+            caWord: "la vorera (f.)",
+            pos: "名詞(陰)",
+            meaning: "人行道（EN: sidewalk / pavement）",
+            example: "Caminamos por la acera ancha hasta el parque.",
+            caExample: "Caminem per la vorera ampla fins al parc.",
+            origin: "源自拉丁文 facies（面貌、側面），早期指街道兩側供行人行走的邊緣地帶。"
+          },
+          {
+            word: "la inversión",
+            caWord: "la inversió (f.)",
+            pos: "名詞(陰)",
+            meaning: "投資、投入（EN: investment）",
+            example: "La energía limpia requiere una inversión a largo plazo.",
+            caExample: "L'energia neta requereix una inversió a llarg termini.",
+            origin: "源自動詞 invertir（投入、投資），源自拉丁文 invertere（翻轉、投入使用）。"
+          },
+          {
+            word: "el horario",
+            caWord: "l'horari (m.)",
+            pos: "名詞(陽)",
+            meaning: "時刻表、營業時間／作息（EN: schedule / timetable）",
+            example: "Consulta el horario del tren antes de salir.",
+            caExample: "Consulta l'horari del tren abans de sortir.",
+            origin: "由 hora（小時、時間）加上字尾 -ario 構成，指安排時間的規則或表單。"
+          },
+          {
+            word: "silencioso/a",
+            caWord: "silenciós / silenciosa",
+            pos: "形容詞",
+            meaning: "安靜的、無聲的（EN: quiet / silent）",
+            example: "Este autobús eléctrico es muy silencioso.",
+            caExample: "Aquest autobús elèctric és molt silenciós.",
+            origin: "源自 silencio（寂靜、安靜），由拉丁文 silentium 演變而來，指幾乎沒有聲音。"
+          },
+          {
+            word: "el turno",
+            caWord: "el torn (m.)",
+            pos: "名詞(陽)",
+            meaning: "輪班、班次、輪流順序（EN: shift / turn）",
+            example: "Hoy trabajo en el turno de la mañana.",
+            caExample: "Avui treballo en el torn del matí.",
+            origin: "源自拉丁文 turnus（車床轉動、輪流），引申為排班制中的「班次」或輪到某人的順序。"
+          },
+          {
+            word: "la plaza",
+            caWord: "la plaça (f.)",
+            pos: "名詞(陰)",
+            meaning: "廣場、市集廣場（EN: square / plaza）",
+            example: "Nos reunimos en la plaza del pueblo.",
+            caExample: "Ens trobem a la plaça del poble.",
+            origin: "源自希臘文 plateia（寬闊的街道），經由拉丁文 platea 傳入，指城市中寬敞的公共廣場。"
+          },
+          {
+            word: "exigir",
+            caWord: "exigir",
+            pos: "動詞",
+            meaning: "要求、需要（EN: require / demand）",
+            example: "Este cambio exige diálogo y cooperación.",
+            caExample: "Aquest canvi exigeix diàleg i cooperació.",
+            origin: "源自拉丁文 exigere（驅出、催討、嚴格要求），在現代語境中常指「需要、要求條件」。"
+          },
+          {
+            word: "el panel",
+            caWord: "la placa (f.)",
+            pos: "名詞(陽)",
+            meaning: "面板、太陽能板（EN: panel）",
+            example: "El panel solar recibe luz durante todo el día.",
+            caExample: "La placa solar rep llum durant tot el dia.",
+            origin: "源自拉丁文 pannus（布料、板塊），在現代科技中指功能面板或發電板。"
+          },
+          {
+            word: "la movilidad",
+            caWord: "la mobilitat (f.)",
+            pos: "名詞(陰)",
+            meaning: "移動性、交通通勤（EN: mobility）",
+            example: "La movilidad urbana mejora con buenos carriles bici.",
+            caExample: "La mobilitat urbana millora amb bons carrils bici.",
+            origin: "源自拉丁文 mobilitas（可移動性），與 mover（移動）同源。"
+          }
+        ],
+        phrases: [
+          {
+            phrase: "apostar por algo",
+            caPhrase: "apostar per alguna cosa",
+            meaning: "押注於、致力支持某事物（EN: bet on / back something）",
+            example: "La ciudad apuesta por el transporte eléctrico.",
+            caExample: "La ciutat aposta pel transport elèctric.",
+            origin: "apostar 源自拉丁文 apponere（放置、下注），原本指賭注，現常比喻「投入資源支持某方向」。"
+          },
+          {
+            phrase: "vivir una etapa",
+            caPhrase: "viure una etapa",
+            meaning: "經歷一個階段（EN: go through a stage）",
+            example: "El barrio vive una etapa de renovación.",
+            caExample: "El barri viu una etapa de renovació.",
+            origin: "etapa 源自希臘文 stadion（賽跑距離／階段），在生活中指發展過程中的某個時期。"
+          },
+          {
+            phrase: "de un día para otro",
+            caPhrase: "d'un dia per a l'altre",
+            meaning: "一夕之間、突然間（EN: overnight / from one day to the next）",
+            example: "Las costumbres no cambian de un día para otro.",
+            caExample: "Els costums no canvien d'un dia per a l'altre.",
+            origin: "對比「一天」與「隔天」，強調事物變化無法瞬間完成，需要時間醞釀。"
+          },
+          {
+            phrase: "a largo plazo",
+            caPhrase: "a llarg termini",
+            meaning: "長期來看、長遠地（EN: in the long term）",
+            example: "Ahorrar energía es bueno a largo plazo.",
+            caExample: "Estalviar energia és bo a llarg termini.",
+            origin: "plazo 源自拉丁文 placitum（約定、期限），與 largo（長的）搭配表示較長的時間跨度。"
+          },
+          {
+            phrase: "en la ciudad de + 地名",
+            caPhrase: "a la ciutat de + lloc",
+            meaning: "在……這座城市（EN: in the city of...）",
+            example: "Vive en la ciudad de Valencia desde hace dos años.",
+            caExample: "Viu a la ciutat de València des de fa dos anys.",
+            origin: "以定冠詞 la + ciudad + de 連接城市專有名稱，是介紹人物所在地的標準句型。"
+          },
+          {
+            phrase: "mejorar la calidad de vida",
+            caPhrase: "millorar la qualitat de vida",
+            meaning: "提升生活品質（EN: improve quality of life）",
+            example: "Más zonas verdes mejoran la calidad de vida.",
+            caExample: "Més zones verdes milloren la qualitat de vida.",
+            origin: "結合 mejorar（改善）與 calidad de vida（生活品質），常見於都市規劃與永續議題。"
+          }
+        ],
+        grammar: [
+          {
+            title: "1. 比較級「más + 形容詞/副詞 + que」與「menos + 形容詞/副詞」",
+            explanation: "短文中出現「más seguro（更安全）」、「menos ruido（更少噪音）」、「más viva（更有活力）」，用來比較改變前後的差異。",
+            example: "ES: El autobús eléctrico hace menos ruido en la calle.",
+            caExample: "CA: L'autobús elèctric fa menys soroll al carrer. / La plaça sembla més viva."
+          },
+          {
+            title: "2. 動詞「requerir」與「exigir」表達需求與條件",
+            explanation: "文中「Instalar paneles requiere una inversión inicial」與「Construir una ciudad más limpia exige acuerdos」用及物動詞帶出達成某事所需的條件。",
+            example: "ES: Este proyecto requiere buena organización.",
+            caExample: "CA: Aquest projecte requereix bona organització. / Calen acords."
+          },
+          {
+            title: "3. 目的子句「para que + 虛擬式（subjuntivo）」",
+            explanation: "當主要子句與目的子句主詞不同時，用「para que + 虛擬式」表達目的，例如「para que caminar o pedalear sea más seguro」。",
+            example: "ES: Amplían las aceras para que la gente camine con calma.",
+            caExample: "CA: Amplien les voreres perquè la gent camini amb calma."
+          }
+        ],
+        quiz: [
+          {
+            esQ: "1. ¿Dónde instalan paneles solares los vecinos en varios barrios?",
+            caQ: "1. On instal·len plaques solars els veïns en diversos barris?",
+            enQ: "1. Where do residents install solar panels in several neighborhoods?",
+            zhQ: "1. 許多社區的居民把太陽能板裝在哪裡？",
+            esOpts: ["Bajo el suelo", "Dentro del metro", "En los tejados", "En las montañas"],
+            caOpts: ["Sota terra", "Dins del metro", "A les teulades", "A les muntanyes"],
+            enOpts: ["Underground", "Inside the subway", "On roofs", "On mountains"],
+            zhOpts: ["在地下", "在地鐵裡", "在屋頂上", "在山上"],
+            answer: 2,
+            esExplain: "Instalan paneles solares en los tejados para producir electricidad limpia.",
+            caExplain: "Instal·len plaques solars a les teulades per produir electricitat neta.",
+            enExplain: "Residents install solar panels on roofs to produce clean electricity at home.",
+            zhExplain: "第一段提到居民在屋頂（los tejados）安裝太陽能板發電。"
+          },
+          {
+            esQ: "2. ¿Qué significa el verbo 'contaminar'?",
+            caQ: "2. Què significa el verb 'contaminar'?",
+            enQ: "2. What does the Spanish verb 'contaminar' mean?",
+            zhQ: "2. 動詞「contaminar」的意思是什麼？",
+            esOpts: ["Limpiar un jardín", "Reparar una bicicleta", "Plantar flores", "Hacer daño o ensuciar el aire o el agua"],
+            caOpts: ["Netejar un jardí", "Reparar una bicicleta", "Plantar flors", "Fer malbé o embrutar l'aire o l'aigua"],
+            enOpts: ["Clean a garden", "Repair a bicycle", "Plant flowers", "Pollute air or water"],
+            zhOpts: ["整理花園", "修理腳踏車", "種花", "汙染空氣或水源"],
+            answer: 3,
+            esExplain: "'Contaminar' significa alterar o ensuciar el medio ambiente.",
+            caExplain: "'Contaminar' significa embrutar o alterar l'aire, l'aigua o l'entorn.",
+            enExplain: "'Contaminar' means to pollute or contaminate air, water, or the environment.",
+            zhExplain: "contaminar 指「汙染（空氣、水或環境）」。"
+          },
+          {
+            esQ: "3. ¿Cómo funcionan cada vez más autobuses en el transporte público?",
+            caQ: "3. Com funcionen cada vegada més autobusos en el transport públic?",
+            enQ: "3. How do more and more public buses run?",
+            zhQ: "3. 大眾運輸中越來越多的公車使用什麼動力？",
+            esOpts: ["Con electricidad o gas limpio", "Con carbón pesado", "Sin ruedas", "Solo de noche"],
+            caOpts: ["Amb electricitat o gas net", "Amb carbó pesant", "Sense rodes", "Només de nit"],
+            enOpts: ["On electricity or clean gas", "On heavy coal", "Without wheels", "Only at night"],
+            zhOpts: ["電力或潔淨天然氣", "重型煤炭", "沒有輪子", "只在晚上行駛"],
+            answer: 0,
+            esExplain: "Funcionan con electricidad o gas limpio y hacen menos ruido.",
+            caExplain: "Funcionen amb electricitat o gas net i fan menys soroll.",
+            enExplain: "More and more buses run on electricity or clean gas and make less noise.",
+            zhExplain: "第二段指出越來越多公車使用電力或潔淨天然氣行駛。"
+          },
+          {
+            esQ: "4. ¿Qué significa el verbo 'ampliar'?",
+            caQ: "4. Què significa el verb 'ampliar'?",
+            enQ: "4. What does the Spanish verb 'ampliar' mean?",
+            zhQ: "4. 動詞「ampliar」的意思最接近哪一項？",
+            esOpts: ["Cerrar un edificio", "Hacer algo más grande o ancho", "Vender un coche", "Apagar la luz"],
+            caOpts: ["Tancar un edifici", "Fer quelcom més gran o ample", "Vendre un cotxe", "Apagar la llum"],
+            enOpts: ["Close a building", "Make wider or larger", "Sell a car", "Turn off the light"],
+            zhOpts: ["關閉建築物", "擴大、擴寬", "賣掉汽車", "關燈"],
+            answer: 1,
+            esExplain: "'Ampliar' significa extender o aumentar el tamaño o ancho de algo.",
+            caExplain: "'Ampliar' vol dir fer més gran o més ample.",
+            enExplain: "'Ampliar' means to widen or expand something.",
+            zhExplain: "ampliar 的意思是「擴大、擴寬」。"
+          },
+          {
+            esQ: "5. ¿Qué significa 'de un día para otro' en el tercer párrafo?",
+            caQ: "5. Què significa 'd'un dia per a l'altre' en el tercer paràgraf?",
+            enQ: "5. What does 'de un día para otro' mean in the third paragraph?",
+            zhQ: "5. 第三段中的「de un día para otro」是什麼意思？",
+            esOpts: ["Cada cien años", "Durante todo el invierno", "De repente o en muy poco tiempo", "En otro continente"],
+            caOpts: ["Cada cent anys", "Durant tot l'hivern", "De cop o en molt poc temps", "En un altre continent"],
+            enOpts: ["Every hundred years", "All winter long", "Overnight / all of a sudden", "On another continent"],
+            zhOpts: ["每百年一次", "整個冬天", "一夕之間、突然間", "在另一個大洲"],
+            answer: 2,
+            esExplain: "Significa que algo no ocurre de forma inmediata o instantánea.",
+            caExplain: "Vol dir que quelcom passa de cop o sense un procés previ.",
+            enExplain: "'De un día para otro' means 'overnight'—the energy transition takes time.",
+            zhExplain: "意思是「一夕之間、立刻」，文中說明轉型無法瞬間完成。"
+          },
+          {
+            esQ: "6. ¿Qué requiere instalar paneles solares según el texto?",
+            caQ: "6. Què requereix instal·lar plaques solars segons el text?",
+            enQ: "6. What does installing solar panels require according to the text?",
+            zhQ: "6. 根據文章，安裝太陽能板需要什麼條件？",
+            esOpts: ["Solo cerrar las ventanas", "Dejar de usar luz", "Comprar un barco", "Inversión inicial y organizar carga y mantenimiento"],
+            caOpts: ["Només tancar les finestres", "Deixar d'utilitzar llum", "Comprar un vaixell", "Inversió inicial i organitzar càrrega i manteniment"],
+            enOpts: ["Only closing windows", "Stopping light use", "Buying a boat", "Initial investment and planning charging and maintenance"],
+            zhOpts: ["只要關上窗戶", "停止使用燈光", "買一艘船", "初期投資與安排充電及維護"],
+            answer: 3,
+            esExplain: "Requiere una inversión inicial y organizar horarios de carga y mantenimiento.",
+            caExplain: "Requereix una inversió inicial i organitzar horaris de càrrega i manteniment.",
+            enExplain: "It requires an initial investment and organizing charging and maintenance schedules.",
+            zhExplain: "需要初期投資（inversión inicial）以及安排充電與維護時程。"
+          },
+          {
+            esQ: "7. ¿Qué preguntan algunos comerciantes?",
+            caQ: "7. Què pregunten alguns comerciants?",
+            enQ: "7. What do some shopkeepers ask?",
+            zhQ: "7. 部分商家詢問了什麼問題？",
+            esOpts: ["Cómo afectarán las zonas peatonales a las entregas", "Cuándo abre el museo", "Cuánto cuesta un billete de avión", "Dónde está la playa"],
+            caOpts: ["Com afectaran les zones de vianants als lliuraments", "Quan obre el museu", "Quant costa un bitllet d'avió", "On és la platja"],
+            enOpts: ["How pedestrian zones affect goods deliveries", "When the museum opens", "How much a flight costs", "Where the beach is"],
+            zhOpts: ["行人徒步區如何影響貨物配送", "博物館何時開門", "機票多少錢", "海灘在哪裡"],
+            answer: 0,
+            esExplain: "Preguntan cómo afectarán las nuevas zonas peatonales a las entregas de mercancías.",
+            caExplain: "Pregunten com afectaran les noves zones de vianants al lliurament de mercaderies.",
+            enExplain: "They ask how new pedestrian zones will affect goods deliveries.",
+            zhExplain: "他們關心新設行人徒步區會如何影響貨物配送。"
+          },
+          {
+            esQ: "8. ¿Qué significa el adjetivo 'silencioso'?",
+            caQ: "8. Què significa l'adjectiu 'silenciós'?",
+            enQ: "8. What does the Spanish adjective 'silencioso' mean?",
+            zhQ: "8. 形容詞「silencioso」的意思是什麼？",
+            esOpts: ["Muy rápido y alto", "Que hace poco o ningún ruido", "De color amarillo", "Difícil de encontrar"],
+            caOpts: ["Molt ràpid i fort", "Que fa poc o gens de soroll", "De color groc", "Difícil de trobar"],
+            enOpts: ["Very fast and loud", "Quiet / making little or no noise", "Yellow in color", "Hard to find"],
+            zhOpts: ["非常快且大聲的", "安靜的、幾乎沒有噪音的", "黃色的", "很難找到的"],
+            answer: 1,
+            esExplain: "'Silencioso' significa tranquilo y sin ruido.",
+            caExplain: "'Silenciós' vol dir que fa poc o gens de soroll.",
+            enExplain: "'Silencioso' means quiet or making little or no noise.",
+            zhExplain: "silencioso 指「安靜的、無聲的」。"
+          },
+          {
+            esQ: "9. ¿Cuál de estos sustantivos lleva el artículo 'el'?",
+            caQ: "9. Quin d'aquests substantius porta l'article 'el' en castellà?",
+            enQ: "9. Which of these Spanish nouns takes the masculine article 'el'?",
+            zhQ: "9. 下列哪一個名詞搭配的冠詞是「el」？",
+            esOpts: ["acera", "inversión", "gasto", "plaza"],
+            caOpts: ["acera", "inversión", "gasto", "plaza"],
+            enOpts: ["acera", "inversión", "gasto", "plaza"],
+            zhOpts: ["acera", "inversión", "gasto", "plaza"],
+            answer: 2,
+            esExplain: "'El gasto' es un sustantivo masculino.",
+            caExplain: "'El gasto' és un substantiu masculí.",
+            enExplain: "'El gasto' (expense/spending) is a masculine noun.",
+            zhExplain: "gasto（el gasto）是陽性名詞，搭配 el。"
+          },
+          {
+            esQ: "10. ¿Cuál de estos sustantivos lleva el artículo 'la'?",
+            caQ: "10. Quin d'aquests substantius porta l'article 'la' en castellà?",
+            enQ: "10. Which of these Spanish nouns takes the feminine article 'la'?",
+            zhQ: "10. 下列哪一個名詞搭配的冠詞是「la」？",
+            esOpts: ["gasto", "horario", "turno", "acera"],
+            caOpts: ["gasto", "horario", "turno", "acera"],
+            enOpts: ["gasto", "horario", "turno", "acera"],
+            zhOpts: ["gasto", "horario", "turno", "acera"],
+            answer: 3,
+            esExplain: "'La acera' es un sustantivo femenino.",
+            caExplain: "'La acera' és un substantiu femení.",
+            enExplain: "'La acera' (sidewalk) is a feminine noun.",
+            zhExplain: "acera（la acera）是陰性名詞，搭配 la。"
+          },
+          {
+            esQ: "11. ¿Qué nota Adrián al terminar su turno?",
+            caQ: "11. Què nota l'Adrià en acabar el seu torn?",
+            enQ: "11. What does Adrián notice at the end of his shift?",
+            zhQ: "11. 輪班結束後，阿德里安注意到什麼變化？",
+            esOpts: ["Los vecinos saludan más y la plaza parece más viva", "Hay menos árboles", "Cierran todas las calles", "Llueve todo el día"],
+            caOpts: ["Els veïns saluden més i la plaça sembla més viva", "Hi ha menys arbres", "Tanquen tots els carrers", "Plou tot el dia"],
+            enOpts: ["Neighbors greet each other more and the main square feels livelier", "There are fewer trees", "All streets close", "It rains all day"],
+            zhOpts: ["居民更常打招呼且廣場更有活力", "樹木變少", "所有街道封閉", "整天下雨"],
+            answer: 0,
+            esExplain: "Los vecinos saludan más y la plaza central parece más viva.",
+            caExplain: "Els veïns saluden més i la plaça central sembla més viva.",
+            enExplain: "He notes that neighbors greet each other more and the main square feels livelier.",
+            zhExplain: "他提到居民更常打招呼，中央廣場也顯得更有活力。"
+          },
+          {
+            esQ: "12. ¿Qué significa 'apostar por' en el contexto del título?",
+            caQ: "12. Què significa 'apostar per' en el context del títol?",
+            enQ: "12. What does 'apostar por' mean in the context of the title?",
+            zhQ: "12. 「apostar por」在能源與城市語境中的意思是？",
+            esOpts: ["Olvidar por completo", "Apoyar y dedicar recursos a algo", "Prohibir una actividad", "Vender una casa"],
+            caOpts: ["Oblidar del tot", "Donar suport i dedicar recursos a quelcom", "Prohibir una activitat", "Vendre una casa"],
+            enOpts: ["Forget completely", "Back / commit to and invest in something", "Ban an activity", "Sell a house"],
+            zhOpts: ["完全忘記", "支持並投入資源發展某事", "禁止某項活動", "賣掉房子"],
+            answer: 1,
+            esExplain: "'Apostar por' significa apoyar o elegir decididamente una opción.",
+            caExplain: "'Apostar per' vol dir donar suport i dedicar recursos a una opció.",
+            enExplain: "'Apostar por' means to back or commit resources to a direction or option.",
+            zhExplain: "apostar por 在這裡指「支持、致力推動某項方向」。"
+          },
+          {
+            esQ: "13. Completa: 'Es una decisión buena a ____ plazo.'",
+            caQ: "13. Completa: 'És una decisió bona a ____ termini.'",
+            enQ: "13. Complete the phrase: 'Es una decisión buena a ____ plazo.'",
+            zhQ: "13. 填入正確詞彙完成片語：Es una decisión buena a ____ plazo.",
+            esOpts: ["corto", "alto", "largo", "bajo"],
+            caOpts: ["curt", "alt", "llarg", "baix"],
+            enOpts: ["corto", "alto", "largo", "bajo"],
+            zhOpts: ["corto", "alto", "largo", "bajo"],
+            answer: 2,
+            esExplain: "La expresión fija es 'a largo plazo'.",
+            caExplain: "L'expressió fixa és 'a llarg termini'.",
+            enExplain: "'A largo plazo' means 'in the long term'.",
+            zhExplain: "固定片語為 a largo plazo（長期來看）。"
+          },
+          {
+            esQ: "14. ¿Qué significa el verbo 'exigir'?",
+            caQ: "14. Què significa el verb 'exigir'?",
+            enQ: "14. What does the Spanish verb 'exigir' mean?",
+            zhQ: "14. 動詞「exigir」的意思是什麼？",
+            esOpts: ["Dormir profundamente", "Viajar en barco", "Cocinar pan", "Pedir o requerir algo necesario"],
+            caOpts: ["Dormir profundament", "Viatjar en vaixell", "Coure pa", "Demanar o requerir quelcom necessari"],
+            enOpts: ["Sleep deeply", "Travel by boat", "Bake bread", "Require or demand something needed"],
+            zhOpts: ["熟睡", "搭船旅行", "烤麵包", "要求、需要"],
+            answer: 3,
+            esExplain: "'Exigir' significa requerir o demandar algo.",
+            caExplain: "'Exigir' vol dir requerir o demanar quelcom necessari.",
+            enExplain: "'Exigir' means to require or call for something.",
+            zhExplain: "exigir 意思是「要求、需要」。"
+          },
+          {
+            esQ: "15. ¿Cuál de estos sustantivos lleva el artículo 'el'?",
+            caQ: "15. Quin d'aquests substantius porta l'article 'el' en castellà?",
+            enQ: "15. Which of these Spanish nouns takes 'el'?",
+            zhQ: "15. 下列哪一個名詞搭配的冠詞是「el」？",
+            esOpts: ["horario", "plaza", "acera", "inversión"],
+            caOpts: ["horario", "plaza", "acera", "inversión"],
+            enOpts: ["horario", "plaza", "acera", "inversión"],
+            zhOpts: ["horario", "plaza", "acera", "inversión"],
+            answer: 0,
+            esExplain: "'El horario' es un sustantivo masculino.",
+            caExplain: "'El horario' és un substantiu masculí.",
+            enExplain: "'El horario' (schedule/timetable) is masculine.",
+            zhExplain: "horario（el horario）是陽性名詞，搭配 el。"
+          },
+          {
+            esQ: "16. ¿Qué se necesita para construir una ciudad más limpia según el final?",
+            caQ: "16. Què cal per construir una ciutat més neta segons el final?",
+            enQ: "16. What is needed to build a cleaner city according to the ending?",
+            zhQ: "16. 根據結尾段落，打造更乾淨的城市需要什麼？",
+            esOpts: ["Solo dinero en efectivo", "Acuerdos y colaboración con paciencia", "Cerrar todas las escuelas", "No hablar con vecinos"],
+            caOpts: ["Només diners en efectiu", "Acords i col·laboració amb paciència", "Tancar totes les escoles", "No parlar amb els veïns"],
+            enOpts: ["Cash only", "Agreements and patient collaboration", "Closing all schools", "Not talking to neighbors"],
+            zhOpts: ["只要現金", "共識與有耐心的合作", "關閉所有學校", "不與鄰居交談"],
+            answer: 1,
+            esExplain: "Exige acuerdos entre vecinos, empresas y autoridades y colaborar con paciencia.",
+            caExplain: "Exigeix acords entre veïns, empreses i autoritats i col·laborar amb paciència.",
+            enExplain: "It requires agreements among residents, businesses, and authorities, and patient collaboration.",
+            zhExplain: "最後一段指出需要各方共識以及有耐心的合作。"
+          },
+          {
+            esQ: "17. Completa: 'Los parques ayudan a mejorar la ____ de vida.'",
+            caQ: "17. Completa: 'Els parcs ajuden a millorar la ____ de vida.'",
+            enQ: "17. Complete the collocation: 'Los parques ayudan a mejorar la ____ de vida.'",
+            zhQ: "17. 填入正確詞彙：Los parques ayudan a mejorar la ____ de vida.",
+            esOpts: ["cantidad", "velocidad", "calidad", "temperatura"],
+            caOpts: ["quantitat", "velocitat", "qualitat", "temperatura"],
+            enOpts: ["cantidad", "velocidad", "calidad", "temperatura"],
+            zhOpts: ["cantidad", "velocidad", "calidad", "temperatura"],
+            answer: 2,
+            esExplain: "La colocación habitual es 'calidad de vida'.",
+            caExplain: "La combinació habitual és 'qualitat de vida'.",
+            enExplain: "'Calidad de vida' means 'quality of life'.",
+            zhExplain: "常見搭配為 mejorar la calidad de vida（提升生活品質）。"
+          },
+          {
+            esQ: "18. ¿Cuál de estos sustantivos lleva el artículo 'la'?",
+            caQ: "18. Quin d'aquests substantius porta l'article 'la' en castellà?",
+            enQ: "18. Which of these Spanish nouns takes 'la'?",
+            zhQ: "18. 下列哪一個名詞搭配的冠詞是「la」？",
+            esOpts: ["gasto", "horario", "turno", "plaza"],
+            caOpts: ["gasto", "horario", "turno", "plaza"],
+            enOpts: ["gasto", "horario", "turno", "plaza"],
+            zhOpts: ["gasto", "horario", "turno", "plaza"],
+            answer: 3,
+            esExplain: "'La plaza' es un sustantivo femenino.",
+            caExplain: "'La plaza' és un substantiu femení.",
+            enExplain: "'La plaza' (square) is feminine.",
+            zhExplain: "plaza（la plaza）是陰性名詞，搭配 la。"
+          },
+          {
+            esQ: "19. Completa: 'Vive ____ ciudad de Madrid.'",
+            caQ: "19. Completa: 'Viu ____ ciutat de Madrid.'",
+            enQ: "19. Complete: 'Vive ____ ciudad de Madrid.'",
+            zhQ: "19. 填入正確搭配：Vive ____ ciudad de Madrid.",
+            esOpts: ["en la", "a los", "sin un", "por unas"],
+            caOpts: ["a la", "als", "sense un", "per unes"],
+            enOpts: ["en la", "a los", "sin un", "por unas"],
+            zhOpts: ["en la", "a los", "sin un", "por unas"],
+            answer: 0,
+            esExplain: "La estructura habitual es 'en la ciudad de + nombre'.",
+            caExplain: "L'estructura habitual és 'a la ciutat de + nom'.",
+            enExplain: "The standard phrase is 'en la ciudad de + city name' (in the city of...).",
+            zhExplain: "常用搭配為 en la ciudad de + 城市名稱。"
+          },
+          {
+            esQ: "20. ¿Qué mejora se menciona al final cuando todos colaboran?",
+            caQ: "20. Quina millora s'esmenta al final quan tothom col·labora?",
+            enQ: "20. What improves at the end when everyone collaborates?",
+            zhQ: "20. 當眾人合作時，最後提到什麼會改善？",
+            esOpts: ["El tráfico caótico", "Espacios públicos y calidad de vida", "La basura en las calles", "El ruido nocturno"],
+            caOpts: ["El trànsit caòtic", "Espais públics i qualitat de vida", "Les escombraries als carrers", "El soroll nocturn"],
+            enOpts: ["Chaotic traffic", "Public spaces and quality of life", "Street trash", "Nighttime noise"],
+            zhOpts: ["混亂的交通", "公共空間與生活品質", "街頭垃圾", "夜間噪音"],
+            answer: 1,
+            esExplain: "Mejoran los espacios públicos y crece la calidad de vida.",
+            caExplain: "Milloren els espais públics i creix la qualitat de vida.",
+            enExplain: "Public spaces improve and quality of life grows.",
+            zhExplain: "公共空間會改善，生活品質也會提升。"
           }
         ]
       }
     ];
 
-    let state = {
-      lessons: [],
-      activeIndex: 0,
-      primaryLang: "es",
-      showSubZh: true,
-      quizAnswers: {}
-    };
+    /* =========================================================================
+       本機儲存（localStorage）與跨裝置同步碼工具
+       ========================================================================= */
+    const STORAGE_KEY = "spanish_deep_reader_lessons_v1";
 
-    function encodeBase64Url(str) {
-      const bytes = new TextEncoder().encode(str);
+    function loadPersistedLessons() {
+      try {
+        const raw = localStorage.getItem(STORAGE_KEY);
+        if (!raw) return structuredClone(INITIAL_LESSONS);
+        const parsed = JSON.parse(raw);
+        const list = Array.isArray(parsed)
+          ? parsed
+          : (Array.isArray(parsed.lessons) ? parsed.lessons : null);
+        if (!list || list.length === 0) return structuredClone(INITIAL_LESSONS);
+        return list.map((item, idx) => validateAndNormalizeLesson(item, idx));
+      } catch (e) {
+        return structuredClone(INITIAL_LESSONS);
+      }
+    }
+
+    function persistLessons(list) {
+      try {
+        localStorage.setItem(STORAGE_KEY, JSON.stringify({
+          savedAt: new Date().toISOString(),
+          lessons: list
+        }));
+      } catch (e) {
+        ioStatus = {
+          type: "bad",
+          message: "本機儲存空間已滿或受限，請改用「匯出文章 (JSON)」備份。"
+        };
+      }
+    }
+
+    function toSyncCode(list) {
+      const jsonStr = JSON.stringify(list);
+      const bytes = new TextEncoder().encode(jsonStr);
       let bin = "";
       for (let i = 0; i < bytes.length; i++) {
         bin += String.fromCharCode(bytes[i]);
@@ -331,347 +2621,983 @@
       return btoa(bin).replace(/\+/g, "-").replace(/\//g, "_").replace(/=+$/, "");
     }
 
-    function decodeBase64Url(b64url) {
-      const b64 = b64url.replace(/-/g, "+").replace(/_/g, "/");
+    function fromSyncCode(codeStr) {
+      const trimmed = String(codeStr || "").trim();
+      if (!trimmed) throw new Error("請先貼上同步碼。");
+      const b64 = trimmed.replace(/-/g, "+").replace(/_/g, "/");
       const pad = b64.length % 4 ? "=".repeat(4 - (b64.length % 4)) : "";
       const bin = atob(b64 + pad);
       const bytes = new Uint8Array(bin.length);
       for (let i = 0; i < bin.length; i++) {
         bytes[i] = bin.charCodeAt(i);
       }
-      return new TextDecoder().decode(bytes);
+      const jsonStr = new TextDecoder().decode(bytes);
+      const parsed = JSON.parse(jsonStr);
+      return Array.isArray(parsed)
+        ? parsed
+        : (Array.isArray(parsed.lessons) ? parsed.lessons : [parsed]);
     }
 
-    function normalizeLessons(list) {
-      return list.map((item, idx) => ({
-        ...item,
-        id: item.id || `lesson-${idx + 1}`,
-        unitLabel: `第 ${idx + 1} 篇`
-      }));
-    }
+    function mergeImportedLessons(rawList) {
+      const normalizedList = rawList.map((item, idx) =>
+        validateAndNormalizeLesson(item, lessons.length + idx)
+      );
 
-    function saveLessonsToStorage(lessons) {
-      const normalized = normalizeLessons(lessons);
-      state.lessons = normalized;
-      try {
-        localStorage.setItem(STORAGE_KEY, JSON.stringify(normalized));
-        updateStatus(`已儲存於本機瀏覽器（${new Date().toLocaleTimeString()}）`);
-      } catch (err) {
-        updateStatus("本機儲存空間不足或受限，建議使用「匯出全部 JSON」備份。");
-      }
-    }
+      let addedCount = 0;
+      let updatedCount = 0;
+      let lastTouchedIndex = currentIndex;
 
-    function loadInitialLessons() {
-      // 1. 先檢查網址列是否有 #sync= 跨裝置同步參數
-      const hash = window.location.hash || "";
-      if (hash.startsWith("#sync=")) {
-        try {
-          const decoded = JSON.parse(decodeBase64Url(hash.slice(6)));
-          const incoming = Array.isArray(decoded) ? decoded : (decoded.lessons || []);
-          if (incoming.length > 0) {
-            const existing = readLocalStorageLessons() || DEFAULT_LESSONS;
-            const merged = mergeLessons(existing, incoming);
-            saveLessonsToStorage(merged);
-            history.replaceState(null, "", window.location.pathname + window.location.search);
-            updateStatus(`已從同步連結匯入並儲存 ${incoming.length} 篇文章！`);
-            return merged;
-          }
-        } catch (e) {
-          console.warn("同步連結解析失敗", e);
+      normalizedList.forEach((newLesson) => {
+        const existingIdx = lessons.findIndex(l => l.id === newLesson.id);
+        if (existingIdx >= 0) {
+          newLesson.unitLabel = lessons[existingIdx].unitLabel;
+          lessons[existingIdx] = newLesson;
+          delete shuffledQuizCache[existingIdx];
+          updatedCount++;
+          lastTouchedIndex = existingIdx;
+        } else {
+          newLesson.unitLabel = `第 ${lessons.length + 1} 篇`;
+          lessons.push(newLesson);
+          addedCount++;
+          lastTouchedIndex = lessons.length - 1;
         }
-      }
-
-      // 2. 讀取 localStorage
-      const localData = readLocalStorageLessons();
-      if (localData && localData.length > 0) {
-        updateStatus("已從本機瀏覽器載入已儲存文章。");
-        return normalizeLessons(localData);
-      }
-
-      // 3. 首次使用載入預設文章並寫入 localStorage
-      const init = normalizeLessons(DEFAULT_LESSONS);
-      localStorage.setItem(STORAGE_KEY, JSON.stringify(init));
-      updateStatus("首次載入預設文章，已建立本機儲存。");
-      return init;
-    }
-
-    function readLocalStorageLessons() {
-      try {
-        const raw = localStorage.getItem(STORAGE_KEY);
-        if (!raw) return null;
-        const parsed = JSON.parse(raw);
-        return Array.isArray(parsed) ? parsed : (parsed.lessons || null);
-      } catch (e) {
-        return null;
-      }
-    }
-
-    function mergeLessons(baseList, incomingList) {
-      const map = new Map();
-      baseList.forEach(item => map.set(item.id, item));
-      incomingList.forEach(item => {
-        const key = item.id || `imported-${Date.now()}-${Math.random().toString(36).slice(2, 7)}`;
-        map.set(key, { ...item, id: key });
       });
-      return normalizeLessons(Array.from(map.values()));
+
+      persistLessons(lessons);
+      currentIndex = lastTouchedIndex;
+      showCa = false;
+      showZh = false;
+      showEn = false;
+      ioStatus = {
+        type: "ok",
+        message: `已儲存並更新：新增 ${addedCount} 篇、更新 ${updatedCount} 篇（目前共 ${lessons.length} 篇，重新整理不遺失）。`
+      };
+      render();
     }
 
-    function updateStatus(msg) {
-      document.getElementById("storageStatus").textContent = msg;
-      document.getElementById("lessonCount").textContent = `共 ${state.lessons.length} 篇文章`;
+    let lessons = loadPersistedLessons();
+    let currentIndex = 0;
+    let overviewMenuOpen = false;
+    let illusMenuOpen = false;
+    let syncDrawerOpen = false;
+    let syncCodeText = "";
+    let showCa = false;
+    let showZh = false;
+    let showEn = false;
+    let quizLang = "es";
+    let ioStatus = { type: "", message: "" };
+    let shuffledQuizCache = {};
+
+    let currentIllus = pickSeasonalIllustration(null);
+    let autoRotateIllus = false;
+    let manualReducedMotion = false;
+    let galleryOpen = false;
+    let illusTimerId = null;
+
+    let availableVoices = [];
+    let selectedEsVoiceURI = "";
+    let selectedCaVoiceURI = "";
+    let selectedEnVoiceURI = "";
+    let speechState = "idle";
+    let activeSpeechLang = "es";
+
+    const appEl = document.getElementById("app");
+    const currentUnitLabelEl = document.getElementById("currentUnitLabel");
+    const prevBtn = document.getElementById("prevBtn");
+    const nextBtn = document.getElementById("nextBtn");
+    const scrollTopBtn = document.getElementById("scrollTopBtn");
+    const openOverviewMenuBtn = document.getElementById("openOverviewMenuBtn");
+    const closeOverviewMenuBtn = document.getElementById("closeOverviewMenuBtn");
+    const overviewBackdrop = document.getElementById("overviewBackdrop");
+    const overviewMenuPopover = document.getElementById("overviewMenuPopover");
+    const overviewTitleList = document.getElementById("overviewTitleList");
+
+    function syncHeaderOffset() {
+      const headerEl = document.getElementById("topHeader");
+      if (headerEl) {
+        document.documentElement.style.setProperty("--header-offset", `${headerEl.offsetHeight}px`);
+      }
     }
 
-    function render() {
-      renderNav();
-      renderLesson();
-      updateStatus(document.getElementById("storageStatus").textContent);
+    function setOverviewMenu(open) {
+      overviewMenuOpen = open;
+      overviewBackdrop.classList.toggle("open", open);
+      overviewMenuPopover.classList.toggle("open", open);
+      openOverviewMenuBtn.classList.toggle("active-pill", open);
+      if (open) {
+        renderOverviewMenuItems();
+      }
     }
 
-    function renderNav() {
-      const nav = document.getElementById("lessonNav");
-      nav.innerHTML = "";
-      state.lessons.forEach((lesson, idx) => {
-        const pill = document.createElement("button");
-        pill.type = "button";
-        pill.className = `lesson-pill ${idx === state.activeIndex ? "active" : ""}`;
-        pill.textContent = `${lesson.unitLabel} · ${lesson.title}`;
-        pill.onclick = () => {
-          state.activeIndex = idx;
-          render();
-        };
-        nav.appendChild(pill);
+    function renderOverviewMenuItems() {
+      overviewTitleList.innerHTML = lessons.map((item, idx) => `
+        <button
+          type="button"
+          class="overview-title-item-btn ${idx === currentIndex ? "active" : ""}"
+          data-pick-lesson="${idx}"
+        >
+          <div class="overview-item-meta">
+            <span>${item.unitLabel || `第 ${idx + 1} 篇`}</span>
+            <span>${item.topic || "綜合主題"}</span>
+            <span>${item.level || "A2 初級"}</span>
+          </div>
+          <div class="overview-item-heading">${item.title}</div>
+        </button>
+      `).join("");
+
+      overviewTitleList.querySelectorAll("[data-pick-lesson]").forEach(btn => {
+        btn.addEventListener("click", () => {
+          const idx = Number(btn.getAttribute("data-pick-lesson"));
+          setOverviewMenu(false);
+          switchLesson(idx);
+        });
       });
     }
 
-    function getParagraphSet(lesson, lang) {
-      if (lang === "ca") return lesson.caParagraphs || [];
-      if (lang === "en") return lesson.enParagraphs || [];
-      if (lang === "zh") return lesson.zhParagraphs || [];
-      return lesson.esParagraphs || [];
+    function loadVoices() {
+      if (!("speechSynthesis" in window)) return;
+      availableVoices = window.speechSynthesis.getVoices() || [];
+      const esVoices = availableVoices.filter(v => v.lang && v.lang.toLowerCase().startsWith("es"));
+      const caVoices = availableVoices.filter(v => v.lang && v.lang.toLowerCase().startsWith("ca"));
+      const enVoices = availableVoices.filter(v => v.lang && v.lang.toLowerCase().startsWith("en"));
+
+      if (!selectedEsVoiceURI && esVoices.length > 0) selectedEsVoiceURI = esVoices[0].voiceURI;
+      if (!selectedCaVoiceURI && caVoices.length > 0) selectedCaVoiceURI = caVoices[0].voiceURI;
+      if (!selectedEnVoiceURI && enVoices.length > 0) selectedEnVoiceURI = enVoices[0].voiceURI;
+      render();
     }
 
-    function renderLesson() {
-      const container = document.getElementById("lessonContent");
-      const lesson = state.lessons[state.activeIndex];
-      if (!lesson) {
-        container.innerHTML = `<div class="card">目前沒有文章，請點選右上角「匯入文章 (JSON)」。</div>`;
+    if ("speechSynthesis" in window) {
+      loadVoices();
+      window.speechSynthesis.onvoiceschanged = loadVoices;
+    }
+
+    function updateSpeechStatusLabel() {
+      const el = document.getElementById("speechStatusText");
+      if (!el) return;
+      if (speechState === "speaking-es") el.textContent = "正在朗讀西文...";
+      else if (speechState === "speaking-ca") el.textContent = "正在朗讀加泰隆尼亞文...";
+      else if (speechState === "speaking-en") el.textContent = "正在朗讀英文...";
+      else if (speechState === "paused") el.textContent = "已暫停朗讀";
+      else el.textContent = "待命／已停止";
+    }
+
+    function stopSpeech() {
+      if ("speechSynthesis" in window) {
+        window.speechSynthesis.cancel();
+      }
+      speechState = "idle";
+      updateSpeechStatusLabel();
+    }
+
+    function togglePauseSpeech() {
+      if (!("speechSynthesis" in window)) return;
+      if (speechState === "paused") {
+        window.speechSynthesis.resume();
+        speechState = `speaking-${activeSpeechLang}`;
+        updateSpeechStatusLabel();
+      } else if (speechState.startsWith("speaking-")) {
+        window.speechSynthesis.pause();
+        speechState = "paused";
+        updateSpeechStatusLabel();
+      }
+    }
+
+    function startSpeech(paragraphs, langMode) {
+      if (!("speechSynthesis" in window)) {
+        alert("你的瀏覽器不支援語音朗讀功能。");
         return;
       }
+      const text = (paragraphs || []).join(" ").trim();
+      if (!text) return;
 
-      const mainParas = getParagraphSet(lesson, state.primaryLang);
-      const zhParas = lesson.zhParagraphs || [];
+      window.speechSynthesis.cancel();
+      activeSpeechLang = langMode;
 
-      const parasHtml = mainParas.map((p, i) => `
-        <div class="para-box">
-          <div>${p}</div>
-          ${(state.showSubZh && state.primaryLang !== "zh" && zhParas[i]) ? `<div class="sub-lang">${zhParas[i]}</div>` : ""}
-        </div>
-      `).join("");
+      const utter = new SpeechSynthesisUtterance(text);
+      const uriMap = {
+        es: selectedEsVoiceURI,
+        ca: selectedCaVoiceURI,
+        en: selectedEnVoiceURI
+      };
+      const fallbackLangMap = {
+        es: "es-ES",
+        ca: "ca-ES",
+        en: "en-US"
+      };
+      const chosenVoice = availableVoices.find(v => v.voiceURI === uriMap[langMode]);
 
-      const vocabHtml = (lesson.vocab || []).map(v => `
-        <div class="item-card">
-          <div><strong>${v.word}</strong> <span style="color:var(--muted)">(${v.caWord || ""}) · ${v.pos || ""}</span></div>
-          <div style="margin:4px 0">${v.meaning || ""}</div>
-          <div style="font-size:0.9rem">${v.example || ""}</div>
-          ${v.origin ? `<div class="sub-lang">詞源：${v.origin}</div>` : ""}
-        </div>
-      `).join("");
+      if (chosenVoice) {
+        utter.voice = chosenVoice;
+        utter.lang = chosenVoice.lang;
+      } else {
+        utter.lang = fallbackLangMap[langMode] || "es-ES";
+      }
+      utter.rate = 0.94;
 
-      const phrasesHtml = (lesson.phrases || []).map(p => `
-        <div class="item-card">
-          <div><strong>${p.phrase}</strong> <span style="color:var(--muted)">(${p.caPhrase || ""})</span></div>
-          <div style="margin:4px 0">${p.meaning || ""}</div>
-          <div style="font-size:0.9rem">${p.example || ""}</div>
-        </div>
-      `).join("");
+      utter.onstart = () => {
+        speechState = `speaking-${langMode}`;
+        updateSpeechStatusLabel();
+      };
+      utter.onend = () => {
+        speechState = "idle";
+        updateSpeechStatusLabel();
+      };
+      utter.onerror = () => {
+        speechState = "idle";
+        updateSpeechStatusLabel();
+      };
 
-      const grammarHtml = (lesson.grammar || []).map(g => `
-        <div class="item-card">
-          <div><strong>${g.title}</strong></div>
-          <div style="margin:4px 0">${g.explanation || ""}</div>
-          <div class="sub-lang">${g.example || ""}</div>
-          <div class="sub-lang">${g.caExample || ""}</div>
-        </div>
-      `).join("");
-
-      const quizHtml = (lesson.quiz || []).map((q, qIdx) => {
-        const key = `${lesson.id}-${qIdx}`;
-        const picked = state.quizAnswers[key];
-        const opts = (state.primaryLang === "ca" ? q.caOpts : state.primaryLang === "en" ? q.enOpts : state.primaryLang === "zh" ? q.zhOpts : q.esOpts) || q.esOpts || [];
-        const questionText = (state.primaryLang === "ca" ? q.caQ : state.primaryLang === "en" ? q.enQ : state.primaryLang === "zh" ? q.zhQ : q.esQ) || q.esQ || "";
-        const explainText = (state.primaryLang === "ca" ? q.caExplain : state.primaryLang === "en" ? q.enExplain : state.primaryLang === "zh" ? q.zhExplain : q.esExplain) || q.zhExplain || "";
-
-        const optsButtons = opts.map((opt, oIdx) => {
-          let cls = "quiz-opt";
-          if (picked !== undefined) {
-            if (oIdx === q.answer) cls += " correct";
-            else if (oIdx === picked) cls += " wrong";
-          }
-          return `<button type="button" class="${cls}" onclick="selectAnswer('${key}', ${oIdx})">${String.fromCharCode(65 + oIdx)}. ${opt}</button>`;
-        }).join("");
-
-        return `
-          <div class="item-card" style="margin-bottom:10px">
-            <div><strong>${questionText}</strong></div>
-            ${optsButtons}
-            ${picked !== undefined ? `<div class="explain"><strong>解析：</strong>${explainText}（${q.zhExplain || ""}）</div>` : ""}
-          </div>
-        `;
-      }).join("");
-
-      container.innerHTML = `
-        <div class="card">
-          <div class="meta">
-            <span class="badge">${lesson.unitLabel}</span>
-            <span class="badge">${lesson.topic || ""}</span>
-            <span class="badge">${lesson.level || ""}</span>
-            <span class="badge">${lesson.duration || ""}</span>
-          </div>
-          <h2 style="margin:6px 0 2px">${lesson.title}</h2>
-          <div style="color:var(--muted)">${lesson.caTitle || ""}</div>
-
-          <div class="lang-tabs">
-            <button type="button" class="lang-tab ${state.primaryLang === "es" ? "active" : ""}" onclick="setLang('es')">西班牙文 ES</button>
-            <button type="button" class="lang-tab ${state.primaryLang === "ca" ? "active" : ""}" onclick="setLang('ca')">加泰隆尼亞文 CA</button>
-            <button type="button" class="lang-tab ${state.primaryLang === "en" ? "active" : ""}" onclick="setLang('en')">英文 EN</button>
-            <button type="button" class="lang-tab ${state.primaryLang === "zh" ? "active" : ""}" onclick="setLang('zh')">繁體中文 ZH</button>
-            <button type="button" onclick="toggleSubZh()">${state.showSubZh ? "隱藏中文對照" : "顯示中文對照"}</button>
-          </div>
-
-          ${parasHtml}
-        </div>
-
-        <div class="card">
-          <h3 style="margin-top:0">重要單字（${(lesson.vocab || []).length}）</h3>
-          <div class="grid-2">${vocabHtml || "無單字資料"}</div>
-        </div>
-
-        <div class="card">
-          <h3 style="margin-top:0">實用片語（${(lesson.phrases || []).length}）</h3>
-          <div class="grid-2">${phrasesHtml || "無片語資料"}</div>
-        </div>
-
-        <div class="card">
-          <h3 style="margin-top:0">文法重點（${(lesson.grammar || []).length}）</h3>
-          <div class="grid-2">${grammarHtml || "無文法資料"}</div>
-        </div>
-
-        <div class="card">
-          <h3 style="margin-top:0">四語測驗（${(lesson.quiz || []).length}）</h3>
-          ${quizHtml || "無測驗資料"}
-        </div>
-      `;
+      speechState = `speaking-${langMode}`;
+      updateSpeechStatusLabel();
+      window.speechSynthesis.speak(utter);
     }
 
-    window.setLang = (lang) => {
-      state.primaryLang = lang;
-      render();
-    };
+    function applyMotionPreference() {
+      const systemReduced = window.matchMedia && window.matchMedia("(prefers-reduced-motion: reduce)").matches;
+      const isReduced = manualReducedMotion || systemReduced;
+      document.body.classList.toggle("reduced-motion", manualReducedMotion);
 
-    window.toggleSubZh = () => {
-      state.showSubZh = !state.showSubZh;
-      render();
-    };
+      if (illusTimerId) {
+        clearInterval(illusTimerId);
+        illusTimerId = null;
+      }
+      if (autoRotateIllus && !isReduced) {
+        illusTimerId = setInterval(() => {
+          currentIllus = pickSeasonalIllustration(currentIllus.id);
+          render();
+        }, 12000);
+      }
+    }
 
-    window.selectAnswer = (key, idx) => {
-      state.quizAnswers[key] = idx;
-      render();
-    };
-
-    // 匯入 JSON 檔案（支援單篇、陣列或 { lessons: [...] }）
-    document.getElementById("importFile").addEventListener("change", async (e) => {
-      const files = Array.from(e.target.files || []);
-      if (!files.length) return;
-
-      let importedCount = 0;
-      for (const file of files) {
-        try {
-          const text = await file.text();
-          const parsed = JSON.parse(text);
-          const list = Array.isArray(parsed) ? parsed : (Array.isArray(parsed.lessons) ? parsed.lessons : [parsed]);
-          const valid = list.filter(item => item && (item.title || item.esParagraphs || item.zhParagraphs));
-          if (valid.length > 0) {
-            const merged = mergeLessons(state.lessons, valid);
-            saveLessonsToStorage(merged);
-            importedCount += valid.length;
-          }
-        } catch (err) {
-          alert(`檔案「${file.name}」JSON 格式有誤：${err.message}`);
+    function buildShuffledQuiz(quizList) {
+      return quizList.map((qItem) => {
+        const indices = qItem.esOpts.map((_, idx) => idx);
+        for (let i = indices.length - 1; i > 0; i--) {
+          const j = Math.floor(Math.random() * (i + 1));
+          [indices[i], indices[j]] = [indices[j], indices[i]];
         }
-      }
+        return {
+          ...qItem,
+          esOpts: indices.map(i => qItem.esOpts[i]),
+          caOpts: indices.map(i => (qItem.caOpts || qItem.esOpts)[i]),
+          enOpts: indices.map(i => (qItem.enOpts || qItem.esOpts)[i]),
+          zhOpts: indices.map(i => qItem.zhOpts[i]),
+          answer: indices.indexOf(qItem.answer)
+        };
+      });
+    }
 
-      if (importedCount > 0) {
-        state.activeIndex = Math.max(0, state.lessons.length - importedCount);
-        render();
-        alert(`成功匯入並儲存 ${importedCount} 篇文章！重新整理不會遺失。`);
+    function getActiveQuiz(lessonIndex) {
+      if (!shuffledQuizCache[lessonIndex]) {
+        shuffledQuizCache[lessonIndex] = buildShuffledQuiz(lessons[lessonIndex].quiz);
       }
-      e.target.value = "";
-    });
+      return shuffledQuizCache[lessonIndex];
+    }
 
-    // 匯出全部文章 JSON
-    document.getElementById("exportBtn").addEventListener("click", () => {
-      const blob = new Blob([JSON.stringify({ lessons: state.lessons }, null, 2)], { type: "application/json" });
+    function exportLessonsJson() {
+      const payload = {
+        exportedAt: new Date().toISOString(),
+        level: "A2",
+        count: lessons.length,
+        lessons
+      };
+      const blob = new Blob([JSON.stringify(payload, null, 2)], { type: "application/json;charset=utf-8" });
       const url = URL.createObjectURL(blob);
       const a = document.createElement("a");
       a.href = url;
-      a.download = `quad-lessons-backup-${new Date().toISOString().slice(0, 10)}.json`;
+      a.download = `spanish-catalan-lessons-a2-${lessons.length}-units.json`;
+      document.body.appendChild(a);
       a.click();
+      a.remove();
       URL.revokeObjectURL(url);
-    });
 
-    // 還原預設
-    document.getElementById("resetBtn").addEventListener("click", () => {
-      if (!confirm("確定要清除已匯入的文章並還原成預設文章嗎？")) return;
-      localStorage.removeItem(STORAGE_KEY);
-      state.activeIndex = 0;
-      state.lessons = loadInitialLessons();
+      ioStatus = {
+        type: "ok",
+        message: `已匯出 ${lessons.length} 篇學習單元為 JSON 檔案（可傳至手機再匯入）。`
+      };
       render();
-    });
+    }
 
-    // 跨裝置同步面板
-    document.getElementById("toggleSyncBtn").addEventListener("click", () => {
-      document.getElementById("syncPanel").classList.toggle("open");
-    });
+    function validateAndNormalizeLesson(item, fallbackIndex) {
+      if (!item || typeof item !== "object" || !item.title) {
+        throw new Error(`第 ${fallbackIndex + 1} 筆資料缺少標題（title）。`);
+      }
+      const esParagraphs = Array.isArray(item.esParagraphs)
+        ? item.esParagraphs
+        : (typeof item.es === "string" ? [item.es] : []);
+      if (esParagraphs.length === 0) {
+        throw new Error(`「${item.title}」缺少西文段落內容（esParagraphs）。`);
+      }
+      return {
+        id: item.id || `custom-${Date.now()}-${fallbackIndex}`,
+        unitLabel: item.unitLabel || `第 ${fallbackIndex + 1} 篇`,
+        topic: item.topic || "自訂主題",
+        level: item.level || "A2 初級",
+        duration: item.duration || "約 30 分鐘單元",
+        title: item.title,
+        caTitle: item.caTitle || "",
+        esParagraphs,
+        caParagraphs: Array.isArray(item.caParagraphs) ? item.caParagraphs : [],
+        zhParagraphs: Array.isArray(item.zhParagraphs)
+          ? item.zhParagraphs
+          : (typeof item.zh === "string" ? [item.zh] : []),
+        enParagraphs: Array.isArray(item.enParagraphs)
+          ? item.enParagraphs
+          : (typeof item.en === "string" ? [item.en] : []),
+        vocab: Array.isArray(item.vocab) ? item.vocab : [],
+        phrases: Array.isArray(item.phrases) ? item.phrases : [],
+        grammar: Array.isArray(item.grammar) ? item.grammar : [],
+        quiz: Array.isArray(item.quiz) ? item.quiz : []
+      };
+    }
 
-    document.getElementById("genCodeBtn").addEventListener("click", () => {
-      const code = encodeBase64Url(JSON.stringify({ lessons: state.lessons }));
-      const box = document.getElementById("syncText");
-      box.value = code;
-      box.select();
-      navigator.clipboard?.writeText(code).catch(() => {});
-      alert("已產生同步碼並嘗試複製到剪貼簿！請傳到手機貼上後按「套用同步碼／連結」。");
-    });
+    function handleImportFile(file) {
+      if (!file) return;
+      const reader = new FileReader();
+      reader.onload = (e) => {
+        try {
+          const parsed = JSON.parse(String(e.target.result));
+          const rawList = Array.isArray(parsed)
+            ? parsed
+            : (Array.isArray(parsed.lessons) ? parsed.lessons : [parsed]);
+          mergeImportedLessons(rawList);
+        } catch (err) {
+          ioStatus = {
+            type: "bad",
+            message: `匯入失敗：${err.message || "請確認 JSON 格式是否正確。"}`
+          };
+          render();
+        }
+      };
+      reader.readAsText(file, "utf-8");
+    }
 
-    document.getElementById("genLinkBtn").addEventListener("click", () => {
-      const code = encodeBase64Url(JSON.stringify({ lessons: state.lessons }));
-      const link = `${window.location.origin}${window.location.pathname}#sync=${code}`;
-      const box = document.getElementById("syncText");
-      box.value = link;
-      box.select();
-      navigator.clipboard?.writeText(link).catch(() => {});
-      alert("已產生同步連結！傳到手機瀏覽器打開即可自動存入手機。");
-    });
-
-    document.getElementById("applyCodeBtn").addEventListener("click", () => {
-      let raw = document.getElementById("syncText").value.trim();
-      if (!raw) return alert("請先貼上同步碼或同步連結。");
-      const hashIdx = raw.indexOf("#sync=");
-      if (hashIdx !== -1) raw = raw.slice(hashIdx + 6);
+    function resetBuiltInLessons() {
+      lessons = structuredClone(INITIAL_LESSONS);
       try {
-        const parsed = JSON.parse(decodeBase64Url(raw));
-        const list = Array.isArray(parsed) ? parsed : (parsed.lessons || []);
-        if (!list.length) return alert("同步碼內沒有文章資料。");
-        const merged = mergeLessons(state.lessons, list);
-        saveLessonsToStorage(merged);
-        state.activeIndex = 0;
+        localStorage.removeItem(STORAGE_KEY);
+      } catch (e) {}
+      shuffledQuizCache = {};
+      currentIndex = 0;
+      showCa = false;
+      showZh = false;
+      showEn = false;
+      ioStatus = {
+        type: "ok",
+        message: "已還原為內建初始文章清單，並清除本機已匯入紀錄。"
+      };
+      render();
+    }
+
+    function buildVoiceOptions(prefix, selectedURI) {
+      const filtered = availableVoices.filter(v => v.lang && v.lang.toLowerCase().startsWith(prefix));
+      const list = filtered.length > 0 ? filtered : availableVoices;
+      if (list.length === 0) {
+        return `<option value="">系統預設語音</option>`;
+      }
+      return list.map(v => {
+        const isSel = v.voiceURI === selectedURI ? "selected" : "";
+        return `<option value="${v.voiceURI}" ${isSel}>${v.name} (${v.lang})</option>`;
+      }).join("");
+    }
+
+    function getQuizQuestionText(qItem) {
+      if (quizLang === "ca") return qItem.caQ || qItem.esQ;
+      if (quizLang === "en") return qItem.enQ || qItem.esQ;
+      if (quizLang === "zh") return qItem.zhQ;
+      return qItem.esQ;
+    }
+
+    function getQuizOptions(qItem) {
+      if (quizLang === "ca") return qItem.caOpts || qItem.esOpts;
+      if (quizLang === "en") return qItem.enOpts || qItem.esOpts;
+      if (quizLang === "zh") return qItem.zhOpts;
+      return qItem.esOpts;
+    }
+
+    function getQuizExplain(qItem) {
+      if (quizLang === "ca") return qItem.caExplain || qItem.esExplain;
+      if (quizLang === "en") return qItem.enExplain || qItem.esExplain;
+      if (quizLang === "zh") return qItem.zhExplain;
+      return qItem.esExplain;
+    }
+
+    function getQuizModeLabel() {
+      if (quizLang === "ca") return "目前模式：加泰隆尼亞文版測驗";
+      if (quizLang === "en") return "目前模式：英文版測驗";
+      if (quizLang === "zh") return "目前模式：中文版測驗";
+      return "目前模式：西文版測驗";
+    }
+
+    function render() {
+      const lesson = lessons[currentIndex];
+      const activeQuiz = getActiveQuiz(currentIndex);
+
+      currentUnitLabelEl.textContent = `${lesson.unitLabel || `第 ${currentIndex + 1} 篇`} / 共 ${lessons.length} 篇`;
+      prevBtn.disabled = currentIndex === 0;
+      nextBtn.disabled = currentIndex === lessons.length - 1;
+
+      if (overviewMenuOpen) {
+        renderOverviewMenuItems();
+      }
+
+      appEl.innerHTML = `
+        <section id="bcnBanner" class="bcn-banner" aria-label="巴塞隆納插畫">
+          <div class="bcn-banner-top">
+            <div class="bcn-caption-wrap">
+              <span class="bcn-title">${currentIllus.name}</span>
+            </div>
+
+            <div class="bcn-actions-right">
+              <button type="button" id="prevIllusBtn">上一張</button>
+              <button type="button" id="nextIllusBtn">下一張</button>
+              <div class="bcn-menu-wrap">
+                <button type="button" id="toggleIllusMenuBtn" class="${illusMenuOpen ? "active-pill" : ""}">
+                  插畫選單 ${illusMenuOpen ? "▴" : "▾"}
+                </button>
+                <div id="illusControlsDropdown" class="bcn-controls-dropdown ${illusMenuOpen ? "open" : ""}">
+                  <button type="button" id="randomIllusBtn">隨機換圖</button>
+                  <button type="button" id="toggleGalleryBtn" class="${galleryOpen ? "active-pill" : ""}">
+                    ${galleryOpen ? "收合全部" : "檢視全部"}
+                  </button>
+                  <button type="button" id="toggleAutoIllusBtn" class="${autoRotateIllus ? "active-pill" : ""}">
+                    ${autoRotateIllus ? "自動輪播：開" : "自動輪播：關"}
+                  </button>
+                  <button type="button" id="toggleMotionBtn" class="${manualReducedMotion ? "active-pill" : ""}">
+                    ${manualReducedMotion ? "減少動態：開" : "減少動態"}
+                  </button>
+                </div>
+              </div>
+            </div>
+          </div>
+
+          <div class="bcn-svg-frame">${currentIllus.svg}</div>
+          <div class="bcn-desc">${currentIllus.desc}</div>
+
+          <div id="bcnGalleryPanel" class="bcn-gallery-panel ${galleryOpen ? "open" : ""}">
+            <div class="bcn-gallery-grid">
+              ${BCN_ILLUSTRATIONS.map(item => `
+                <button
+                  type="button"
+                  class="bcn-thumb-btn ${item.id === currentIllus.id ? "active" : ""}"
+                  data-pick-illus="${item.id}"
+                >
+                  ${item.svg}
+                  <span class="bcn-thumb-label">${item.name}</span>
+                </button>
+              `).join("")}
+            </div>
+          </div>
+        </section>
+
+        <section class="io-bar">
+          <div>
+            <div class="io-title">本機文章管理（自動儲存 · 匯入／匯出 JSON · 跨裝置同步）</div>
+            <div class="io-desc">已自動存於本機瀏覽器（重新整理不遺失）；電腦匯入後可匯出 JSON 或用「跨裝置同步碼」傳到手機。</div>
+          </div>
+          <div class="io-actions">
+            <button type="button" id="exportJsonBtn">匯出文章 (JSON)</button>
+            <button type="button" id="importJsonBtn">匯入文章 (JSON)</button>
+            <button type="button" id="toggleSyncBtn" class="${syncDrawerOpen ? "active-pill" : ""}">跨裝置同步碼</button>
+            <button type="button" id="resetDefaultBtn">還原內建</button>
+            <input type="file" id="jsonFileInput" accept=".json,application/json" style="display:none;" />
+          </div>
+          <div id="syncDrawer" class="sync-drawer ${syncDrawerOpen ? "open" : ""}">
+            <div class="sync-btns">
+              <button type="button" class="primary" id="genSyncCodeBtn">產生目前全部文章同步碼（電腦端）</button>
+              <button type="button" id="copySyncCodeBtn">複製同步碼</button>
+              <button type="button" class="primary" id="applySyncCodeBtn">套用同步碼（手機端）</button>
+            </div>
+            <textarea id="syncCodeTextarea" class="sync-textarea" placeholder="電腦端點「產生目前全部文章同步碼」取得代碼；手機端貼上同步碼後點「套用同步碼」即可同步。">${syncCodeText}</textarea>
+          </div>
+          <div id="ioStatusBox" class="io-status ${ioStatus.message ? `show ${ioStatus.type}` : ""}">
+            ${ioStatus.message}
+          </div>
+        </section>
+
+        <section id="articleSection" class="card">
+          <div class="meta">
+            <span class="badge">${lesson.level}</span>
+            <span class="topic-badge">${lesson.topic}</span>
+            <span class="time-badge">${lesson.duration}</span>
+            <span>${lesson.unitLabel} · 可重複閱讀與複習</span>
+          </div>
+          <h1>${lesson.title}</h1>
+
+          <div class="es-text" id="esParagraphs">
+            ${lesson.esParagraphs.map(p => `<p>${p}</p>`).join("")}
+          </div>
+
+          <div class="audio-panel">
+            <div class="audio-controls-row">
+              <button type="button" class="primary" id="playEsBtn">朗讀西文</button>
+              <button type="button" id="playCaBtn">朗讀加泰隆尼亞文</button>
+              <button type="button" id="playEnBtn">朗讀英文</button>
+              <button type="button" id="pauseSpeechBtn">${speechState === "paused" ? "繼續朗讀" : "暫停朗讀"}</button>
+              <button type="button" id="stopSpeechBtn">停止朗讀</button>
+              <span id="speechStatusText" class="speech-status">待命／已停止</span>
+            </div>
+            <div class="voice-select-row">
+              <label class="voice-field">
+                <span>西文聲線：</span>
+                <select id="esVoiceSelect">${buildVoiceOptions("es", selectedEsVoiceURI)}</select>
+              </label>
+              <label class="voice-field">
+                <span>加泰隆尼亞文聲線：</span>
+                <select id="caVoiceSelect">${buildVoiceOptions("ca", selectedCaVoiceURI)}</select>
+              </label>
+              <label class="voice-field">
+                <span>英文聲線：</span>
+                <select id="enVoiceSelect">${buildVoiceOptions("en", selectedEnVoiceURI)}</select>
+              </label>
+            </div>
+          </div>
+
+          <div class="audio-controls-row" style="margin-top: 12px;">
+            <button type="button" id="toggleCaBtn" class="${showCa ? "active-pill" : ""}">
+              ${showCa ? "隱藏加泰隆尼亞文" : "顯示加泰隆尼亞文"}
+            </button>
+            <button type="button" id="toggleZhBtn" class="${showZh ? "active-pill" : ""}">
+              ${showZh ? "隱藏中文翻譯" : "顯示中文翻譯"}
+            </button>
+            <button type="button" id="toggleEnBtn" class="${showEn ? "active-pill" : ""}">
+              ${showEn ? "隱藏英文翻譯" : "顯示英文翻譯"}
+            </button>
+          </div>
+
+          ${showCa && lesson.caParagraphs && lesson.caParagraphs.length ? `
+            <div class="ca-text">
+              <span class="trans-label">加泰隆尼亞文（Català）${lesson.caTitle ? ` — ${lesson.caTitle}` : ""}</span>
+              ${lesson.caParagraphs.map(p => `<p>${p}</p>`).join("")}
+            </div>
+          ` : ""}
+
+          ${showZh && lesson.zhParagraphs.length ? `
+            <div class="zh-text">
+              <span class="trans-label">中文翻譯（Traducción al chino）</span>
+              ${lesson.zhParagraphs.map(p => `<p>${p}</p>`).join("")}
+            </div>
+          ` : ""}
+
+          ${showEn && lesson.enParagraphs.length ? `
+            <div class="en-text">
+              <span class="trans-label">英文翻譯（English translation）</span>
+              ${lesson.enParagraphs.map(p => `<p>${p}</p>`).join("")}
+            </div>
+          ` : ""}
+        </section>
+
+        <section id="vocabSection" class="card">
+          <h2>重要單字與歷史淵源</h2>
+          <div class="grid-2">
+            ${lesson.vocab.map(v => `
+              <div class="item-box">
+                <div class="item-head">
+                  <span class="es-word">${v.word}</span>
+                  <span class="pos">${v.pos}</span>
+                </div>
+                ${v.caWord ? `<div class="ca-box"><strong>加泰隆尼亞文：</strong>${v.caWord}${v.caExample ? `<br /><em>${v.caExample}</em>` : ""}</div>` : ""}
+                <div class="meaning-line"><strong>釋義：</strong>${v.meaning}</div>
+                <div class="example"><strong>例句：</strong>${v.example}</div>
+                ${v.origin ? `<div class="origin-box"><strong>歷史／詞源淵源：</strong>${v.origin}</div>` : ""}
+              </div>
+            `).join("")}
+          </div>
+        </section>
+
+        <section id="phrasesSection" class="card">
+          <h2>實用片語與歷史淵源</h2>
+          <div class="grid-2">
+            ${lesson.phrases.map(p => `
+              <div class="item-box">
+                <div class="item-head">
+                  <span class="es-word">${p.phrase}</span>
+                </div>
+                ${p.caPhrase ? `<div class="ca-box"><strong>加泰隆尼亞文：</strong>${p.caPhrase}${p.caExample ? `<br /><em>${p.caExample}</em>` : ""}</div>` : ""}
+                <div class="meaning-line"><strong>釋義：</strong>${p.meaning}</div>
+                <div class="example"><strong>例句：</strong>${p.example}</div>
+                ${p.origin ? `<div class="origin-box"><strong>歷史／詞源淵源：</strong>${p.origin}</div>` : ""}
+              </div>
+            `).join("")}
+          </div>
+        </section>
+
+        <section id="grammarSection" class="card">
+          <h2>文法重點</h2>
+          ${lesson.grammar.map(g => `
+            <div class="grammar-box">
+              <h3 style="margin-bottom: 6px;">${g.title}</h3>
+              <p style="margin: 0 0 8px;">${g.explanation}</p>
+              <div class="example"><strong>西文例句：</strong>${g.example}</div>
+              ${g.caExample ? `<div class="ca-box" style="margin-top: 8px;"><strong>加泰隆尼亞文對照：</strong>${g.caExample}</div>` : ""}
+            </div>
+          `).join("")}
+        </section>
+
+        <section id="quizSection" class="card">
+          <div class="quiz-header">
+            <div>
+              <h2 style="margin-bottom: 4px;">測驗</h2>
+              <div class="review-note">${getQuizModeLabel()}</div>
+            </div>
+            <div class="lang-switch">
+              <button type="button" id="langEsBtn" class="${quizLang === "es" ? "active-pill" : ""}">西文版</button>
+              <button type="button" id="langCaBtn" class="${quizLang === "ca" ? "active-pill" : ""}">加泰隆尼亞文版</button>
+              <button type="button" id="langEnBtn" class="${quizLang === "en" ? "active-pill" : ""}">英文版</button>
+              <button type="button" id="langZhBtn" class="${quizLang === "zh" ? "active-pill" : ""}">中文版</button>
+            </div>
+          </div>
+
+          <form id="quizForm">
+            ${activeQuiz.map((qItem, qIdx) => {
+              const promptText = getQuizQuestionText(qItem);
+              const opts = getQuizOptions(qItem);
+              return `
+                <div class="quiz-q">
+                  <div style="font-weight: 600;">${promptText}</div>
+                  <div class="options">
+                    ${opts.map((opt, oIdx) => `
+                      <label class="option-label">
+                        <input type="radio" name="q${qIdx}" value="${oIdx}" />
+                        <span>${opt}</span>
+                      </label>
+                    `).join("")}
+                  </div>
+                  <div id="feedback-${qIdx}"></div>
+                </div>
+              `;
+            }).join("")}
+
+            <div class="quiz-actions">
+              <button type="submit" class="primary">提交測驗</button>
+              <button type="button" id="resetQuizBtn">重新洗牌作答／複習</button>
+              <span id="scoreSummary" style="font-weight: 700;"></span>
+            </div>
+          </form>
+        </section>
+      `;
+
+      syncHeaderOffset();
+      updateSpeechStatusLabel();
+
+      // 插畫上一張／下一張與選單開關
+      document.getElementById("prevIllusBtn").addEventListener("click", () => {
+        const idx = BCN_ILLUSTRATIONS.findIndex(i => i.id === currentIllus.id);
+        const prevIdx = (idx - 1 + BCN_ILLUSTRATIONS.length) % BCN_ILLUSTRATIONS.length;
+        currentIllus = BCN_ILLUSTRATIONS[prevIdx];
         render();
-        alert(`已成功同步 ${list.length} 篇文章到這台裝置！`);
-      } catch (e) {
-        alert("同步碼格式無效，請確認是否複製完整。");
+      });
+
+      document.getElementById("nextIllusBtn").addEventListener("click", () => {
+        const idx = BCN_ILLUSTRATIONS.findIndex(i => i.id === currentIllus.id);
+        const nextIdx = (idx + 1) % BCN_ILLUSTRATIONS.length;
+        currentIllus = BCN_ILLUSTRATIONS[nextIdx];
+        render();
+      });
+
+      document.getElementById("toggleIllusMenuBtn").addEventListener("click", (e) => {
+        e.stopPropagation();
+        illusMenuOpen = !illusMenuOpen;
+        render();
+      });
+
+      document.getElementById("randomIllusBtn").addEventListener("click", () => {
+        currentIllus = pickSeasonalIllustration(currentIllus.id);
+        render();
+      });
+
+      document.getElementById("toggleGalleryBtn").addEventListener("click", () => {
+        galleryOpen = !galleryOpen;
+        render();
+      });
+
+      document.querySelectorAll("[data-pick-illus]").forEach(btn => {
+        btn.addEventListener("click", () => {
+          const picked = BCN_ILLUSTRATIONS.find(i => i.id === btn.getAttribute("data-pick-illus"));
+          if (picked) {
+            currentIllus = picked;
+            render();
+          }
+        });
+      });
+
+      document.getElementById("toggleAutoIllusBtn").addEventListener("click", () => {
+        autoRotateIllus = !autoRotateIllus;
+        applyMotionPreference();
+        render();
+      });
+
+      document.getElementById("toggleMotionBtn").addEventListener("click", () => {
+        manualReducedMotion = !manualReducedMotion;
+        applyMotionPreference();
+        render();
+      });
+
+      // JSON 匯入／匯出與跨裝置同步碼
+      document.getElementById("exportJsonBtn").addEventListener("click", exportLessonsJson);
+      const fileInput = document.getElementById("jsonFileInput");
+      document.getElementById("importJsonBtn").addEventListener("click", () => fileInput.click());
+      fileInput.addEventListener("change", (e) => {
+        if (e.target.files && e.target.files[0]) {
+          handleImportFile(e.target.files[0]);
+          e.target.value = "";
+        }
+      });
+      document.getElementById("resetDefaultBtn").addEventListener("click", resetBuiltInLessons);
+
+      document.getElementById("toggleSyncBtn").addEventListener("click", () => {
+        syncDrawerOpen = !syncDrawerOpen;
+        render();
+      });
+
+      const syncArea = document.getElementById("syncCodeTextarea");
+      if (syncArea) {
+        syncArea.addEventListener("input", (e) => {
+          syncCodeText = e.target.value;
+        });
+      }
+
+      document.getElementById("genSyncCodeBtn").addEventListener("click", () => {
+        syncCodeText = toSyncCode(lessons);
+        ioStatus = {
+          type: "ok",
+          message: `已產生目前 ${lessons.length} 篇的跨裝置同步碼，請複製並傳到手機套用。`
+        };
+        render();
+      });
+
+      document.getElementById("copySyncCodeBtn").addEventListener("click", () => {
+        const val = syncCodeText || toSyncCode(lessons);
+        syncCodeText = val;
+        if (navigator.clipboard && navigator.clipboard.writeText) {
+          navigator.clipboard.writeText(val).then(() => {
+            ioStatus = { type: "ok", message: "已複製同步碼到剪貼簿！" };
+            render();
+          }).catch(() => {
+            ioStatus = { type: "ok", message: "請手動全選下方同步碼並複製。" };
+            render();
+          });
+        } else {
+          ioStatus = { type: "ok", message: "請手動全選下方同步碼並複製。" };
+          render();
+        }
+      });
+
+      document.getElementById("applySyncCodeBtn").addEventListener("click", () => {
+        try {
+          const rawList = fromSyncCode(syncCodeText);
+          mergeImportedLessons(rawList);
+        } catch (err) {
+          ioStatus = {
+            type: "bad",
+            message: `同步碼套用失敗：${err.message || "請確認同步碼是否完整。"}`
+          };
+          render();
+        }
+      });
+
+      // 朗讀、暫停、停止與聲線選擇
+      document.getElementById("playEsBtn").addEventListener("click", () => startSpeech(lesson.esParagraphs, "es"));
+      document.getElementById("playCaBtn").addEventListener("click", () => {
+        const caList = lesson.caParagraphs && lesson.caParagraphs.length ? lesson.caParagraphs : lesson.esParagraphs;
+        startSpeech(caList, "ca");
+      });
+      document.getElementById("playEnBtn").addEventListener("click", () => startSpeech(lesson.enParagraphs, "en"));
+
+      document.getElementById("pauseSpeechBtn").addEventListener("click", () => {
+        togglePauseSpeech();
+        document.getElementById("pauseSpeechBtn").textContent =
+          speechState === "paused" ? "繼續朗讀" : "暫停朗讀";
+      });
+      document.getElementById("stopSpeechBtn").addEventListener("click", () => {
+        stopSpeech();
+        document.getElementById("pauseSpeechBtn").textContent = "暫停朗讀";
+      });
+
+      document.getElementById("esVoiceSelect").addEventListener("change", (e) => {
+        selectedEsVoiceURI = e.target.value;
+      });
+      document.getElementById("caVoiceSelect").addEventListener("change", (e) => {
+        selectedCaVoiceURI = e.target.value;
+      });
+      document.getElementById("enVoiceSelect").addEventListener("change", (e) => {
+        selectedEnVoiceURI = e.target.value;
+      });
+
+      // 翻譯開關
+      document.getElementById("toggleCaBtn").addEventListener("click", () => {
+        showCa = !showCa;
+        render();
+      });
+      document.getElementById("toggleZhBtn").addEventListener("click", () => {
+        showZh = !showZh;
+        render();
+      });
+      document.getElementById("toggleEnBtn").addEventListener("click", () => {
+        showEn = !showEn;
+        render();
+      });
+
+      // 測驗語系切換與批改
+      document.getElementById("langEsBtn").addEventListener("click", () => {
+        quizLang = "es";
+        render();
+      });
+      document.getElementById("langCaBtn").addEventListener("click", () => {
+        quizLang = "ca";
+        render();
+      });
+      document.getElementById("langEnBtn").addEventListener("click", () => {
+        quizLang = "en";
+        render();
+      });
+      document.getElementById("langZhBtn").addEventListener("click", () => {
+        quizLang = "zh";
+        render();
+      });
+      document.getElementById("resetQuizBtn").addEventListener("click", () => {
+        delete shuffledQuizCache[currentIndex];
+        render();
+      });
+
+      document.getElementById("quizForm").addEventListener("submit", (e) => {
+        e.preventDefault();
+        let score = 0;
+
+        activeQuiz.forEach((qItem, qIdx) => {
+          const opts = getQuizOptions(qItem);
+          const explain = getQuizExplain(qItem);
+          const selected = document.querySelector(`input[name="q${qIdx}"]:checked`);
+          const fbEl = document.getElementById(`feedback-${qIdx}`);
+
+          if (!selected) {
+            fbEl.className = "feedback bad";
+            if (quizLang === "ca") {
+              fbEl.textContent = `Sense respondre. Resposta correcta: "${opts[qItem.answer]}". ${explain}`;
+            } else if (quizLang === "en") {
+              fbEl.textContent = `Unanswered. Correct answer: "${opts[qItem.answer]}". ${explain}`;
+            } else if (quizLang === "zh") {
+              fbEl.textContent = `尚未作答。正確答案是：「${opts[qItem.answer]}」。${explain}`;
+            } else {
+              fbEl.textContent = `Sin responder. Respuesta correcta: "${opts[qItem.answer]}". ${explain}`;
+            }
+            return;
+          }
+
+          const val = Number(selected.value);
+          if (val === qItem.answer) {
+            score++;
+            fbEl.className = "feedback ok";
+            if (quizLang === "ca") {
+              fbEl.textContent = `Molt bé! ${explain}`;
+            } else if (quizLang === "en") {
+              fbEl.textContent = `Correct! ${explain}`;
+            } else if (quizLang === "zh") {
+              fbEl.textContent = `答對了！${explain}`;
+            } else {
+              fbEl.textContent = `¡Correcto! ${explain}`;
+            }
+          } else {
+            fbEl.className = "feedback bad";
+            if (quizLang === "ca") {
+              fbEl.textContent = `Incorrecte. Resposta correcta: "${opts[qItem.answer]}". ${explain}`;
+            } else if (quizLang === "en") {
+              fbEl.textContent = `Incorrect. Correct answer: "${opts[qItem.answer]}". ${explain}`;
+            } else if (quizLang === "zh") {
+              fbEl.textContent = `再接再厲！正確答案是：「${opts[qItem.answer]}」。${explain}`;
+            } else {
+              fbEl.textContent = `Incorrecto. Respuesta correcta: "${opts[qItem.answer]}". ${explain}`;
+            }
+          }
+        });
+
+        const summaryEl = document.getElementById("scoreSummary");
+        if (quizLang === "ca") {
+          summaryEl.textContent = `Puntuació: ${score} / ${activeQuiz.length}`;
+        } else if (quizLang === "en") {
+          summaryEl.textContent = `Score: ${score} / ${activeQuiz.length}`;
+        } else if (quizLang === "zh") {
+          summaryEl.textContent = `得分：${score} / ${activeQuiz.length}`;
+        } else {
+          summaryEl.textContent = `Puntuación: ${score} / ${activeQuiz.length}`;
+        }
+      });
+    }
+
+    // 點擊外部收合插畫選單
+    document.addEventListener("click", (e) => {
+      if (illusMenuOpen && !e.target.closest(".bcn-menu-wrap")) {
+        illusMenuOpen = false;
+        const dd = document.getElementById("illusControlsDropdown");
+        const btn = document.getElementById("toggleIllusMenuBtn");
+        if (dd) dd.classList.remove("open");
+        if (btn) {
+          btn.classList.remove("active-pill");
+          btn.textContent = "插畫選單 ▾";
+        }
       }
     });
 
-    state.lessons = loadInitialLessons();
+    // 文章總覽彈窗開關
+    openOverviewMenuBtn.addEventListener("click", () => {
+      setOverviewMenu(!overviewMenuOpen);
+    });
+    closeOverviewMenuBtn.addEventListener("click", () => {
+      setOverviewMenu(false);
+    });
+    overviewBackdrop.addEventListener("click", () => {
+      setOverviewMenu(false);
+    });
+
+    function jumpToSection(target) {
+      setOverviewMenu(false);
+      if (target === "top") {
+        window.scrollTo({ top: 0, behavior: "smooth" });
+        return;
+      }
+      const map = {
+        article: "articleSection",
+        vocab: "vocabSection",
+        phrases: "phrasesSection",
+        grammar: "grammarSection",
+        quiz: "quizSection"
+      };
+      const targetEl = document.getElementById(map[target]);
+      if (targetEl) {
+        targetEl.scrollIntoView({ behavior: "smooth", block: "start" });
+      }
+    }
+
+    document.querySelectorAll("[data-jump]").forEach(btn => {
+      btn.addEventListener("click", () => {
+        jumpToSection(btn.getAttribute("data-jump"));
+      });
+    });
+
+    function switchLesson(newIndex) {
+      if (newIndex >= 0 && newIndex < lessons.length) {
+        stopSpeech();
+        currentIndex = newIndex;
+        showCa = false;
+        showZh = false;
+        showEn = false;
+        ioStatus = { type: "", message: "" };
+        render();
+        window.scrollTo({ top: 0, behavior: "smooth" });
+      }
+    }
+
+    prevBtn.addEventListener("click", () => switchLesson(currentIndex - 1));
+    nextBtn.addEventListener("click", () => switchLesson(currentIndex + 1));
+
+    scrollTopBtn.addEventListener("click", () => {
+      window.scrollTo({ top: 0, behavior: "smooth" });
+    });
+
+    window.addEventListener("resize", syncHeaderOffset);
+
+    applyMotionPreference();
     render();
   </script>
 </body>
