@@ -3,7 +3,19 @@
 <head>
   <meta charset="UTF-8" />
   <meta name="viewport" content="width=device-width, initial-scale=1.0" />
+  <meta name="apple-mobile-web-app-capable" content="yes" />
+  <meta name="apple-mobile-web-app-title" content="西文深度閱讀站" />
+  <meta name="theme-color" content="#fffaf0" />
   <title>西文深度閱讀站</title>
+  <link
+    rel="icon"
+    type="image/svg+xml"
+    href="data:image/svg+xml,%3Csvg xmlns='http://www.w3.org/2000/svg' viewBox='0 0 128 128'%3E%3Crect width='128' height='128' rx='26' fill='%23efe3cc'/%3E%3Crect x='10' y='10' width='108' height='108' rx='20' fill='none' stroke='%23c8b28e' stroke-width='3'/%3E%3Cg transform='translate(64,64)'%3E%3Cellipse cx='0' cy='-25' rx='12' ry='21' fill='%23d48c46' stroke='%238c5220' stroke-width='2.5'/%3E%3Cellipse cx='0' cy='25' rx='12' ry='21' fill='%23d48c46' stroke='%238c5220' stroke-width='2.5'/%3E%3Cellipse cx='-25' cy='0' rx='21' ry='12' fill='%23d48c46' stroke='%238c5220' stroke-width='2.5'/%3E%3Cellipse cx='25' cy='0' rx='21' ry='12' fill='%23d48c46' stroke='%238c5220' stroke-width='2.5'/%3E%3Ccircle cx='0' cy='0' r='11' fill='%23f5d08a' stroke='%238c5220' stroke-width='2.5'/%3E%3Ccircle cx='0' cy='0' r='4' fill='%238c5220'/%3E%3C/g%3E%3C/svg%3E"
+  />
+  <link
+    rel="apple-touch-icon"
+    href="data:image/svg+xml,%3Csvg xmlns='http://www.w3.org/2000/svg' viewBox='0 0 180 180'%3E%3Crect width='180' height='180' rx='38' fill='%23efe3cc'/%3E%3Crect x='14' y='14' width='152' height='152' rx='28' fill='none' stroke='%23c8b28e' stroke-width='4'/%3E%3Cg transform='translate(90,90)'%3E%3Cellipse cx='0' cy='-35' rx='17' ry='29' fill='%23d48c46' stroke='%238c5220' stroke-width='3.5'/%3E%3Cellipse cx='0' cy='35' rx='17' ry='29' fill='%23d48c46' stroke='%238c5220' stroke-width='3.5'/%3E%3Cellipse cx='-35' cy='0' rx='29' ry='17' fill='%23d48c46' stroke='%238c5220' stroke-width='3.5'/%3E%3Cellipse cx='35' cy='0' rx='29' ry='17' fill='%23d48c46' stroke='%238c5220' stroke-width='3.5'/%3E%3Ccircle cx='0' cy='0' r='15' fill='%23f5d08a' stroke='%238c5220' stroke-width='3.5'/%3E%3Ccircle cx='0' cy='0' r='5.5' fill='%238c5220'/%3E%3C/g%3E%3C/svg%3E"
+  />
   <style>
     :root {
       --primary: #c85a17;
@@ -29,8 +41,8 @@
       --origin-bg: #f6effa;
       --origin-border: #dfd0eb;
       --origin-text: #563278;
-      --grammar-bg: #fdf4d7;
-      --grammar-border: #ebd288;
+      --grammar-bg: #FFFFFF;
+      --grammar-border: #e5d8c1;
       --header-offset: 108px;
     }
 
@@ -301,25 +313,18 @@
       gap: 8px;
     }
 
-    .bcn-tag {
-      background: #faeed5;
-      color: var(--primary-hover);
-      border: 1px solid var(--warm-border);
-      font-size: 0.8rem;
-      font-weight: 700;
-      padding: 2px 10px;
-      border-radius: 999px;
-    }
-
     .bcn-title {
       font-weight: 800;
       font-size: clamp(0.98rem, 0.7vw + 0.85rem, 1.12rem);
       color: var(--text);
     }
 
-    .bcn-sub {
-      font-size: 0.85rem;
-      color: var(--muted);
+    .bcn-actions-right {
+      display: flex;
+      align-items: center;
+      gap: 8px;
+      flex-wrap: wrap;
+      position: relative;
     }
 
     .bcn-menu-wrap {
@@ -331,23 +336,28 @@
       position: absolute;
       right: 0;
       top: calc(100% + 8px);
-      width: min(280px, 84vw);
+      width: max-content;
+      min-width: 136px;
       background: var(--card);
       border: 1px solid var(--border);
       border-radius: 12px;
-      padding: 12px;
+      padding: 8px;
       box-shadow: 0 10px 24px rgba(68, 46, 22, 0.16);
       z-index: 20;
       flex-direction: column;
-      gap: 8px;
+      align-items: stretch;
+      gap: 6px;
     }
     .bcn-controls-dropdown.open {
       display: flex;
     }
 
     .bcn-controls-dropdown button {
-      width: 100%;
-      text-align: left;
+      width: auto;
+      padding: 5px 10px;
+      font-size: 0.83rem;
+      text-align: center;
+      white-space: nowrap;
     }
 
     .bcn-svg-frame {
@@ -611,7 +621,7 @@
       gap: 10px;
       margin-top: 14px;
       padding: 14px;
-      background: #fdf8ee;
+      background: #FFFFFF;
       border: 1px solid var(--border);
       border-radius: 12px;
     }
@@ -865,9 +875,9 @@
       </div>
 
       <div class="lesson-pager-group">
-        <button type="button" id="prevBtn">← 上一篇</button>
+        <button type="button" id="prevBtn">上一篇</button>
         <span id="currentUnitLabel" class="unit-label">第 1 篇 / 共 2 篇</span>
-        <button type="button" id="nextBtn">下一篇 →</button>
+        <button type="button" id="nextBtn">下一篇</button>
       </div>
     </div>
   </header>
@@ -937,13 +947,14 @@
             <rect x="481" y="109" width="14" height="67" fill="#e6d7bc" />
             <rect x="531" y="109" width="14" height="67" fill="#e6d7bc" />
             <path d="M220 84 Q310 66 400 84 T580 84 L580 95 Q490 77 400 95 T220 95 Z" fill="#e07a3f" />
-            <!-- 平滑曲線馬賽克蜥蜴 -->
-            <g class="anim-float">
-              <path d="M342 152 Q352 142 374 143 Q406 144 436 149 Q468 145 504 132 Q488 154 452 160 Q438 162 426 160 L422 174 Q418 176 414 173 L416 160 L376 160 L371 174 Q367 176 363 173 L367 159 Q346 158 342 152 Z" fill="#2e8b75" stroke="#1d5d8c" stroke-width="1.6" stroke-linejoin="round" />
-              <path d="M378 151 Q386 147 394 151 Q386 156 378 151 Z" fill="#f5b942" />
-              <path d="M402 151 Q411 147 420 151 Q411 156 402 151 Z" fill="#c85a17" />
-              <path d="M427 152 Q435 148 443 153 Q435 157 427 152 Z" fill="#f5b942" />
-              <circle cx="356" cy="149" r="2.6" fill="#3E3A39" />
+            <g transform="translate(423, 154)">
+              <g class="anim-float">
+                <path d="M-81 -2 Q-71 -12 -49 -11 Q-17 -10 13 -5 Q45 -9 81 -22 Q65 0 29 6 Q15 8 3 6 L-1 20 Q-5 22 -9 19 L-7 6 L-47 6 L-52 20 Q-56 22 -60 19 L-56 5 Q-77 4 -81 -2 Z" fill="#2e8b75" stroke="#1d5d8c" stroke-width="1.6" stroke-linejoin="round" />
+                <path d="M-45 -3 Q-37 -7 -29 -3 Q-37 2 -45 -3 Z" fill="#f5b942" />
+                <path d="M-21 -3 Q-12 -7 -3 -3 Q-12 2 -21 -3 Z" fill="#c85a17" />
+                <path d="M4 -2 Q12 -6 20 -1 Q12 3 4 -2 Z" fill="#f5b942" />
+                <circle cx="-67" cy="-5" r="2.6" fill="#3E3A39" />
+              </g>
             </g>
           </svg>
         `
@@ -993,11 +1004,13 @@
             <circle cx="290" cy="152" r="26" fill="#477a48" />
             <circle cx="485" cy="120" r="22" fill="#5a8f5b" />
             <circle cx="510" cy="152" r="26" fill="#477a48" />
-            <g class="anim-float">
-              <circle cx="395" cy="166" r="4" fill="#c85a17" />
-              <line x1="395" y1="170" x2="395" y2="184" stroke="#c85a17" stroke-width="3" />
-              <line x1="395" y1="184" x2="390" y2="196" stroke="#c85a17" stroke-width="2.5" />
-              <line x1="395" y1="184" x2="400" y2="196" stroke="#c85a17" stroke-width="2.5" />
+            <g transform="translate(395, 181)">
+              <g class="anim-float">
+                <circle cx="0" cy="-15" r="4" fill="#c85a17" />
+                <line x1="0" y1="-11" x2="0" y2="3" stroke="#c85a17" stroke-width="3" />
+                <line x1="0" y1="3" x2="-5" y2="15" stroke="#c85a17" stroke-width="2.5" />
+                <line x1="0" y1="3" x2="5" y2="15" stroke="#c85a17" stroke-width="2.5" />
+              </g>
             </g>
           </svg>
         `
@@ -1015,11 +1028,13 @@
             <rect x="0" y="132" width="800" height="88" fill="#4b93b8" />
             <rect x="170" y="128" width="105" height="10" rx="2" fill="#d9c3a3" />
             <path d="M280 156 Q360 150 440 156 T600 156" stroke="#b3def5" stroke-width="2.5" fill="none" class="anim-drift" />
-            <g class="anim-float">
-              <path d="M360 140 L450 140 L436 154 L374 154 Z" fill="#c85a17" />
-              <line x1="405" y1="140" x2="405" y2="72" stroke="#574837" stroke-width="3.5" />
-              <polygon points="407,76 452,132 407,132" fill="#fffdf8" />
-              <polygon points="403,86 370,132 403,132" fill="#f7ebd2" />
+            <g transform="translate(406, 113)">
+              <g class="anim-float">
+                <path d="M-46 27 L44 27 L30 41 L-32 41 Z" fill="#c85a17" />
+                <line x1="-1" y1="27" x2="-1" y2="-41" stroke="#574837" stroke-width="3.5" />
+                <polygon points="1,-37 46,19 1,19" fill="#fffdf8" />
+                <polygon points="-3,-27 -36,19 -3,19" fill="#f7ebd2" />
+              </g>
             </g>
           </svg>
         `
@@ -1034,17 +1049,21 @@
           <svg viewBox="0 0 800 220" role="img" aria-label="聖喬治節玫瑰與書本插畫">
             <rect width="800" height="220" fill="#fdf2ea" />
             <rect x="0" y="182" width="800" height="38" fill="#e7d6ba" />
-            <g class="anim-float">
-              <path d="M235 148 Q312 132 390 150 L390 184 Q312 166 235 184 Z" fill="#fffdf8" stroke="#c85a17" stroke-width="2" />
-              <path d="M390 150 Q468 132 545 148 L545 184 Q468 166 390 184 Z" fill="#fffdf8" stroke="#c85a17" stroke-width="2" />
-              <line x1="262" y1="158" x2="365" y2="162" stroke="#b8a892" stroke-width="2" />
-              <line x1="415" y1="162" x2="518" y2="158" stroke="#b8a892" stroke-width="2" />
+            <g transform="translate(390, 161)">
+              <g class="anim-float">
+                <path d="M-155 -13 Q-78 -29 0 -11 L0 23 Q-78 5 -155 23 Z" fill="#fffdf8" stroke="#c85a17" stroke-width="2" />
+                <path d="M0 -11 Q78 -29 155 -13 L155 23 Q78 5 0 23 Z" fill="#fffdf8" stroke="#c85a17" stroke-width="2" />
+                <line x1="-128" y1="-3" x2="-25" y2="1" stroke="#b8a892" stroke-width="2" />
+                <line x1="25" y1="1" x2="128" y2="-3" stroke="#b8a892" stroke-width="2" />
+              </g>
             </g>
-            <g transform="translate(515, 92)" class="anim-pulse">
-              <line x1="0" y1="16" x2="-10" y2="62" stroke="#3f7d44" stroke-width="5" stroke-linecap="round" />
-              <ellipse cx="-14" cy="40" rx="11" ry="5.5" fill="#4e9454" transform="rotate(-25 -14 40)" />
-              <circle cx="0" cy="0" r="20" fill="#d63c2f" />
-              <path d="M-10 -2 Q0 -14 10 -2 Q6 10 -6 8 Z" fill="#eb6456" />
+            <g transform="translate(515, 92)">
+              <g class="anim-pulse">
+                <line x1="0" y1="16" x2="-10" y2="62" stroke="#3f7d44" stroke-width="5" stroke-linecap="round" />
+                <ellipse cx="-14" cy="40" rx="11" ry="5.5" fill="#4e9454" transform="rotate(-25 -14 40)" />
+                <circle cx="0" cy="0" r="20" fill="#d63c2f" />
+                <path d="M-10 -2 Q0 -14 10 -2 Q6 10 -6 8 Z" fill="#eb6456" />
+              </g>
             </g>
           </svg>
         `
@@ -1065,43 +1084,48 @@
             <circle cx="400" cy="154" r="8" fill="#f7d699" />
             <circle cx="429" cy="154" r="8" fill="#f7d699" />
             <circle cx="458" cy="154" r="8" fill="#f7d699" />
-            <g class="anim-float">
-              <rect x="372" y="128" width="56" height="20" rx="4" fill="#1d5d8c" />
-              <circle cx="386" cy="120" r="7" fill="#f7d699" />
-              <circle cx="400" cy="120" r="7" fill="#f7d699" />
-              <circle cx="414" cy="120" r="7" fill="#f7d699" />
-              <rect x="382" y="96" width="36" height="18" rx="4" fill="#d97a3a" />
-              <circle cx="392" cy="88" r="6.5" fill="#f7d699" />
-              <circle cx="408" cy="88" r="6.5" fill="#f7d699" />
-              <rect x="390" y="68" width="20" height="15" rx="3" fill="#c85a17" />
-              <circle cx="400" cy="60" r="6" fill="#f7d699" />
-              <circle cx="400" cy="42" r="5.5" fill="#f5b942" />
-              <line x1="400" y1="48" x2="400" y2="62" stroke="#c85a17" stroke-width="3" />
+            <g transform="translate(400, 92)">
+              <g class="anim-float">
+                <rect x="-28" y="36" width="56" height="20" rx="4" fill="#1d5d8c" />
+                <circle cx="-14" cy="28" r="7" fill="#f7d699" />
+                <circle cx="0" cy="28" r="7" fill="#f7d699" />
+                <circle cx="14" cy="28" r="7" fill="#f7d699" />
+                <rect x="-18" y="4" width="36" height="18" rx="4" fill="#d97a3a" />
+                <circle cx="-8" cy="-4" r="6.5" fill="#f7d699" />
+                <circle cx="8" cy="-4" r="6.5" fill="#f7d699" />
+                <rect x="-10" y="-24" width="20" height="15" rx="3" fill="#c85a17" />
+                <circle cx="0" cy="-32" r="6" fill="#f7d699" />
+                <circle cx="0" cy="-50" r="5.5" fill="#f5b942" />
+                <line x1="0" y1="-44" x2="0" y2="-30" stroke="#c85a17" stroke-width="3" />
+              </g>
             </g>
           </svg>
         `
       },
       {
         id: "tapas-paella",
-        name: "8. 海鮮飯烤鍋與番茄麵包",
+        name: "8. 海鮮飯與番茄麵包",
         category: "飲食文化",
         seasons: ["spring", "summer", "autumn", "winter"],
-        desc: "描繪雙耳烤鍋中的金黃米飯與法棍番茄麵包。",
+        desc: "描繪金黃海鮮飯與番茄麵包。",
         svg: `
           <svg viewBox="0 0 800 220" role="img" aria-label="海鮮飯與番茄麵包插畫">
             <rect width="800" height="220" fill="#fcf4e4" />
             <rect x="0" y="174" width="800" height="46" fill="#e8d6b7" />
-            <line x1="255" y1="144" x2="275" y2="144" stroke="#8c5832" stroke-width="5" stroke-linecap="round" />
-            <line x1="455" y1="144" x2="475" y2="144" stroke="#8c5832" stroke-width="5" stroke-linecap="round" />
-            <ellipse cx="365" cy="148" rx="92" ry="24" fill="#b86b28" />
-            <ellipse cx="365" cy="144" rx="82" ry="18" fill="#f5c342" class="anim-pulse" />
-            <circle cx="332" cy="142" r="5" fill="#d63c2f" />
-            <circle cx="365" cy="146" r="5" fill="#4c7a4b" />
-            <circle cx="398" cy="141" r="5" fill="#d63c2f" />
-            <circle cx="422" cy="145" r="6" fill="#ffe066" />
-            <ellipse cx="525" cy="158" rx="34" ry="10" fill="#fffdf8" stroke="#cbb898" stroke-width="1.5" />
-            <rect x="505" y="146" width="38" height="10" rx="4" fill="#d99b52" />
-            <circle cx="524" cy="146" r="5" fill="#d63c2f" class="anim-float" />
+            <!-- 海鮮飯（左右手把緊接鍋身） -->
+            <line x1="212" y1="144" x2="232" y2="144" stroke="#8c5832" stroke-width="5" stroke-linecap="round" />
+            <line x1="378" y1="144" x2="398" y2="144" stroke="#8c5832" stroke-width="5" stroke-linecap="round" />
+            <ellipse cx="305" cy="148" rx="80" ry="21" fill="#b86b28" />
+            <ellipse cx="305" cy="144" rx="70" ry="16" fill="#f5c342" class="anim-pulse" />
+            <circle cx="276" cy="142" r="5" fill="#d63c2f" />
+            <circle cx="305" cy="146" r="5" fill="#4c7a4b" />
+            <circle cx="334" cy="141" r="5" fill="#d63c2f" />
+            <!-- 番茄麵包 -->
+            <ellipse cx="475" cy="158" rx="30" ry="9" fill="#fffdf8" stroke="#cbb898" stroke-width="1.5" />
+            <rect x="457" y="146" width="35" height="10" rx="4" fill="#d99b52" />
+            <g transform="translate(474, 146)">
+              <circle cx="0" cy="0" r="5" fill="#d63c2f" class="anim-float" />
+            </g>
           </svg>
         `
       },
@@ -1130,41 +1154,61 @@
         name: "10. 巴塞隆納海灘遮陽傘與棕櫚樹",
         category: "海灘夏日",
         seasons: ["summer"],
-        desc: "描繪海灘條紋遮陽傘、海浪、沙灘與搖曳的棕櫚樹葉。",
+        desc: "描繪海灘遮陽傘、棕櫚樹與地中海海岸風光。",
         svg: `
-          <svg viewBox="0 0 800 220" role="img" aria-label="巴塞隆納海灘夏日插畫">
+          <svg viewBox="0 0 800 220" role="img" aria-label="巴塞隆納海灘遮陽傘與棕櫚樹插畫">
             <rect width="800" height="128" fill="#dff2fc" />
-            <circle cx="670" cy="44" r="26" fill="#f7b731" class="anim-pulse" />
+            <circle cx="670" cy="44" r="24" fill="#f7b731" class="anim-pulse" />
             <rect x="0" y="128" width="800" height="32" fill="#4da1c4" />
             <path d="M0 158 Q400 148 800 158 L800 220 L0 220 Z" fill="#f3dfb6" />
-            <line x1="255" y1="160" x2="255" y2="112" stroke="#7c5329" stroke-width="4" />
-            <path d="M208 112 Q255 76 302 112 Z" fill="#c85a17" class="anim-float" />
-            <path d="M238 112 Q255 76 272 112 Z" fill="#f7ebd2" class="anim-float" />
-            <path d="M545 166 Q552 126 538 90" stroke="#7c5329" stroke-width="6" fill="none" />
-            <g class="anim-drift">
-              <path d="M538 90 Q505 76 485 96" stroke="#4d8f4c" stroke-width="5" stroke-linecap="round" fill="none" />
-              <path d="M538 90 Q570 76 590 96" stroke="#4d8f4c" stroke-width="5" stroke-linecap="round" fill="none" />
-              <path d="M538 90 Q526 62 548 56" stroke="#4d8f4c" stroke-width="5" stroke-linecap="round" fill="none" />
+            <line x1="285" y1="160" x2="285" y2="112" stroke="#7c5329" stroke-width="4" />
+            <g transform="translate(285, 94)">
+              <g class="anim-float">
+                <path d="M-47 18 Q0 -18 47 18 Z" fill="#c85a17" />
+                <path d="M-17 18 Q0 -18 17 18 Z" fill="#f7ebd2" />
+              </g>
+            </g>
+            <path d="M515 166 Q522 126 508 90" stroke="#7c5329" stroke-width="6" fill="none" />
+            <g transform="translate(508, 76)">
+              <g class="anim-drift">
+                <path d="M0 14 Q-33 0 -53 20" stroke="#4d8f4c" stroke-width="5" stroke-linecap="round" fill="none" />
+                <path d="M0 14 Q32 0 52 20" stroke="#4d8f4c" stroke-width="5" stroke-linecap="round" fill="none" />
+                <path d="M0 14 Q-12 -14 10 -20" stroke="#4d8f4c" stroke-width="5" stroke-linecap="round" fill="none" />
+              </g>
             </g>
           </svg>
         `
       },
       {
         id: "barcelona-cathedral",
-        name: "11. 巴塞隆納主教座堂哥德尖頂",
+        name: "11. 巴塞隆納主教座堂與復活節遊行",
         category: "歷史建築",
         seasons: ["spring", "summer", "autumn", "winter"],
-        desc: "描繪哥德區主教座堂的高聳尖頂、玫瑰窗、尖拱門與石階。",
+        desc: "描繪哥德區主教座堂尖頂、玫瑰窗，以及前方舉旗持燭的復活節遊行隊伍。",
         svg: `
-          <svg viewBox="0 0 800 220" role="img" aria-label="巴塞隆納主教座堂插畫">
+          <svg viewBox="0 0 800 220" role="img" aria-label="巴塞隆納主教座堂與復活節遊行插畫">
             <rect width="800" height="220" fill="#f6efe2" />
             <rect x="0" y="186" width="800" height="34" fill="#e2d1b3" />
-            <rect x="315" y="96" width="170" height="90" fill="#d4bf9e" stroke="#9e8868" stroke-width="2" />
-            <polygon points="315,96 340,42 365,96" fill="#c4ae8d" />
-            <polygon points="370,96 400,26 430,96" fill="#d9c4a3" class="anim-float" />
-            <polygon points="435,96 460,42 485,96" fill="#c4ae8d" />
-            <circle cx="400" cy="122" r="14" fill="#fffdf8" stroke="#7c6649" stroke-width="2" />
-            <path d="M380 186 L380 154 Q400 138 420 154 L420 186 Z" fill="#6e583c" />
+            <rect x="315" y="92" width="170" height="94" fill="#d4bf9e" stroke="#9e8868" stroke-width="2" />
+            <polygon points="315,92 340,40 365,92" fill="#c4ae8d" />
+            <g transform="translate(400, 58)">
+              <polygon points="-30,34 0,-34 30,34" fill="#d9c4a3" class="anim-float" />
+            </g>
+            <polygon points="435,92 460,40 485,92" fill="#c4ae8d" />
+            <circle cx="400" cy="118" r="13" fill="#fffdf8" stroke="#7c6649" stroke-width="2" />
+            <path d="M380 186 L380 152 Q400 136 420 152 L420 186 Z" fill="#6e583c" />
+            <g transform="translate(266, 156)">
+              <g class="anim-drift">
+                <line x1="-11" y1="30" x2="-11" y2="-30" stroke="#574837" stroke-width="2.5" />
+                <polygon points="-10,-28 16,-20 -10,-12" fill="#6d3b8e" />
+                <polygon points="-30,30 -22,-2 -14,30" fill="#4e2a66" />
+                <circle cx="-22" cy="-8" r="5.5" fill="#f7d699" />
+                <polygon points="2,30 10,-2 18,30" fill="#4e2a66" />
+                <circle cx="10" cy="-8" r="5.5" fill="#f7d699" />
+                <line x1="30" y1="28" x2="30" y2="0" stroke="#8c5832" stroke-width="2" />
+                <circle cx="30" cy="-4" r="4" fill="#f5b942" class="anim-pulse" />
+              </g>
+            </g>
           </svg>
         `
       },
@@ -1180,15 +1224,21 @@
             <rect x="0" y="178" width="800" height="42" fill="#3c4c63" />
             <path d="M150 52 Q400 104 650 52" stroke="#f7ebd2" stroke-width="2" fill="none" />
             <circle cx="230" cy="66" r="6" fill="#f5b942" class="anim-pulse" />
-            <circle cx="315" cy="80" r="6" fill="#e85a4a" class="anim-float" />
+            <g transform="translate(315, 80)">
+              <circle cx="0" cy="0" r="6" fill="#e85a4a" class="anim-float" />
+            </g>
             <circle cx="400" cy="86" r="6" fill="#f7ebd2" class="anim-pulse" />
-            <circle cx="485" cy="80" r="6" fill="#f5b942" class="anim-float" />
+            <g transform="translate(485, 80)">
+              <circle cx="0" cy="0" r="6" fill="#f5b942" class="anim-float" />
+            </g>
             <circle cx="570" cy="66" r="6" fill="#e85a4a" class="anim-pulse" />
             <rect x="335" y="126" width="130" height="52" rx="4" fill="#8c5832" />
             <polygon points="325,126 400,88 475,126" fill="#c85a17" />
             <rect x="378" y="142" width="44" height="22" rx="3" fill="#ffe082" class="anim-pulse" />
             <polygon points="535,178 555,134 575,178" fill="#3b7a57" />
-            <polygon points="540,156 555,118 570,156" fill="#4b946b" class="anim-float" />
+            <g transform="translate(555, 137)">
+              <polygon points="-15,19 0,-19 15,19" fill="#4b946b" class="anim-float" />
+            </g>
           </svg>
         `
       },
@@ -1203,11 +1253,13 @@
             <rect width="800" height="220" fill="#f7e8d0" />
             <path d="M0 192 Q250 116 510 162 T800 136 L800 220 L0 220 Z" fill="#89a86d" />
             <line x1="160" y1="62" x2="640" y2="96" stroke="#574837" stroke-width="2" />
-            <g class="anim-drift">
-              <line x1="400" y1="79" x2="400" y2="96" stroke="#574837" stroke-width="2" />
-              <rect x="378" y="96" width="44" height="24" rx="6" fill="#c85a17" stroke="#fffdf8" stroke-width="1.5" />
-              <rect x="385" y="102" width="12" height="10" rx="2" fill="#fffdf8" />
-              <rect x="403" y="102" width="12" height="10" rx="2" fill="#fffdf8" />
+            <g transform="translate(400, 99.5)">
+              <g class="anim-drift">
+                <line x1="0" y1="-20.5" x2="0" y2="-3.5" stroke="#574837" stroke-width="2" />
+                <rect x="-22" y="-3.5" width="44" height="24" rx="6" fill="#c85a17" stroke="#fffdf8" stroke-width="1.5" />
+                <rect x="-15" y="2.5" width="12" height="10" rx="2" fill="#fffdf8" />
+                <rect x="3" y="2.5" width="12" height="10" rx="2" fill="#fffdf8" />
+              </g>
             </g>
             <circle cx="655" cy="52" r="22" fill="#f29d38" class="anim-pulse" />
           </svg>
@@ -1223,17 +1275,17 @@
           <svg viewBox="0 0 800 220" role="img" aria-label="魔幻噴泉插畫">
             <rect width="800" height="220" fill="#23304a" />
             <rect x="0" y="182" width="800" height="38" fill="#324161" />
-            <!-- 多層噴泉水池 -->
             <ellipse cx="400" cy="176" rx="190" ry="22" fill="#2c7da0" stroke="#89c2d9" stroke-width="2" />
             <ellipse cx="400" cy="156" rx="135" ry="15" fill="#468faf" stroke="#a9d6e5" stroke-width="1.5" />
             <ellipse cx="400" cy="138" rx="75" ry="10" fill="#61a5c2" />
-            <!-- 向上噴湧的水柱 -->
-            <g class="anim-float">
-              <path d="M400 136 Q392 84 400 40 Q408 84 400 136 Z" fill="#caf0f8" opacity="0.9" />
-              <path d="M365 144 Q330 96 305 74 Q345 104 374 144 Z" fill="#90e0ef" opacity="0.85" />
-              <path d="M435 144 Q470 96 495 74 Q455 104 426 144 Z" fill="#90e0ef" opacity="0.85" />
-              <path d="M335 156 Q285 124 252 114 Q298 134 345 156 Z" fill="#f5b942" opacity="0.78" />
-              <path d="M465 156 Q515 124 548 114 Q502 134 455 156 Z" fill="#e85a4a" opacity="0.78" />
+            <g transform="translate(400, 98)">
+              <g class="anim-float">
+                <path d="M0 38 Q-8 -14 0 -58 Q8 -14 0 38 Z" fill="#caf0f8" opacity="0.9" />
+                <path d="M-35 46 Q-70 -2 -95 -24 Q-55 6 -26 46 Z" fill="#90e0ef" opacity="0.85" />
+                <path d="M35 46 Q70 -2 95 -24 Q55 6 26 46 Z" fill="#90e0ef" opacity="0.85" />
+                <path d="M-65 58 Q-115 26 -148 16 Q-102 36 -55 58 Z" fill="#f5b942" opacity="0.78" />
+                <path d="M65 58 Q115 26 148 16 Q102 36 55 58 Z" fill="#e85a4a" opacity="0.78" />
+              </g>
             </g>
             <circle cx="400" cy="40" r="6" fill="#ffe082" class="anim-pulse" />
           </svg>
@@ -1241,40 +1293,47 @@
       },
       {
         id: "la-merce-festival",
-        name: "15. 梅爾塞節（La Mercè）彩旗、煙火與巨型人偶",
+        name: "15. 梅爾塞節（La Mercè）煙火與巨型人偶",
         category: "秋季節慶",
         seasons: ["autumn", "spring", "summer", "winter"],
-        desc: "描繪梅爾塞節慶典彩旗、夜空煙火與身穿華麗禮服的加泰隆尼亞巨型人偶（Gegants）。",
+        desc: "描繪梅爾塞節夜空煙火與身穿華麗禮服的加泰隆尼亞巨型人偶（Gegants）。",
         svg: `
-          <svg viewBox="0 0 800 220" role="img" aria-label="梅爾塞節巨型人偶插畫">
+          <svg viewBox="0 0 800 220" role="img" aria-label="梅爾塞節煙火與巨型人偶插畫">
             <rect width="800" height="220" fill="#2c3552" />
             <rect x="0" y="178" width="800" height="42" fill="#3d4766" />
-            <!-- 節慶彩旗串 -->
-            <path d="M140 38 Q400 76 660 38" stroke="#f7ebd2" stroke-width="2" fill="none" />
-            <polygon points="220,47 232,63 242,49" fill="#e85a4a" class="anim-float" />
-            <polygon points="310,57 322,73 332,59" fill="#f5b942" class="anim-float" />
-            <polygon points="400,61 412,77 422,63" fill="#4da1c4" class="anim-float" />
-            <polygon points="490,57 502,73 512,59" fill="#f5b942" class="anim-float" />
-            <polygon points="580,47 592,63 602,49" fill="#e85a4a" class="anim-float" />
-            <!-- 煙火 -->
-            <g transform="translate(230, 96)" class="anim-pulse">
-              <circle cx="0" cy="0" r="5" fill="#ffe082" />
-              <line x1="0" y1="-6" x2="0" y2="-20" stroke="#f5b942" stroke-width="2.5" />
-              <line x1="0" y1="6" x2="0" y2="20" stroke="#f5b942" stroke-width="2.5" />
-              <line x1="-6" y1="0" x2="-20" y2="0" stroke="#e85a4a" stroke-width="2.5" />
-              <line x1="6" y1="0" x2="20" y2="0" stroke="#e85a4a" stroke-width="2.5" />
+            <g transform="translate(250, 88)">
+              <g class="anim-pulse">
+                <circle cx="0" cy="0" r="5" fill="#ffe082" />
+                <line x1="0" y1="-6" x2="0" y2="-22" stroke="#f5b942" stroke-width="2.5" />
+                <line x1="0" y1="6" x2="0" y2="22" stroke="#f5b942" stroke-width="2.5" />
+                <line x1="-6" y1="0" x2="-22" y2="0" stroke="#e85a4a" stroke-width="2.5" />
+                <line x1="6" y1="0" x2="22" y2="0" stroke="#e85a4a" stroke-width="2.5" />
+                <line x1="-5" y1="-5" x2="-16" y2="-16" stroke="#90e0ef" stroke-width="2" />
+                <line x1="5" y1="-5" x2="16" y2="-16" stroke="#90e0ef" stroke-width="2" />
+              </g>
             </g>
-            <!-- 巨型人偶（Gegant 王） -->
-            <g class="anim-float">
-              <polygon points="362,178 380,116 406,116 424,178" fill="#c85a17" stroke="#f7ebd2" stroke-width="1.5" />
-              <circle cx="393" cy="100" r="14" fill="#f7d699" />
-              <polygon points="379,88 386,70 393,82 400,70 407,88" fill="#f5b942" />
+            <g transform="translate(540, 74)">
+              <g class="anim-pulse">
+                <circle cx="0" cy="0" r="4.5" fill="#ffe082" />
+                <line x1="0" y1="-5" x2="0" y2="-18" stroke="#e85a4a" stroke-width="2.2" />
+                <line x1="0" y1="5" x2="0" y2="18" stroke="#e85a4a" stroke-width="2.2" />
+                <line x1="-5" y1="0" x2="-18" y2="0" stroke="#f5b942" stroke-width="2.2" />
+                <line x1="5" y1="0" x2="18" y2="0" stroke="#f5b942" stroke-width="2.2" />
+              </g>
             </g>
-            <!-- 巨型人偶（Geganta 后） -->
-            <g class="anim-float">
-              <polygon points="432,178 446,124 468,124 482,178" fill="#1d5d8c" stroke="#f7ebd2" stroke-width="1.5" />
-              <circle cx="457" cy="108" r="13" fill="#f7d699" />
-              <path d="M444 96 Q457 80 470 96 Z" fill="#f5b942" />
+            <g transform="translate(388, 123)">
+              <g class="anim-float">
+                <polygon points="-33,55 -14,-9 14,-9 33,55" fill="#c85a17" stroke="#f7ebd2" stroke-width="1.5" />
+                <circle cx="0" cy="-25" r="14" fill="#f7d699" />
+                <polygon points="-14,-37 -7,-55 0,-43 7,-55 14,-37" fill="#f5b942" />
+              </g>
+            </g>
+            <g transform="translate(453, 129)">
+              <g class="anim-float">
+                <polygon points="-25,49 -11,-7 12,-7 26,49" fill="#1d5d8c" stroke="#f7ebd2" stroke-width="1.5" />
+                <circle cx="0" cy="-23" r="13" fill="#f7d699" />
+                <path d="M-13 -35 Q0 -51 13 -35 Z" fill="#f5b942" />
+              </g>
             </g>
           </svg>
         `
@@ -1310,11 +1369,13 @@
             <rect x="340" y="74" width="46" height="24" fill="#f7ebd2" />
             <rect x="435" y="74" width="46" height="24" fill="#f7ebd2" />
             <rect x="530" y="74" width="40" height="24" fill="#f7ebd2" />
-            <g class="anim-float">
-              <circle cx="280" cy="124" r="12" fill="#f59f00" />
-              <circle cx="308" cy="124" r="12" fill="#e8590c" />
-              <circle cx="490" cy="124" r="12" fill="#37b24d" />
-              <circle cx="518" cy="124" r="12" fill="#e03131" />
+            <g transform="translate(399, 124)">
+              <g class="anim-float">
+                <circle cx="-119" cy="0" r="12" fill="#f59f00" />
+                <circle cx="-91" cy="0" r="12" fill="#e8590c" />
+                <circle cx="91" cy="0" r="12" fill="#37b24d" />
+                <circle cx="119" cy="0" r="12" fill="#e03131" />
+              </g>
             </g>
           </svg>
         `
@@ -1329,16 +1390,20 @@
           <svg viewBox="0 0 800 220" role="img" aria-label="三王節 Reyes Magos 插畫">
             <rect width="800" height="220" fill="#233044" />
             <rect x="0" y="178" width="800" height="42" fill="#38475e" />
-            <g class="anim-drift">
-              <rect x="275" y="128" width="250" height="36" rx="8" fill="#1d5d8c" stroke="#f5b942" stroke-width="2" />
-              <circle cx="320" cy="168" r="10" fill="#574837" />
-              <circle cx="480" cy="168" r="10" fill="#574837" />
-              <polygon points="315,124 320,104 330,116 340,104 345,124" fill="#f5b942" />
-              <polygon points="385,124 390,100 400,114 410,100 415,124" fill="#ffe082" />
-              <polygon points="455,124 460,104 470,116 480,104 485,124" fill="#f5b942" />
+            <g transform="translate(400, 139)">
+              <g class="anim-drift">
+                <rect x="-125" y="-11" width="250" height="36" rx="8" fill="#1d5d8c" stroke="#f5b942" stroke-width="2" />
+                <circle cx="-80" cy="29" r="10" fill="#574837" />
+                <circle cx="80" cy="29" r="10" fill="#574837" />
+                <polygon points="-85,-15 -80,-35 -70,-23 -60,-35 -55,-15" fill="#f5b942" />
+                <polygon points="-15,-15 -10,-39 0,-25 10,-39 15,-15" fill="#ffe082" />
+                <polygon points="55,-15 60,-35 70,-23 80,-35 85,-15" fill="#f5b942" />
+              </g>
             </g>
             <circle cx="620" cy="52" r="6" fill="#ffe082" class="anim-pulse" />
-            <circle cx="190" cy="64" r="5" fill="#f5b942" class="anim-float" />
+            <g transform="translate(190, 64)">
+              <circle cx="0" cy="0" r="5" fill="#f5b942" class="anim-float" />
+            </g>
           </svg>
         `
       },
@@ -1359,45 +1424,66 @@
               <path d="M40 116 L40 62 Q63 42 86 62 L86 116 Z" fill="#eef6ea" stroke="#8f421c" stroke-width="2" />
               <rect x="18" y="28" width="90" height="12" rx="2" fill="#f7d699" />
             </g>
-            <circle cx="420" cy="132" r="24" fill="#5b9154" class="anim-drift" />
-            <circle cx="655" cy="134" r="22" fill="#4c7a4b" class="anim-drift" />
+            <g transform="translate(420, 132)">
+              <circle cx="0" cy="0" r="24" fill="#5b9154" class="anim-drift" />
+            </g>
+            <g transform="translate(655, 134)">
+              <circle cx="0" cy="0" r="22" fill="#4c7a4b" class="anim-drift" />
+            </g>
           </svg>
         `
       },
       {
         id: "twelve-grapes-new-year",
-        name: "20. 跨年吃葡萄、鐘聲與無人機排字 Barcelona",
+        name: "20. 跨年吃葡萄、煙火與無人機排字 Barcelona",
         category: "跨年傳統",
         seasons: ["winter", "autumn"],
-        desc: "描繪 12 月 31 日跨年午夜鐘聲、高腳杯、12 顆幸運葡萄與夜空無人機排列出 Barcelona 字樣。",
+        desc: "描繪顯示 23:59 的時鐘、緊鄰時鐘旁的 12 顆幸運葡萄、高腳杯、煙火與無人機排字 Barcelona。",
         svg: `
-          <svg viewBox="0 0 800 220" role="img" aria-label="跨年吃葡萄與無人機排字 Barcelona 插畫">
+          <svg viewBox="0 0 800 220" role="img" aria-label="跨年吃葡萄、23:59 時鐘、煙火與無人機排字 Barcelona 插畫">
             <rect width="800" height="220" fill="#252e47" />
             <rect x="0" y="178" width="800" height="42" fill="#3a4563" />
+            <!-- 煙火 -->
+            <g transform="translate(145, 58)">
+              <g class="anim-pulse">
+                <circle cx="0" cy="0" r="4.5" fill="#ffe082" />
+                <line x1="0" y1="-5" x2="0" y2="-18" stroke="#e85a4a" stroke-width="2.2" />
+                <line x1="0" y1="5" x2="0" y2="18" stroke="#e85a4a" stroke-width="2.2" />
+                <line x1="-5" y1="0" x2="-18" y2="0" stroke="#f5b942" stroke-width="2.2" />
+                <line x1="5" y1="0" x2="18" y2="0" stroke="#f5b942" stroke-width="2.2" />
+              </g>
+            </g>
             <!-- 無人機光點排字 Barcelona -->
             <g class="anim-pulse">
-              <text x="545" y="66" fill="#ffe082" font-size="24" font-weight="800" letter-spacing="2" text-anchor="middle">Barcelona</text>
-              <circle cx="458" cy="58" r="2.5" fill="#90e0ef" />
-              <circle cx="486" cy="44" r="2.5" fill="#f5b942" />
-              <circle cx="518" cy="42" r="2.5" fill="#90e0ef" />
-              <circle cx="552" cy="42" r="2.5" fill="#f5b942" />
-              <circle cx="586" cy="42" r="2.5" fill="#90e0ef" />
-              <circle cx="618" cy="44" r="2.5" fill="#f5b942" />
-              <circle cx="642" cy="58" r="2.5" fill="#90e0ef" />
+              <text x="565" y="64" fill="#ffe082" font-size="22" font-weight="800" letter-spacing="2" text-anchor="middle">Barcelona</text>
+              <circle cx="487" cy="56" r="2.5" fill="#90e0ef" />
+              <circle cx="513" cy="43" r="2.5" fill="#f5b942" />
+              <circle cx="543" cy="41" r="2.5" fill="#90e0ef" />
+              <circle cx="575" cy="41" r="2.5" fill="#f5b942" />
+              <circle cx="607" cy="41" r="2.5" fill="#90e0ef" />
+              <circle cx="637" cy="43" r="2.5" fill="#f5b942" />
+              <circle cx="659" cy="56" r="2.5" fill="#90e0ef" />
             </g>
-            <!-- 午夜時鐘 -->
-            <circle cx="245" cy="72" r="26" fill="#fffdf8" stroke="#f5b942" stroke-width="3" class="anim-pulse" />
-            <line x1="245" y1="72" x2="245" y2="55" stroke="#3E3A39" stroke-width="2.5" />
-            <line x1="245" y1="72" x2="258" y2="72" stroke="#c85a17" stroke-width="2.5" />
-            <!-- 葡萄串與高腳杯 -->
-            <g transform="translate(335, 122)" class="anim-float">
-              <circle cx="0" cy="0" r="8" fill="#7ab84e" />
-              <circle cx="16" cy="0" r="8" fill="#8cc95d" />
-              <circle cx="32" cy="0" r="8" fill="#7ab84e" />
-              <circle cx="8" cy="14" r="8" fill="#8cc95d" />
-              <circle cx="24" cy="14" r="8" fill="#7ab84e" />
-              <circle cx="16" cy="28" r="8" fill="#8cc95d" />
+            <!-- 時鐘（顯示 23:59） -->
+            <g class="anim-pulse">
+              <circle cx="240" cy="106" r="32" fill="#fffdf8" stroke="#f5b942" stroke-width="3" />
+              <line x1="240" y1="106" x2="237" y2="85" stroke="#3E3A39" stroke-width="2.6" stroke-linecap="round" />
+              <line x1="240" y1="106" x2="241" y2="81" stroke="#c85a17" stroke-width="2.2" stroke-linecap="round" />
+              <text x="240" y="130" fill="#3E3A39" font-size="11" font-weight="800" text-anchor="middle">23:59</text>
             </g>
+            <!-- 葡萄串（外層定位在時鐘旁，內層上下浮動） -->
+            <g transform="translate(284, 92)">
+              <g class="anim-float">
+                <line x1="22" y1="-10" x2="22" y2="0" stroke="#7c5329" stroke-width="3" stroke-linecap="round" />
+                <circle cx="6" cy="6" r="7" fill="#7ab84e" />
+                <circle cx="21" cy="6" r="7" fill="#8cc95d" />
+                <circle cx="36" cy="6" r="7" fill="#7ab84e" />
+                <circle cx="13" cy="18" r="7" fill="#8cc95d" />
+                <circle cx="28" cy="18" r="7" fill="#7ab84e" />
+                <circle cx="21" cy="30" r="7" fill="#8cc95d" />
+              </g>
+            </g>
+            <!-- 高腳杯 -->
             <path d="M475 124 L505 124 L494 148 L486 148 Z" fill="#e8f3fb" stroke="#89b5d6" stroke-width="1.5" />
             <line x1="490" y1="148" x2="490" y2="174" stroke="#89b5d6" stroke-width="2.5" />
             <line x1="478" y1="174" x2="502" y2="174" stroke="#89b5d6" stroke-width="2.5" />
@@ -1424,15 +1510,8 @@
       return candidates[idx];
     }
 
-    const SEASON_NAMES = {
-      spring: "春季／聖喬治節",
-      summer: "夏季／地中海",
-      autumn: "秋季／梅爾塞節與城市",
-      winter: "冬季／跨年與三王節"
-    };
-
     /* =========================================================================
-       學習單元資料（各 12 個單字、6 個片語、3 個文法重點、20 題三文測驗）
+       學習單元資料（各 12 個單字、6 個片語、3 個文法重點、20 題四語測驗）
        ========================================================================= */
     const INITIAL_LESSONS = [
       {
@@ -1655,241 +1734,301 @@
           {
             esQ: "1. ¿Qué usan muchos empleados en las oficinas según el primer párrafo?",
             caQ: "1. Què fan servir molts treballadors a les oficines segons el primer paràgraf?",
+            enQ: "1. What do many employees use in offices according to the first paragraph?",
             zhQ: "1. 根據第一段，許多員工在辦公室裡使用什麼？",
             esOpts: ["Mapas de papel", "Programas inteligentes", "Cámaras de cine", "Bicicletas eléctricas"],
             caOpts: ["Mapes de paper", "Programes intel·ligents", "Càmeres de cinema", "Bicicletes elèctriques"],
+            enOpts: ["Paper maps", "Smart programs", "Film cameras", "Electric bicycles"],
             zhOpts: ["紙本地圖", "智慧程式", "電影攝影機", "電動自行車"],
             answer: 1,
             esExplain: "Usan programas inteligentes para resumir informes y organizar agendas.",
             caExplain: "Fan servir programes intel·ligents per resumir informes i organitzar agendes.",
+            enExplain: "They use smart programs to summarize reports, organize schedules, and reply to simple emails.",
             zhExplain: "第一段提到員工使用智慧程式來摘要報告、安排行程與回信。"
           },
           {
             esQ: "2. ¿Qué significa el verbo 'resumir'?",
             caQ: "2. Què significa el verb 'resumir'?",
+            enQ: "2. What does the Spanish verb 'resumir' mean?",
             zhQ: "2. 動詞「resumir」的意思最接近哪一項？",
             esOpts: ["Borrar un archivo", "Imprimir cien páginas", "Contar las ideas principales de forma breve", "Cambiar la contraseña"],
             caOpts: ["Esborrar un arxiu", "Imprimir cent pàgines", "Explicar les idees principals de manera breu", "Canviar la contrasenya"],
+            enOpts: ["Delete a file", "Print a hundred pages", "Present the main ideas briefly", "Change the password"],
             zhOpts: ["刪除檔案", "列印一百頁", "簡要整理出重點／摘要", "更改密碼"],
             answer: 2,
             esExplain: "'Resumir' significa presentar lo esencial de un texto de manera breve.",
             caExplain: "'Resumir' vol dir presentar les idees principals de manera breu.",
+            enExplain: "'Resumir' means to summarize or give the main points in a short form.",
             zhExplain: "resumir 的意思是「摘要、簡要總結重點」。"
           },
           {
             esQ: "3. ¿Qué hace un asistente digital cuando un estudiante no entiende un tema?",
             caQ: "3. Què fa un assistent digital quan un estudiant no entén un tema?",
+            enQ: "3. What does a digital assistant do when a student does not understand a topic?",
             zhQ: "3. 當學生不理解某個主題時，數位助理會做什麼？",
             esOpts: ["Borra todos los libros", "Cambia la fecha del examen", "Llama a los padres", "Explica paso a paso y propone ejercicios"],
             caOpts: ["Esborra tots els llibres", "Canvia la data de l'examen", "Truca als pares", "Explica pas a pas i proposa exercicis"],
+            enOpts: ["Deletes all books", "Changes the exam date", "Calls the parents", "Explains step by step and suggests exercises"],
             zhOpts: ["刪除所有書本", "更改考試日期", "打電話給家長", "一步步解釋並提供練習題"],
             answer: 3,
             esExplain: "Explica las ideas paso a paso y propone ejercicios nuevos.",
             caExplain: "Explica les idees pas a pas i proposa exercicis nous.",
+            enExplain: "The system explains ideas step by step and suggests new exercises to practice at home.",
             zhExplain: "系統會一步步解釋概念，並提供新的練習題。"
           },
           {
             esQ: "4. ¿Cuál es un problema que mencionan profesores y empresas?",
             caQ: "4. Quin problema mencionen els professors i les empreses?",
+            enQ: "4. What problem do teachers and companies point out?",
             zhQ: "4. 老師與企業提到哪一個潛在問題？",
             esOpts: ["La IA a veces comete errores", "La IA nunca funciona de día", "La IA es más pesada que un coche", "La IA prohíbe leer"],
             caOpts: ["La IA de vegades comet errors", "La IA no funciona mai de dia", "La IA és més pesant que un cotxe", "La IA prohibeix llegir"],
+            enOpts: ["AI sometimes makes mistakes", "AI never works during the day", "AI is heavier than a car", "AI bans reading"],
             zhOpts: ["AI 有時會犯錯", "AI 白天完全不能用", "AI 比汽車還重", "AI 禁止閱讀"],
             answer: 0,
             esExplain: "A veces una herramienta automática comete errores o da respuestas poco claras.",
             caExplain: "De vegades una eina automàtica comet errors o dóna respostes poc clares.",
+            enExplain: "Sometimes an automatic tool makes mistakes or gives unclear answers.",
             zhExplain: "第三段指出自動化工具偶爾會犯錯或給出不夠清楚的答案。"
           },
           {
             esQ: "5. ¿Qué significa 'comprobar' en el tercer párrafo?",
             caQ: "5. Què significa 'comprovar' en el tercer paràgraf?",
+            enQ: "5. What does 'comprobar' mean in the third paragraph?",
             zhQ: "5. 第三段中的動詞「comprobar」是什麼意思？",
             esOpts: ["Olvidar por completo", "Verificar o confirmar datos", "Pintar de colores", "Comprar en oferta"],
             caOpts: ["Oblidar del tot", "Verificar o confirmar dades", "Pintar de colors", "Comprar en oferta"],
+            enOpts: ["Forget completely", "Check or verify data", "Paint in colors", "Buy on sale"],
             zhOpts: ["完全忘記", "核對、查證資料", "塗上顏色", "特價購買"],
             answer: 1,
             esExplain: "'Comprobar' significa revisar para confirmar que algo es correcto.",
             caExplain: "'Comprovar' vol dir revisar per confirmar que una dada és correcta.",
+            enExplain: "'Comprobar' means to check or verify facts in reliable sources.",
             zhExplain: "comprobar 的意思是「核對、查證以確認正確性」。"
           },
           {
             esQ: "6. ¿Quién es Valeria en el cuarto párrafo?",
             caQ: "6. Qui és la Valèria en el quart paràgraf?",
+            enQ: "6. Who is Valeria in the fourth paragraph?",
             zhQ: "6. 第四段提到的瓦萊麗亞是什麼身分？",
             esOpts: ["Piloto de avión", "Arquitecta de puentes", "Profesora de secundaria", "Periodista deportiva"],
             caOpts: ["Pilot d'avió", "Arquitecta de ponts", "Professora de secundària", "Periodista esportiva"],
+            enOpts: ["Airplane pilot", "Bridge architect", "High school teacher", "Sports journalist"],
             zhOpts: ["飛機駕駛", "橋樑建築師", "中學老師", "體育記者"],
             answer: 2,
             esExplain: "Valeria es profesora de secundaria.",
             caExplain: "La Valèria és professora de secundària.",
+            enExplain: "Valeria is a high school teacher ('profesora de secundaria').",
             zhExplain: "瓦萊麗亞是一位中學老師（profesora de secundaria）。"
           },
           {
             esQ: "7. ¿Por qué prefiere Valeria corregir los textos de manera personal?",
             caQ: "7. Per què prefereix la Valèria corregir els textos de manera personal?",
+            enQ: "7. Why does Valeria prefer grading students' texts personally?",
             zhQ: "7. 瓦萊麗亞為什麼喜歡親自批改學生的作文？",
             esOpts: ["Porque no tiene electricidad", "Porque no sabe escribir", "Para cobrar más dinero", "Para conocer su estilo y animarlos"],
             caOpts: ["Perquè no té electricitat", "Perquè no sap escriure", "Per cobrar més diners", "Per conèixer el seu estil i animar-los"],
+            enOpts: ["Because she has no electricity", "Because she cannot write", "To charge more money", "To understand their style and encourage them"],
             zhOpts: ["因為家裡沒電", "因為她不會寫字", "為了多收費", "為了了解風格並給予鼓勵"],
             answer: 3,
             esExplain: "Para conocer su estilo y animarlos de verdad.",
             caExplain: "Per conèixer el seu estil i animar-los de debò.",
+            enExplain: "She grades texts personally to understand each student's style and truly encourage them.",
             zhExplain: "她希望了解學生的寫作風格並給予真正的鼓勵。"
           },
           {
             esQ: "8. ¿Qué significa el adjetivo 'confiable'?",
             caQ: "8. Què significa l'adjectiu 'fiable'?",
+            enQ: "8. What does the Spanish adjective 'confiable' mean?",
             zhQ: "8. 形容詞「confiable」的意思是什麼？",
             esOpts: ["En quien o en qué se puede confiar", "Muy difícil de leer", "Demasiado caro", "Totalmente vacío"],
             caOpts: ["En qui o què es pot confiar", "Molt difícil de llegir", "Massa car", "Totalment buit"],
+            enOpts: ["Reliable / trustworthy", "Very hard to read", "Too expensive", "Completely empty"],
             zhOpts: ["可信賴的、可靠的", "非常難讀的", "過於昂貴的", "完全空的"],
             answer: 0,
             esExplain: "'Confiable' describe algo seguro o digno de confianza.",
             caExplain: "'Fiable' descriu quelcom segur o digne de confiança.",
+            enExplain: "'Confiable' means reliable or trustworthy.",
             zhExplain: "confiable 指「可信賴的、可靠的」。"
           },
           {
             esQ: "9. ¿Cuál de estos sustantivos lleva el artículo 'la'?",
             caQ: "9. Quin d'aquests substantius porta l'article 'la' en castellà?",
+            enQ: "9. Which of these Spanish nouns takes the feminine article 'la'?",
             zhQ: "9. 下列哪一個名詞搭配的冠詞是「la」？",
             esOpts: ["informe", "tarea", "esfuerzo", "criterio"],
             caOpts: ["informe", "tarea", "esfuerzo", "criterio"],
+            enOpts: ["informe", "tarea", "esfuerzo", "criterio"],
             zhOpts: ["informe", "tarea", "esfuerzo", "criterio"],
             answer: 1,
             esExplain: "'La tarea' es un sustantivo femenino.",
             caExplain: "'La tarea' és un substantiu femení.",
+            enExplain: "'La tarea' (task/homework) is a feminine noun.",
             zhExplain: "tarea（la tarea）是陰性名詞，搭配 la。"
           },
           {
             esQ: "10. ¿Cuál de estos sustantivos lleva el artículo 'el'?",
             caQ: "10. Quin d'aquests substantius porta l'article 'el' en castellà?",
+            enQ: "10. Which of these Spanish nouns takes the masculine article 'el'?",
             zhQ: "10. 下列哪一個名詞搭配的冠詞是「el」？",
             esOpts: ["fuente", "curiosidad", "criterio", "tarea"],
             caOpts: ["fuente", "curiosidad", "criterio", "tarea"],
+            enOpts: ["fuente", "curiosidad", "criterio", "tarea"],
             zhOpts: ["fuente", "curiosidad", "criterio", "tarea"],
             answer: 2,
             esExplain: "'El criterio' es un sustantivo masculino.",
             caExplain: "'El criterio' és un substantiu masculí.",
+            enExplain: "'El criterio' (criterion/judgment) is a masculine noun.",
             zhExplain: "criterio（el criterio）是陽性名詞，搭配 el。"
           },
           {
             esQ: "11. ¿Qué significa 'paso a paso'?",
             caQ: "11. Què significa 'pas a pas'?",
+            enQ: "11. What does 'paso a paso' mean?",
             zhQ: "11. 「paso a paso」的意思是什麼？",
             esOpts: ["Muy rápido y sin mirar", "Hacia atrás", "En silencio absoluto", "De forma gradual, un paso tras otro"],
             caOpts: ["Molt ràpid i sense mirar", "Cap enrere", "En silenci absolut", "De manera gradual, un pas darrere l'altre"],
+            enOpts: ["Very fast without looking", "Backward", "In complete silence", "Step by step / gradually"],
             zhOpts: ["非常快且不看路", "往後退", "完全安靜地", "一步一步、循序漸進"],
             answer: 3,
             esExplain: "'Paso a paso' significa avanzar de manera gradual.",
             caExplain: "'Pas a pas' vol dir avançar de manera gradual.",
+            enExplain: "'Paso a paso' means step by step or gradually.",
             zhExplain: "paso a paso 的意思是「一步一步地、循序漸進」。"
           },
           {
             esQ: "12. Completa: 'A veces falla el sistema; ____ revisamos todo.'",
             caQ: "12. Completa: 'De vegades falla el sistema; ____ ho revisem tot.'",
+            enQ: "12. Complete: 'Sometimes the system fails; ____ we check everything.'",
             zhQ: "12. 填入表示結果的片語：A veces falla el sistema; ____ revisamos todo.",
             esOpts: ["por eso", "nunca", "todavía", "apenas"],
             caOpts: ["per això", "mai", "encara", "a penes"],
+            enOpts: ["por eso (therefore)", "nunca (never)", "todavía (still)", "apenas (barely)"],
             zhOpts: ["por eso", "nunca", "todavía", "apenas"],
             answer: 0,
             esExplain: "'Por eso' introduce la consecuencia lógica.",
             caExplain: "'Per això' introdueix la conseqüència lógica.",
+            enExplain: "'Por eso' means 'therefore' or 'that is why', introducing a result.",
             zhExplain: "por eso 用來引出前面的原因所導致的結果（因此）。"
           },
           {
             esQ: "13. ¿Qué significa 'variado' en 'actividades variadas'?",
             caQ: "13. Què significa 'variades' en 'activitats variades'?",
+            enQ: "13. What does 'variadas' mean in 'actividades variadas'?",
             zhQ: "13. 在「actividades variadas」中，「variadas」的意思是什麼？",
             esOpts: ["Muy aburridas", "Diversas y de distintos tipos", "Solo para niños", "Demasiado largas"],
             caOpts: ["Molt avorrides", "Diverses i de diferents tipus", "Només per a nens", "Massa llargues"],
+            enOpts: ["Very boring", "Varied / of different types", "Only for children", "Too long"],
             zhOpts: ["非常無聊的", "多樣化的、不同類型的", "只給小孩的", "太長的"],
             answer: 1,
             esExplain: "'Variadas' significa que tienen variedad o diferencia.",
             caExplain: "'Variades' significa que són diverses o de diferents tipus.",
+            enExplain: "'Variadas' means varied or diverse.",
             zhExplain: "variadas 指「多樣化的、豐富多變的」。"
           },
           {
             esQ: "14. Completa: 'El éxito del curso ____ del interés de los estudiantes.'",
             caQ: "14. Completa: 'L'èxit del curs ____ de l'interès dels estudiants.'",
+            enQ: "14. Complete with the right verb form: 'El éxito del curso ____ del interés de los estudiantes.'",
             zhQ: "14. 填入正確動詞變位：El éxito del curso ____ del interés de los estudiantes.",
             esOpts: ["dependen", "depender", "depende", "dependido"],
             caOpts: ["depenen", "dependre", "depèn", "dependut"],
+            enOpts: ["dependen", "depender", "depende", "dependido"],
             zhOpts: ["dependen", "depender", "depende", "dependido"],
             answer: 2,
             esExplain: "'El éxito' es singular, por eso corresponde 'depende'.",
             caExplain: "'L'èxit' és singular, per això correspon 'depèn'.",
+            enExplain: "'El éxito' is singular, so the third-person singular form is 'depende'.",
             zhExplain: "主詞 el éxito 為單數，搭配 depende de（取決於）。"
           },
           {
             esQ: "15. ¿Qué significa 'por sí solo'?",
             caQ: "15. Què significa 'per si sol'?",
+            enQ: "15. What does 'por sí solo' mean?",
             zhQ: "15. 「por sí solo」的意思最接近哪一項？",
             esOpts: ["Con mucha música", "Durante las vacaciones", "En voz alta", "Sin ayuda de otro elemento"],
             caOpts: ["Amb molta música", "Durant les vacances", "En veu alta", "Sense ajuda d'un altre element"],
+            enOpts: ["With lots of music", "During holidays", "Out loud", "By itself / on its own"],
             zhOpts: ["伴隨很多音樂", "在假期期間", "大聲地", "不靠其他因素、獨立地"],
             answer: 3,
             esExplain: "'Por sí solo' indica que algo actúa sin depender de otro.",
             caExplain: "'Per si sol' indica que quelcom actua sense dependre d'un altre element.",
+            enExplain: "'Por sí solo' means 'by itself' or 'on its own'.",
             zhExplain: "por sí solo 表示「靠自身、不依賴其他事物」。"
           },
           {
             esQ: "16. ¿Cuál de estos sustantivos lleva el artículo 'la'?",
             caQ: "16. Quin d'aquests substantius porta l'article 'la' en castellà?",
+            enQ: "16. Which of these Spanish nouns takes 'la'?",
             zhQ: "16. 下列哪一個名詞搭配的冠詞是「la」？",
             esOpts: ["curiosidad", "esfuerzo", "informe", "criterio"],
             caOpts: ["curiosidad", "esfuerzo", "informe", "criterio"],
+            enOpts: ["curiosidad", "esfuerzo", "informe", "criterio"],
             zhOpts: ["curiosidad", "esfuerzo", "informe", "criterio"],
             answer: 0,
             esExplain: "'La curiosidad' es un sustantivo femenino.",
             caExplain: "'La curiosidad' és un substantiu femení.",
+            enExplain: "'La curiosidad' (curiosity) is feminine.",
             zhExplain: "curiosidad（la curiosidad）是陰性名詞，搭配 la。"
           },
           {
             esQ: "17. Completa: '____ últimos años cambió mucho la educación.'",
             caQ: "17. Completa: '____ últims anys ha canviat molt l'educació.'",
+            enQ: "17. Complete the time phrase: '____ últimos años cambió mucho la educación.'",
             zhQ: "17. 填入正確搭配：____ últimos años cambió mucho la educación.",
             esOpts: ["A las", "En los", "Por un", "Sin la"],
             caOpts: ["A les", "En els", "Per un", "Sense la"],
+            enOpts: ["A las", "En los", "Por un", "Sin la"],
             zhOpts: ["A las", "En los", "Por un", "Sin la"],
             answer: 1,
             esExplain: "La expresión completa es 'en los últimos años'.",
             caExplain: "L'expressió completa és 'en els últims anys'.",
+            enExplain: "The standard expression is 'en los últimos años' (in recent years).",
             zhExplain: "固定時間片語為 en los últimos años（近幾年）。"
           },
           {
             esQ: "18. ¿Qué actitud promueve el texto hacia las herramientas digitales?",
             caQ: "18. Quina actitud promou el text cap a les eines digitals?",
+            enQ: "18. What attitude toward digital tools does the text encourage?",
             zhQ: "18. 文章對數位工具抱持什麼態度？",
             esOpts: ["Rechazo total sin probar", "Copiar todo sin leer", "Uso responsable y con criterio", "Dejar de estudiar"],
             caOpts: ["Rebuig total sense provar", "Copiar-ho tot sense llegir", "Ús responsable i amb criteri", "Deixar d'estudiar"],
+            enOpts: ["Total rejection without trying", "Copying everything unread", "Responsible use with good judgment", "Stopping study"],
             zhOpts: ["完全拒絕不嘗試", "不看就全盤照抄", "負責任且有判斷力地使用", "停止學習"],
             answer: 2,
             esExplain: "El texto anima a usarlas con responsabilidad y buen criterio.",
             caExplain: "El text anima a fer-les servir amb responsabilitat i bon criteri.",
+            enExplain: "The text encourages using digital tools responsibly and with good judgment.",
             zhExplain: "文章主張負責任且具備良好判斷力地使用工具。"
           },
           {
             esQ: "19. Completa: 'Habla con los alumnos ____ personal.'",
             caQ: "19. Completa: 'Parla amb els alumnes ____ personal.'",
+            enQ: "19. Complete the phrase: 'Habla con los alumnos ____ personal.'",
             zhQ: "19. 填入正確片語：Habla con los alumnos ____ personal.",
             esOpts: ["en barco", "por tren", "a pie", "de manera"],
             caOpts: ["en vaixell", "amb tren", "a peu", "de manera"],
+            enOpts: ["en barco", "por tren", "a pie", "de manera"],
             zhOpts: ["en barco", "por tren", "a pie", "de manera"],
             answer: 3,
             esExplain: "'De manera personal' significa de forma directa y cercana.",
             caExplain: "'De manera personal' vol dir de forma directa i propera.",
+            enExplain: "'De manera personal' means personally or in person.",
             zhExplain: "de manera personal 意思是「親自地、以個人方式」。"
           },
           {
             esQ: "20. ¿Cuál es el tema central de la lectura?",
             caQ: "20. Quin és el tema central de la lectura?",
+            enQ: "20. What is the main topic of the reading?",
             zhQ: "20. 這篇文章的核心主題是什麼？",
             esOpts: ["La IA en el trabajo y la educación", "Cómo cultivar tomates", "Historia del fútbol", "Preparar una maleta"],
             caOpts: ["La IA en la feina i l'educació", "Com conrear tomàquets", "Història del futbol", "Fer una maleta"],
+            enOpts: ["AI in work and education", "How to grow tomatoes", "History of football", "Packing a suitcase"],
             zhOpts: ["AI 在工作與教育的影響", "如何種植番茄", "足球歷史", "整理行李箱"],
             answer: 0,
             esExplain: "Todo el texto analiza cómo influye la IA en el trabajo, el estudio y la vida diaria.",
             caExplain: "Tot el text analitza com influeix la IA en la feina, l'estudi i la vida diària.",
+            enExplain: "The passage explores how AI affects work, studying, and daily life.",
             zhExplain: "全文圍繞人工智慧在工作、學習與日常生活中的影響與反思。"
           }
         ]
@@ -2114,241 +2253,301 @@
           {
             esQ: "1. ¿Dónde instalan paneles solares los vecinos en varios barrios?",
             caQ: "1. On instal·len plaques solars els veïns en diversos barris?",
+            enQ: "1. Where do residents install solar panels in several neighborhoods?",
             zhQ: "1. 許多社區的居民把太陽能板裝在哪裡？",
             esOpts: ["Bajo el suelo", "Dentro del metro", "En los tejados", "En las montañas"],
             caOpts: ["Sota terra", "Dins del metro", "A les teulades", "A les muntanyes"],
+            enOpts: ["Underground", "Inside the subway", "On roofs", "On mountains"],
             zhOpts: ["在地下", "在地鐵裡", "在屋頂上", "在山上"],
             answer: 2,
             esExplain: "Instalan paneles solares en los tejados para producir electricidad limpia.",
             caExplain: "Instal·len plaques solars a les teulades per produir electricitat neta.",
+            enExplain: "Residents install solar panels on roofs to produce clean electricity at home.",
             zhExplain: "第一段提到居民在屋頂（los tejados）安裝太陽能板發電。"
           },
           {
             esQ: "2. ¿Qué significa el verbo 'contaminar'?",
             caQ: "2. Què significa el verb 'contaminar'?",
+            enQ: "2. What does the Spanish verb 'contaminar' mean?",
             zhQ: "2. 動詞「contaminar」的意思是什麼？",
             esOpts: ["Limpiar un jardín", "Reparar una bicicleta", "Plantar flores", "Hacer daño o ensuciar el aire o el agua"],
             caOpts: ["Netejar un jardí", "Reparar una bicicleta", "Plantar flors", "Fer malbé o embrutar l'aire o l'aigua"],
+            enOpts: ["Clean a garden", "Repair a bicycle", "Plant flowers", "Pollute air or water"],
             zhOpts: ["整理花園", "修理腳踏車", "種花", "汙染空氣或水源"],
             answer: 3,
             esExplain: "'Contaminar' significa alterar o ensuciar el medio ambiente.",
             caExplain: "'Contaminar' significa embrutar o alterar l'aire, l'aigua o l'entorn.",
+            enExplain: "'Contaminar' means to pollute or contaminate air, water, or the environment.",
             zhExplain: "contaminar 指「汙染（空氣、水或環境）」。"
           },
           {
             esQ: "3. ¿Cómo funcionan cada vez más autobuses en el transporte público?",
             caQ: "3. Com funcionen cada vegada més autobusos en el transport públic?",
+            enQ: "3. How do more and more public buses run?",
             zhQ: "3. 大眾運輸中越來越多的公車使用什麼動力？",
             esOpts: ["Con electricidad o gas limpio", "Con carbón pesado", "Sin ruedas", "Solo de noche"],
             caOpts: ["Amb electricitat o gas net", "Amb carbó pesant", "Sense rodes", "Només de nit"],
+            enOpts: ["On electricity or clean gas", "On heavy coal", "Without wheels", "Only at night"],
             zhOpts: ["電力或潔淨天然氣", "重型煤炭", "沒有輪子", "只在晚上行駛"],
             answer: 0,
             esExplain: "Funcionan con electricidad o gas limpio y hacen menos ruido.",
             caExplain: "Funcionen amb electricitat o gas net i fan menys soroll.",
+            enExplain: "More and more buses run on electricity or clean gas and make less noise.",
             zhExplain: "第二段指出越來越多公車使用電力或潔淨天然氣行駛。"
           },
           {
             esQ: "4. ¿Qué significa el verbo 'ampliar'?",
             caQ: "4. Què significa el verb 'ampliar'?",
+            enQ: "4. What does the Spanish verb 'ampliar' mean?",
             zhQ: "4. 動詞「ampliar」的意思最接近哪一項？",
             esOpts: ["Cerrar un edificio", "Hacer algo más grande o ancho", "Vender un coche", "Apagar la luz"],
             caOpts: ["Tancar un edifici", "Fer quelcom més gran o ample", "Vendre un cotxe", "Apagar la llum"],
+            enOpts: ["Close a building", "Make wider or larger", "Sell a car", "Turn off the light"],
             zhOpts: ["關閉建築物", "擴大、擴寬", "賣掉汽車", "關燈"],
             answer: 1,
             esExplain: "'Ampliar' significa extender o aumentar el tamaño o ancho de algo.",
             caExplain: "'Ampliar' vol dir fer més gran o més ample.",
+            enExplain: "'Ampliar' means to widen or expand something.",
             zhExplain: "ampliar 的意思是「擴大、擴寬」。"
           },
           {
             esQ: "5. ¿Qué significa 'de un día para otro' en el tercer párrafo?",
             caQ: "5. Què significa 'd'un dia per a l'altre' en el tercer paràgraf?",
+            enQ: "5. What does 'de un día para otro' mean in the third paragraph?",
             zhQ: "5. 第三段中的「de un día para otro」是什麼意思？",
             esOpts: ["Cada cien años", "Durante todo el invierno", "De repente o en muy poco tiempo", "En otro continente"],
             caOpts: ["Cada cent anys", "Durant tot l'hivern", "De cop o en molt poc temps", "En un altre continent"],
+            enOpts: ["Every hundred years", "All winter long", "Overnight / all of a sudden", "On another continent"],
             zhOpts: ["每百年一次", "整個冬天", "一夕之間、突然間", "在另一個大洲"],
             answer: 2,
             esExplain: "Significa que algo no ocurre de forma inmediata o instantánea.",
             caExplain: "Vol dir que quelcom passa de cop o sense un procés previ.",
+            enExplain: "'De un día para otro' means 'overnight'—the energy transition takes time.",
             zhExplain: "意思是「一夕之間、立刻」，文中說明轉型無法瞬間完成。"
           },
           {
             esQ: "6. ¿Qué requiere instalar paneles solares según el texto?",
             caQ: "6. Què requereix instal·lar plaques solars segons el text?",
+            enQ: "6. What does installing solar panels require according to the text?",
             zhQ: "6. 根據文章，安裝太陽能板需要什麼條件？",
             esOpts: ["Solo cerrar las ventanas", "Dejar de usar luz", "Comprar un barco", "Inversión inicial y organizar carga y mantenimiento"],
             caOpts: ["Només tancar les finestres", "Deixar d'utilitzar llum", "Comprar un vaixell", "Inversió inicial i organitzar càrrega i manteniment"],
+            enOpts: ["Only closing windows", "Stopping light use", "Buying a boat", "Initial investment and planning charging and maintenance"],
             zhOpts: ["只要關上窗戶", "停止使用燈光", "買一艘船", "初期投資與安排充電及維護"],
             answer: 3,
             esExplain: "Requiere una inversión inicial y organizar horarios de carga y mantenimiento.",
             caExplain: "Requereix una inversió inicial i organitzar horaris de càrrega i manteniment.",
+            enExplain: "It requires an initial investment and organizing charging and maintenance schedules.",
             zhExplain: "需要初期投資（inversión inicial）以及安排充電與維護時程。"
           },
           {
             esQ: "7. ¿Qué preguntan algunos comerciantes?",
             caQ: "7. Què pregunten alguns comerciants?",
+            enQ: "7. What do some shopkeepers ask?",
             zhQ: "7. 部分商家詢問了什麼問題？",
             esOpts: ["Cómo afectarán las zonas peatonales a las entregas", "Cuándo abre el museo", "Cuánto cuesta un billete de avión", "Dónde está la playa"],
             caOpts: ["Com afectaran les zones de vianants als lliuraments", "Quan obre el museu", "Quant costa un bitllet d'avió", "On és la platja"],
+            enOpts: ["How pedestrian zones affect goods deliveries", "When the museum opens", "How much a flight costs", "Where the beach is"],
             zhOpts: ["行人徒步區如何影響貨物配送", "博物館何時開門", "機票多少錢", "海灘在哪裡"],
             answer: 0,
             esExplain: "Preguntan cómo afectarán las nuevas zonas peatonales a las entregas de mercancías.",
             caExplain: "Pregunten com afectaran les noves zones de vianants al lliurament de mercaderies.",
+            enExplain: "They ask how new pedestrian zones will affect goods deliveries.",
             zhExplain: "他們關心新設行人徒步區會如何影響貨物配送。"
           },
           {
             esQ: "8. ¿Qué significa el adjetivo 'silencioso'?",
             caQ: "8. Què significa l'adjectiu 'silenciós'?",
+            enQ: "8. What does the Spanish adjective 'silencioso' mean?",
             zhQ: "8. 形容詞「silencioso」的意思是什麼？",
             esOpts: ["Muy rápido y alto", "Que hace poco o ningún ruido", "De color amarillo", "Difícil de encontrar"],
             caOpts: ["Molt ràpid i fort", "Que fa poc o gens de soroll", "De color groc", "Difícil de trobar"],
+            enOpts: ["Very fast and loud", "Quiet / making little or no noise", "Yellow in color", "Hard to find"],
             zhOpts: ["非常快且大聲的", "安靜的、幾乎沒有噪音的", "黃色的", "很難找到的"],
             answer: 1,
             esExplain: "'Silencioso' significa tranquilo y sin ruido.",
             caExplain: "'Silenciós' vol dir que fa poc o gens de soroll.",
+            enExplain: "'Silencioso' means quiet or making little or no noise.",
             zhExplain: "silencioso 指「安靜的、無聲的」。"
           },
           {
             esQ: "9. ¿Cuál de estos sustantivos lleva el artículo 'el'?",
             caQ: "9. Quin d'aquests substantius porta l'article 'el' en castellà?",
+            enQ: "9. Which of these Spanish nouns takes the masculine article 'el'?",
             zhQ: "9. 下列哪一個名詞搭配的冠詞是「el」？",
             esOpts: ["acera", "inversión", "gasto", "plaza"],
             caOpts: ["acera", "inversión", "gasto", "plaza"],
+            enOpts: ["acera", "inversión", "gasto", "plaza"],
             zhOpts: ["acera", "inversión", "gasto", "plaza"],
             answer: 2,
             esExplain: "'El gasto' es un sustantivo masculino.",
             caExplain: "'El gasto' és un substantiu masculí.",
+            enExplain: "'El gasto' (expense/spending) is a masculine noun.",
             zhExplain: "gasto（el gasto）是陽性名詞，搭配 el。"
           },
           {
             esQ: "10. ¿Cuál de estos sustantivos lleva el artículo 'la'?",
             caQ: "10. Quin d'aquests substantius porta l'article 'la' en castellà?",
+            enQ: "10. Which of these Spanish nouns takes the feminine article 'la'?",
             zhQ: "10. 下列哪一個名詞搭配的冠詞是「la」？",
             esOpts: ["gasto", "horario", "turno", "acera"],
             caOpts: ["gasto", "horario", "turno", "acera"],
+            enOpts: ["gasto", "horario", "turno", "acera"],
             zhOpts: ["gasto", "horario", "turno", "acera"],
             answer: 3,
             esExplain: "'La acera' es un sustantivo femenino.",
             caExplain: "'La acera' és un substantiu femení.",
+            enExplain: "'La acera' (sidewalk) is a feminine noun.",
             zhExplain: "acera（la acera）是陰性名詞，搭配 la。"
           },
           {
             esQ: "11. ¿Qué nota Adrián al terminar su turno?",
             caQ: "11. Què nota l'Adrià en acabar el seu torn?",
+            enQ: "11. What does Adrián notice at the end of his shift?",
             zhQ: "11. 輪班結束後，阿德里安注意到什麼變化？",
             esOpts: ["Los vecinos saludan más y la plaza parece más viva", "Hay menos árboles", "Cierran todas las calles", "Llueve todo el día"],
             caOpts: ["Els veïns saluden més i la plaça sembla més viva", "Hi ha menys arbres", "Tanquen tots els carrers", "Plou tot el dia"],
+            enOpts: ["Neighbors greet each other more and the main square feels livelier", "There are fewer trees", "All streets close", "It rains all day"],
             zhOpts: ["居民更常打招呼且廣場更有活力", "樹木變少", "所有街道封閉", "整天下雨"],
             answer: 0,
             esExplain: "Los vecinos saludan más y la plaza central parece más viva.",
             caExplain: "Els veïns saluden més i la plaça central sembla més viva.",
+            enExplain: "He notes that neighbors greet each other more and the main square feels livelier.",
             zhExplain: "他提到居民更常打招呼，中央廣場也顯得更有活力。"
           },
           {
             esQ: "12. ¿Qué significa 'apostar por' en el contexto del título?",
             caQ: "12. Què significa 'apostar per' en el context del títol?",
+            enQ: "12. What does 'apostar por' mean in the context of the title?",
             zhQ: "12. 「apostar por」在能源與城市語境中的意思是？",
             esOpts: ["Olvidar por completo", "Apoyar y dedicar recursos a algo", "Prohibir una actividad", "Vender una casa"],
             caOpts: ["Oblidar del tot", "Donar suport i dedicar recursos a quelcom", "Prohibir una activitat", "Vendre una casa"],
+            enOpts: ["Forget completely", "Back / commit to and invest in something", "Ban an activity", "Sell a house"],
             zhOpts: ["完全忘記", "支持並投入資源發展某事", "禁止某項活動", "賣掉房子"],
             answer: 1,
             esExplain: "'Apostar por' significa apoyar o elegir decididamente una opción.",
             caExplain: "'Apostar per' vol dir donar suport i dedicar recursos a una opció.",
+            enExplain: "'Apostar por' means to back or commit resources to a direction or option.",
             zhExplain: "apostar por 在這裡指「支持、致力推動某項方向」。"
           },
           {
             esQ: "13. Completa: 'Es una decisión buena a ____ plazo.'",
             caQ: "13. Completa: 'És una decisió bona a ____ termini.'",
+            enQ: "13. Complete the phrase: 'Es una decisión buena a ____ plazo.'",
             zhQ: "13. 填入正確詞彙完成片語：Es una decisión buena a ____ plazo.",
             esOpts: ["corto", "alto", "largo", "bajo"],
             caOpts: ["curt", "alt", "llarg", "baix"],
+            enOpts: ["corto", "alto", "largo", "bajo"],
             zhOpts: ["corto", "alto", "largo", "bajo"],
             answer: 2,
             esExplain: "La expresión fija es 'a largo plazo'.",
             caExplain: "L'expressió fixa és 'a llarg termini'.",
+            enExplain: "'A largo plazo' means 'in the long term'.",
             zhExplain: "固定片語為 a largo plazo（長期來看）。"
           },
           {
             esQ: "14. ¿Qué significa el verbo 'exigir'?",
             caQ: "14. Què significa el verb 'exigir'?",
+            enQ: "14. What does the Spanish verb 'exigir' mean?",
             zhQ: "14. 動詞「exigir」的意思是什麼？",
             esOpts: ["Dormir profundamente", "Viajar en barco", "Cocinar pan", "Pedir o requerir algo necesario"],
             caOpts: ["Dormir profundament", "Viatjar en vaixell", "Coure pa", "Demanar o requerir quelcom necessari"],
+            enOpts: ["Sleep deeply", "Travel by boat", "Bake bread", "Require or demand something needed"],
             zhOpts: ["熟睡", "搭船旅行", "烤麵包", "要求、需要"],
             answer: 3,
             esExplain: "'Exigir' significa requerir o demandar algo.",
             caExplain: "'Exigir' vol dir requerir o demanar quelcom necessari.",
+            enExplain: "'Exigir' means to require or call for something.",
             zhExplain: "exigir 意思是「要求、需要」。"
           },
           {
             esQ: "15. ¿Cuál de estos sustantivos lleva el artículo 'el'?",
             caQ: "15. Quin d'aquests substantius porta l'article 'el' en castellà?",
+            enQ: "15. Which of these Spanish nouns takes 'el'?",
             zhQ: "15. 下列哪一個名詞搭配的冠詞是「el」？",
             esOpts: ["horario", "plaza", "acera", "inversión"],
             caOpts: ["horario", "plaza", "acera", "inversión"],
+            enOpts: ["horario", "plaza", "acera", "inversión"],
             zhOpts: ["horario", "plaza", "acera", "inversión"],
             answer: 0,
             esExplain: "'El horario' es un sustantivo masculino.",
             caExplain: "'El horario' és un substantiu masculí.",
+            enExplain: "'El horario' (schedule/timetable) is masculine.",
             zhExplain: "horario（el horario）是陽性名詞，搭配 el。"
           },
           {
             esQ: "16. ¿Qué se necesita para construir una ciudad más limpia según el final?",
             caQ: "16. Què cal per construir una ciutat més neta segons el final?",
+            enQ: "16. What is needed to build a cleaner city according to the ending?",
             zhQ: "16. 根據結尾段落，打造更乾淨的城市需要什麼？",
             esOpts: ["Solo dinero en efectivo", "Acuerdos y colaboración con paciencia", "Cerrar todas las escuelas", "No hablar con vecinos"],
             caOpts: ["Només diners en efectiu", "Acords i col·laboració amb paciència", "Tancar totes les escoles", "No parlar amb els veïns"],
+            enOpts: ["Cash only", "Agreements and patient collaboration", "Closing all schools", "Not talking to neighbors"],
             zhOpts: ["只要現金", "共識與有耐心的合作", "關閉所有學校", "不與鄰居交談"],
             answer: 1,
             esExplain: "Exige acuerdos entre vecinos, empresas y autoridades y colaborar con paciencia.",
             caExplain: "Exigeix acords entre veïns, empreses i autoritats i col·laborar amb paciència.",
+            enExplain: "It requires agreements among residents, businesses, and authorities, and patient collaboration.",
             zhExplain: "最後一段指出需要各方共識以及有耐心地合作。"
           },
           {
             esQ: "17. Completa: 'Los parques ayudan a mejorar la ____ de vida.'",
             caQ: "17. Completa: 'Els parcs ajuden a millorar la ____ de vida.'",
+            enQ: "17. Complete the collocation: 'Los parques ayudan a mejorar la ____ de vida.'",
             zhQ: "17. 填入正確詞彙：Los parques ayudan a mejorar la ____ de vida.",
             esOpts: ["cantidad", "velocidad", "calidad", "temperatura"],
             caOpts: ["quantitat", "velocitat", "qualitat", "temperatura"],
+            enOpts: ["cantidad", "velocidad", "calidad", "temperatura"],
             zhOpts: ["cantidad", "velocidad", "calidad", "temperatura"],
             answer: 2,
             esExplain: "La colocación habitual es 'calidad de vida'.",
             caExplain: "La combinació habitual és 'qualitat de vida'.",
+            enExplain: "'Calidad de vida' means 'quality of life'.",
             zhExplain: "常見搭配為 mejorar la calidad de vida（提升生活品質）。"
           },
           {
             esQ: "18. ¿Cuál de estos sustantivos lleva el artículo 'la'?",
             caQ: "18. Quin d'aquests substantius porta l'article 'la' en castellà?",
+            enQ: "18. Which of these Spanish nouns takes 'la'?",
             zhQ: "18. 下列哪一個名詞搭配的冠詞是「la」？",
             esOpts: ["gasto", "horario", "turno", "plaza"],
             caOpts: ["gasto", "horario", "turno", "plaza"],
+            enOpts: ["gasto", "horario", "turno", "plaza"],
             zhOpts: ["gasto", "horario", "turno", "plaza"],
             answer: 3,
             esExplain: "'La plaza' es un sustantivo femenino.",
             caExplain: "'La plaza' és un substantiu femení.",
+            enExplain: "'La plaza' (square) is feminine.",
             zhExplain: "plaza（la plaza）是陰性名詞，搭配 la。"
           },
           {
             esQ: "19. Completa: 'Vive ____ ciudad de Madrid.'",
             caQ: "19. Completa: 'Viu ____ ciutat de Madrid.'",
+            enQ: "19. Complete: 'Vive ____ ciudad de Madrid.'",
             zhQ: "19. 填入正確搭配：Vive ____ ciudad de Madrid.",
             esOpts: ["en la", "a los", "sin un", "por unas"],
             caOpts: ["a la", "als", "sense un", "per unes"],
+            enOpts: ["en la", "a los", "sin un", "por unas"],
             zhOpts: ["en la", "a los", "sin un", "por unas"],
             answer: 0,
             esExplain: "La estructura habitual es 'en la ciudad de + nombre'.",
             caExplain: "L'estructura habitual és 'a la ciutat de + nom'.",
+            enExplain: "The standard phrase is 'en la ciudad de + city name' (in the city of...).",
             zhExplain: "常用搭配為 en la ciudad de + 城市名稱。"
           },
           {
             esQ: "20. ¿Qué mejora se menciona al final cuando todos colaboran?",
             caQ: "20. Quina millora s'esmenta al final quan tothom col·labora?",
+            enQ: "20. What improves at the end when everyone collaborates?",
             zhQ: "20. 當眾人合作時，最後提到什麼會改善？",
             esOpts: ["El tráfico caótico", "Espacios públicos y calidad de vida", "La basura en las calles", "El ruido nocturno"],
             caOpts: ["El trànsit caòtic", "Espais públics i qualitat de vida", "Les escombraries als carrers", "El soroll nocturn"],
+            enOpts: ["Chaotic traffic", "Public spaces and quality of life", "Street trash", "Nighttime noise"],
             zhOpts: ["混亂的交通", "公共空間與生活品質", "街頭垃圾", "夜間噪音"],
             answer: 1,
             esExplain: "Mejoran los espacios públicos y crece la calidad de vida.",
             caExplain: "Milloren els espais públics i creix la qualitat de vida.",
+            enExplain: "Public spaces improve and quality of life grows.",
             zhExplain: "公共空間會改善，生活品質也會提升。"
           }
         ]
@@ -2559,6 +2758,7 @@
           ...qItem,
           esOpts: indices.map(i => qItem.esOpts[i]),
           caOpts: indices.map(i => (qItem.caOpts || qItem.esOpts)[i]),
+          enOpts: indices.map(i => (qItem.enOpts || qItem.esOpts)[i]),
           zhOpts: indices.map(i => qItem.zhOpts[i]),
           answer: indices.indexOf(qItem.answer)
         };
@@ -2711,26 +2911,35 @@
 
     function getQuizQuestionText(qItem) {
       if (quizLang === "ca") return qItem.caQ || qItem.esQ;
+      if (quizLang === "en") return qItem.enQ || qItem.esQ;
       if (quizLang === "zh") return qItem.zhQ;
       return qItem.esQ;
     }
 
     function getQuizOptions(qItem) {
       if (quizLang === "ca") return qItem.caOpts || qItem.esOpts;
+      if (quizLang === "en") return qItem.enOpts || qItem.esOpts;
       if (quizLang === "zh") return qItem.zhOpts;
       return qItem.esOpts;
     }
 
     function getQuizExplain(qItem) {
       if (quizLang === "ca") return qItem.caExplain || qItem.esExplain;
+      if (quizLang === "en") return qItem.enExplain || qItem.esExplain;
       if (quizLang === "zh") return qItem.zhExplain;
       return qItem.esExplain;
+    }
+
+    function getQuizModeLabel() {
+      if (quizLang === "ca") return "目前模式：加泰隆尼亞文版測驗";
+      if (quizLang === "en") return "目前模式：英文版測驗";
+      if (quizLang === "zh") return "目前模式：中文版測驗";
+      return "目前模式：西文版測驗";
     }
 
     function render() {
       const lesson = lessons[currentIndex];
       const activeQuiz = getActiveQuiz(currentIndex);
-      const seasonLabel = SEASON_NAMES[getCurrentSeason()] || "季節精選";
 
       currentUnitLabelEl.textContent = `${lesson.unitLabel || `第 ${currentIndex + 1} 篇`} / 共 ${lessons.length} 篇`;
       prevBtn.disabled = currentIndex === 0;
@@ -2744,28 +2953,28 @@
         <section id="bcnBanner" class="bcn-banner" aria-label="巴塞隆納插畫">
           <div class="bcn-banner-top">
             <div class="bcn-caption-wrap">
-              <span class="bcn-tag">Barcelona · ${seasonLabel}</span>
               <span class="bcn-title">${currentIllus.name}</span>
-              <span class="bcn-sub">（${currentIllus.category} · 共 20 張）</span>
             </div>
 
-            <div class="bcn-menu-wrap">
-              <button type="button" id="toggleIllusMenuBtn" class="${illusMenuOpen ? "active-pill" : ""}">
-                插畫選單 ${illusMenuOpen ? "▴" : "▾"}
-              </button>
-              <div id="illusControlsDropdown" class="bcn-controls-dropdown ${illusMenuOpen ? "open" : ""}">
-                <button type="button" id="prevIllusBtn">← 上一張</button>
-                <button type="button" id="nextIllusBtn">下一張 →</button>
-                <button type="button" id="randomIllusBtn">隨機換圖</button>
-                <button type="button" id="toggleGalleryBtn" class="${galleryOpen ? "active-pill" : ""}">
-                  ${galleryOpen ? "收合 20 張總覽" : "查看全部 20 張"}
+            <div class="bcn-actions-right">
+              <button type="button" id="prevIllusBtn">上一張</button>
+              <button type="button" id="nextIllusBtn">下一張</button>
+              <div class="bcn-menu-wrap">
+                <button type="button" id="toggleIllusMenuBtn" class="${illusMenuOpen ? "active-pill" : ""}">
+                  插畫選單 ${illusMenuOpen ? "▴" : "▾"}
                 </button>
-                <button type="button" id="toggleAutoIllusBtn" class="${autoRotateIllus ? "active-pill" : ""}">
-                  ${autoRotateIllus ? "自動輪播：開" : "自動輪播：關"}
-                </button>
-                <button type="button" id="toggleMotionBtn" class="${manualReducedMotion ? "active-pill" : ""}">
-                  ${manualReducedMotion ? "減少動態效果：開" : "減少動態效果"}
-                </button>
+                <div id="illusControlsDropdown" class="bcn-controls-dropdown ${illusMenuOpen ? "open" : ""}">
+                  <button type="button" id="randomIllusBtn">隨機換圖</button>
+                  <button type="button" id="toggleGalleryBtn" class="${galleryOpen ? "active-pill" : ""}">
+                    ${galleryOpen ? "收合全部" : "檢視全部"}
+                  </button>
+                  <button type="button" id="toggleAutoIllusBtn" class="${autoRotateIllus ? "active-pill" : ""}">
+                    ${autoRotateIllus ? "自動輪播：開" : "自動輪播：關"}
+                  </button>
+                  <button type="button" id="toggleMotionBtn" class="${manualReducedMotion ? "active-pill" : ""}">
+                    ${manualReducedMotion ? "減少動態：開" : "減少動態"}
+                  </button>
+                </div>
               </div>
             </div>
           </div>
@@ -2878,7 +3087,7 @@
         </section>
 
         <section id="vocabSection" class="card">
-          <h2>重要單字與歷史淵源（${lesson.vocab.length} 個）</h2>
+          <h2>重要單字與歷史淵源</h2>
           <div class="grid-2">
             ${lesson.vocab.map(v => `
               <div class="item-box">
@@ -2927,14 +3136,13 @@
         <section id="quizSection" class="card">
           <div class="quiz-header">
             <div>
-              <h2 style="margin-bottom: 4px;">三文綜合測驗（${activeQuiz.length} 題 · 選項自動隨機排列）</h2>
-              <div class="review-note">
-                ${quizLang === "es" ? "目前模式：西文版測驗" : (quizLang === "ca" ? "目前模式：加泰隆尼亞文版測驗" : "目前模式：中文版測驗")}
-              </div>
+              <h2 style="margin-bottom: 4px;">測驗</h2>
+              <div class="review-note">${getQuizModeLabel()}</div>
             </div>
             <div class="lang-switch">
               <button type="button" id="langEsBtn" class="${quizLang === "es" ? "active-pill" : ""}">西文版</button>
               <button type="button" id="langCaBtn" class="${quizLang === "ca" ? "active-pill" : ""}">加泰隆尼亞文版</button>
+              <button type="button" id="langEnBtn" class="${quizLang === "en" ? "active-pill" : ""}">英文版</button>
               <button type="button" id="langZhBtn" class="${quizLang === "zh" ? "active-pill" : ""}">中文版</button>
             </div>
           </div>
@@ -2971,13 +3179,7 @@
       syncHeaderOffset();
       updateSpeechStatusLabel();
 
-      // 插畫選單開關與控制
-      document.getElementById("toggleIllusMenuBtn").addEventListener("click", (e) => {
-        e.stopPropagation();
-        illusMenuOpen = !illusMenuOpen;
-        render();
-      });
-
+      // 插畫上一張／下一張與選單開關
       document.getElementById("prevIllusBtn").addEventListener("click", () => {
         const idx = BCN_ILLUSTRATIONS.findIndex(i => i.id === currentIllus.id);
         const prevIdx = (idx - 1 + BCN_ILLUSTRATIONS.length) % BCN_ILLUSTRATIONS.length;
@@ -2989,6 +3191,12 @@
         const idx = BCN_ILLUSTRATIONS.findIndex(i => i.id === currentIllus.id);
         const nextIdx = (idx + 1) % BCN_ILLUSTRATIONS.length;
         currentIllus = BCN_ILLUSTRATIONS[nextIdx];
+        render();
+      });
+
+      document.getElementById("toggleIllusMenuBtn").addEventListener("click", (e) => {
+        e.stopPropagation();
+        illusMenuOpen = !illusMenuOpen;
         render();
       });
 
@@ -3087,6 +3295,10 @@
         quizLang = "ca";
         render();
       });
+      document.getElementById("langEnBtn").addEventListener("click", () => {
+        quizLang = "en";
+        render();
+      });
       document.getElementById("langZhBtn").addEventListener("click", () => {
         quizLang = "zh";
         render();
@@ -3110,6 +3322,8 @@
             fbEl.className = "feedback bad";
             if (quizLang === "ca") {
               fbEl.textContent = `Sense respondre. Resposta correcta: "${opts[qItem.answer]}". ${explain}`;
+            } else if (quizLang === "en") {
+              fbEl.textContent = `Unanswered. Correct answer: "${opts[qItem.answer]}". ${explain}`;
             } else if (quizLang === "zh") {
               fbEl.textContent = `尚未作答。正確答案是：「${opts[qItem.answer]}」。${explain}`;
             } else {
@@ -3124,6 +3338,8 @@
             fbEl.className = "feedback ok";
             if (quizLang === "ca") {
               fbEl.textContent = `Molt bé! ${explain}`;
+            } else if (quizLang === "en") {
+              fbEl.textContent = `Correct! ${explain}`;
             } else if (quizLang === "zh") {
               fbEl.textContent = `答對了！${explain}`;
             } else {
@@ -3133,6 +3349,8 @@
             fbEl.className = "feedback bad";
             if (quizLang === "ca") {
               fbEl.textContent = `Incorrecte. Resposta correcta: "${opts[qItem.answer]}". ${explain}`;
+            } else if (quizLang === "en") {
+              fbEl.textContent = `Incorrect. Correct answer: "${opts[qItem.answer]}". ${explain}`;
             } else if (quizLang === "zh") {
               fbEl.textContent = `再接再厲！正確答案是：「${opts[qItem.answer]}」。${explain}`;
             } else {
@@ -3144,6 +3362,8 @@
         const summaryEl = document.getElementById("scoreSummary");
         if (quizLang === "ca") {
           summaryEl.textContent = `Puntuació: ${score} / ${activeQuiz.length}`;
+        } else if (quizLang === "en") {
+          summaryEl.textContent = `Score: ${score} / ${activeQuiz.length}`;
         } else if (quizLang === "zh") {
           summaryEl.textContent = `得分：${score} / ${activeQuiz.length}`;
         } else {
